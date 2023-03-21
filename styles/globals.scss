@@ -1,4 +1,5 @@
-html,
+@use 'variables';
+
 body {
     padding: 0;
     margin: 0;
@@ -13,7 +14,7 @@ body {
 }
 
 a {
-    color: #0070f3;
+    color: variables.$sejongRed;
     text-decoration: none;
 }
 

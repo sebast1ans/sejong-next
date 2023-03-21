@@ -1,0 +1,15 @@
+.textContainer {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+  height: 100%;
+  width: 100%;
+}
+
+.slideImage {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}

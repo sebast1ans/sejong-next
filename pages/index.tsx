@@ -1,12 +1,16 @@
-import { storage } from '../lib/firebase'
+import { storage, db } from '../lib/firebase'
 import { getDownloadURL, listAll, ref } from 'firebase/storage'
+import { collection, DocumentData, getDocs } from 'firebase/firestore'
 import Head from 'next/head'
 import Hero from '../components/landing-page/Hero'
+import Introduction from '../components/landing-page/Introduction'
 
 interface Props {
   heroImageUrls: string[]
+  introductionDocs: DocumentData[]
 }
-export default function Home ({ heroImageUrls }: Props) {
+
+export default function Home ({ heroImageUrls, introductionDocs }: Props) {
   return (
     <>
       <Head>
@@ -16,6 +20,7 @@ export default function Home ({ heroImageUrls }: Props) {
         <link rel="icon" href="/favicon.png"/>
       </Head>
       <Hero heroImages={heroImageUrls}/>
+      <Introduction slidesData={introductionDocs}/>
     </>
   )
 }
@@ -23,25 +28,31 @@ export default function Home ({ heroImageUrls }: Props) {
 export async function getStaticProps () {
   const heroImagesFolderHref = ref(storage, 'images/hero')
   let heroImageUrls = []
+  let introductionDocs: DocumentData[] = []
 
   try {
     const heroImageRefs = (await listAll(heroImagesFolderHref)).items
 
     const heroImageUrlPromises = heroImageRefs.map(async ref => {
-        return await getDownloadURL(ref)
+      return await getDownloadURL(ref)
     })
 
     for await (let heroImageUrl of heroImageUrlPromises) {
       heroImageUrls.push(heroImageUrl)
     }
-
   } catch (e) {
     console.log(e)
   }
 
+  const querySnapshot = await getDocs(collection(db, 'who-are-we'))
+  querySnapshot.forEach(doc => {
+    introductionDocs.push(doc.data())
+  })
+
   return {
     props: {
-      heroImageUrls
+      heroImageUrls,
+      introductionDocs
     }
   }
 }

@@ -20,7 +20,7 @@ export default function Home ({ heroImageUrls }: Props) {
   )
 }
 
-export async function getServerSideProps () {
+export async function getStaticProps () {
   const heroImagesFolderHref = ref(storage, 'images/hero')
   let heroImageUrls = []
 

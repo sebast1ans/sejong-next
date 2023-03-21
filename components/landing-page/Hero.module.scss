@@ -4,3 +4,28 @@
   height: 100vh;
   color: #f0f0f0;
 }
+
+.heroLogo {
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  background: url("/logos/whiteLogo.svg") no-repeat center;
+  background-size: 50%;
+  height: 100vh;
+  width: 100vw;
+  animation: fade-in 1s;
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  @media (width <= 900px) {
+    background-size: 80%;
+  }
+
+  @media (width <= 700px) {
+    background: url("/logos/sejongLogoMobile.svg") no-repeat center;
+    background-size: 50%;
+  }
+}

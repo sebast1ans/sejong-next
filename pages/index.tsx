@@ -46,7 +46,7 @@ export async function getStaticProps () {
 
   const querySnapshot = await getDocs(collection(db, 'who-are-we'))
   querySnapshot.forEach(doc => {
-    introductionDocs.push(doc.data())
+    introductionDocs.push({id: doc.id, ...doc.data()})
   })
 
   return {

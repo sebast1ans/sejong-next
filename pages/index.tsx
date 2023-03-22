@@ -1,16 +1,16 @@
-import { storage, db } from '../lib/firebase'
-import { getDownloadURL, listAll, ref } from 'firebase/storage'
-import { collection, DocumentData, getDocs } from 'firebase/firestore'
 import Head from 'next/head'
+import { db } from '../lib/firebase'
+import { collection, DocumentData, getDocs } from 'firebase/firestore'
+import { useHeroImageURLs } from '../hooks/useHeroImageURLs'
 import Hero from '../components/landing-page/Hero'
 import Introduction from '../components/landing-page/Introduction'
 
 interface Props {
-  heroImageUrls: string[]
+  heroImageURLs: string[]
   introductionDocs: DocumentData[]
 }
 
-export default function Home ({ heroImageUrls, introductionDocs }: Props) {
+export default function Home ({ heroImageURLs, introductionDocs }: Props) {
   return (
     <>
       <Head>
@@ -19,30 +19,15 @@ export default function Home ({ heroImageUrls, introductionDocs }: Props) {
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <link rel="icon" href="/favicon.png"/>
       </Head>
-      <Hero heroImages={heroImageUrls}/>
+      <Hero heroImages={heroImageURLs}/>
       <Introduction slidesData={introductionDocs}/>
     </>
   )
 }
 
 export async function getStaticProps () {
-  const heroImagesFolderHref = ref(storage, 'images/hero')
-  let heroImageUrls = []
+  const heroImageURLs = await useHeroImageURLs()
   let introductionDocs: DocumentData[] = []
-
-  try {
-    const heroImageRefs = (await listAll(heroImagesFolderHref)).items
-
-    const heroImageUrlPromises = heroImageRefs.map(async ref => {
-      return await getDownloadURL(ref)
-    })
-
-    for await (let heroImageUrl of heroImageUrlPromises) {
-      heroImageUrls.push(heroImageUrl)
-    }
-  } catch (e) {
-    console.log(e)
-  }
 
   const querySnapshot = await getDocs(collection(db, 'who-are-we'))
   querySnapshot.forEach(doc => {
@@ -51,7 +36,7 @@ export async function getStaticProps () {
 
   return {
     props: {
-      heroImageUrls,
+      heroImageURLs,
       introductionDocs
     }
   }

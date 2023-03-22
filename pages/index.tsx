@@ -1,16 +1,16 @@
 import Head from 'next/head'
-import { db } from '../lib/firebase'
-import { collection, DocumentData, getDocs } from 'firebase/firestore'
+import { DocumentData } from 'firebase/firestore'
+import { useIntroductionData } from '../hooks/useIntroductionData'
 import { useHeroImageURLs } from '../hooks/useHeroImageURLs'
 import Hero from '../components/landing-page/Hero'
 import Introduction from '../components/landing-page/Introduction'
 
 interface Props {
   heroImageURLs: string[]
-  introductionDocs: DocumentData[]
+  introductionData: DocumentData[]
 }
 
-export default function Home ({ heroImageURLs, introductionDocs }: Props) {
+export default function Home ({ heroImageURLs, introductionData }: Props) {
   return (
     <>
       <Head>
@@ -20,24 +20,19 @@ export default function Home ({ heroImageURLs, introductionDocs }: Props) {
         <link rel="icon" href="/favicon.png"/>
       </Head>
       <Hero heroImages={heroImageURLs}/>
-      <Introduction slidesData={introductionDocs}/>
+      <Introduction slidesData={introductionData}/>
     </>
   )
 }
 
 export async function getStaticProps () {
   const heroImageURLs = await useHeroImageURLs()
-  let introductionDocs: DocumentData[] = []
-
-  const querySnapshot = await getDocs(collection(db, 'who-are-we'))
-  querySnapshot.forEach(doc => {
-    introductionDocs.push({id: doc.id, ...doc.data()})
-  })
+  const introductionData = await useIntroductionData()
 
   return {
     props: {
       heroImageURLs,
-      introductionDocs
+      introductionData
     }
   }
 }

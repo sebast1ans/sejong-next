@@ -1,0 +1,37 @@
+.navigation {
+  position: fixed;
+  border-bottom: 1px solid fade-out(white, .8);
+  background: rgba(0, 0, 0, .78);
+  height: 8rem;
+  width: 100%;
+  z-index: 2;
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+
+    .logo {
+      height: 100%;
+      width: auto;
+      padding: 1rem 0;
+    }
+
+    ul {
+      display: flex;
+      height: 100%;
+      align-items: center;
+      margin: 0;
+      padding: 0;
+
+      li {
+        list-style-type: none;
+        color: white;
+        font-weight: 700;
+        text-transform: uppercase;
+        padding: .27rem;
+      }
+    }
+  }
+}

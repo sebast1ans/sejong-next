@@ -4,7 +4,7 @@ import Image from 'next/image'
 import logo from '../../public/logos/whiteLogo.svg'
 import styles from './Navigation.module.scss'
 
-export function Navigation() {
+export default function Navigation() {
   const { t } = useTranslation('navigation')
 
   return (

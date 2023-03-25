@@ -1,6 +1,7 @@
 import type { AppProps } from 'next/app'
 import { appWithTranslation } from 'next-i18next'
-import { Saira_Semi_Condensed} from '@next/font/google'
+import Navigation from '../components/landing-page/Navigation'
+import { Saira_Semi_Condensed } from '@next/font/google'
 import '../styles/globals.scss'
 
 const encodeSans = Saira_Semi_Condensed({
@@ -10,9 +11,12 @@ const encodeSans = Saira_Semi_Condensed({
 
 function App ({ Component, pageProps }: AppProps) {
   return (
-    <main className={encodeSans.className}>
-      <Component {...pageProps} />
-    </main>
+    <>
+      <main className={encodeSans.className}>
+        <Navigation/>
+        <Component {...pageProps} />
+      </main>
+    </>
   )
 }
 

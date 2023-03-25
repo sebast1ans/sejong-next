@@ -3,7 +3,6 @@ import { DocumentData } from 'firebase/firestore'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useIntroductionData } from '../hooks/useIntroductionData'
 import { useHeroImageURLs } from '../hooks/useHeroImageURLs'
-import { Navigation } from '../components/landing-page/Navigation'
 import Hero from '../components/landing-page/Hero'
 import Introduction from '../components/landing-page/Introduction'
 
@@ -21,7 +20,6 @@ export default function Home ({ heroImageURLs, introductionData }: Props) {
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <link rel="icon" href="/favicon.png"/>
       </Head>
-      <Navigation />
       <Hero heroImages={heroImageURLs}/>
       <Introduction slidesData={introductionData}/>
     </>

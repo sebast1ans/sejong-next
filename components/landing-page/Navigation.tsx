@@ -19,7 +19,7 @@ export function Navigation() {
             <li>{ t('history') }</li>
             <li>{ t('about-taekwondo') }</li>
             <li>{ t('training-sessions') }</li>
-            <li>{ t('pricelist') }</li>
+            <li>{ t('price-list') }</li>
             <li>{ t('contact') }</li>
           </ul>
         </Container>

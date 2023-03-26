@@ -11,6 +11,7 @@
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
+    "@hedgedoc/html-to-react": "^1.4.6",
     "@mui/material": "^5.11.13",
     "@next/font": "13.1.6",
     "@types/node": "18.14.1",
@@ -23,13 +24,11 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-firebase-hooks": "^5.1.1",
-    "react-html-parser": "^2.0.2",
     "react-i18next": "^12.2.0",
     "swiper": "^9.0.5",
     "typescript": "4.9.5"
   },
   "devDependencies": {
-    "@types/react-html-parser": "^2.0.2",
     "sass": "^1.59.3"
   }
 }

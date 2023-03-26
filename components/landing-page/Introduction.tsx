@@ -27,18 +27,19 @@ export default function Introduction ({ slidesData }: Props) {
         pagination={{ clickable: true }}
       >
         {slidesData && slidesData.map(slideData => (
-          <SwiperSlide className={styles.slide} key={slideData.id}>
-            <Container className={styles.textContainer}>
+          <SwiperSlide
+            style={{ background: `url(${slideData.backgroundURL})` }}
+            className={styles.slide}
+            key={slideData.id}
+          >
+            <div className={styles.backdropFilter}>
+              <Container className={styles.slideTextContainer}>
                 <h1>{convertHtmlToReact(slideData.title)}</h1>
                 <p>{convertHtmlToReact(slideData.text)}</p>
               </Container>
-              <img
-                src={slideData.backgroundURL}
-                className={styles.slideImage}
-                alt={slideData.title}
-              />
-            </SwiperSlide>
-          ))}
+            </div>
+          </SwiperSlide>
+        ))}
       </Swiper>
     </section>
   )

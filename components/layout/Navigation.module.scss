@@ -19,6 +19,10 @@
     align-items: center;
     height: 100%;
 
+    .navLogo {
+    height: 100%;
+    }
+
     .logo {
       height: 100%;
       width: auto;
@@ -39,6 +43,14 @@
         text-transform: uppercase;
         padding: .27rem;
       }
+
+      .link:hover {
+        text-decoration: none;
+      }
+    }
+
+    .select {
+      color: white;
     }
   }
 }

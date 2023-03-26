@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { Container, FormControl, MenuItem, Select } from '@mui/material'
 import { useTranslation, i18n } from 'next-i18next'
@@ -36,9 +37,10 @@ const LanguageSelector = (): JSX.Element => {
   }
 
   return (
-    <FormControl>
+    <FormControl size={'small'}>
       <Select
         id='languageSelector'
+        className={styles.select}
         value={activeLocale}
         onChange={e => changeLanguageHandler(e.target.value as string)}
       >
@@ -60,13 +62,17 @@ export default function Navigation() {
     <>
       <nav className={`${styles.navigation} ${scrolledOverPx(300) && styles.scrolled}`}>
         <Container className={styles.container}>
-          <Image src={logo} className={styles.logo} alt='Navigation logo'/>
+          <Link href='/' className={styles.navLogo}>
+            <Image src={logo} className={styles.logo} alt='Navigation logo'/>
+          </Link>
           <ul>
             {Object.keys(navigationKeys).map((key: string) => (
-              <li>{t(key)}</li>
+              <Link href={`#${key}`} className={styles.link} key={key}>
+                <li>{t(key)}</li>
+              </Link>
             ))}
           </ul>
-          <LanguageSelector />
+          <LanguageSelector/>
         </Container>
       </nav>
     </>

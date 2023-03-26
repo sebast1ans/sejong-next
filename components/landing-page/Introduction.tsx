@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay, Pagination } from 'swiper'
 import 'swiper/swiper.css'
 import 'swiper/css/pagination'
-import ReactHtmlParser from 'react-html-parser'
+import convertHtmlToReact from '@hedgedoc/html-to-react'
 import { Heading } from './Heading'
 import styles from './Introduction.module.scss'
 
@@ -26,8 +26,8 @@ export default function Introduction ({ slidesData }: Props) {
         {slidesData && slidesData.map(slideData => (
             <SwiperSlide className={styles.slide} key={slideData.id}>
               <Container className={styles.textContainer}>
-                <h1>{ReactHtmlParser(slideData.title)}</h1>
-                <p>{ReactHtmlParser(slideData.text)}</p>
+                <h1>{convertHtmlToReact(slideData.title)}</h1>
+                <p>{convertHtmlToReact(slideData.text)}</p>
               </Container>
               <img
                 src={slideData.backgroundURL}

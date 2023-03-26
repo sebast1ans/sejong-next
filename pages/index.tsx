@@ -36,7 +36,8 @@ export async function getStaticProps (context: { locale: string }) {
       introductionData: introductionData as DocumentData[],
       ...(await serverSideTranslations(locale, [
         'common',
-        'navigation'
+        'navigation',
+        'introduction'
       ]))
     }
   }

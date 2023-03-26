@@ -26,7 +26,10 @@ const scrolledOverPx = (pixels: number) => {
 const LanguageSelector = (): JSX.Element => {
   const router = useRouter()
   const { pathname, asPath, locales, locale: activeLocale } = router
-  const languageNames = new Intl.DisplayNames(['cs'], {type: 'language'})
+
+  const displayLanguageNameIn = (language: string) => {
+    return new Intl.DisplayNames( [language],{type: 'language'})
+  }
 
   const changeLanguageHandler = (language: string) => {
     void router.push(pathname, asPath, { locale: language })
@@ -41,7 +44,7 @@ const LanguageSelector = (): JSX.Element => {
       >
         {locales && locales.map(language => (
           <MenuItem key={language} value={language}>
-            {languageNames.of(language)}
+            {displayLanguageNameIn(language).of(language)}
           </MenuItem>
         ))}
       </Select>
@@ -51,7 +54,7 @@ const LanguageSelector = (): JSX.Element => {
 
 export default function Navigation() {
   const { t } = useTranslation('navigation')
-  const navigationKeys = i18n?.getResourceBundle('cz', 'navigation')
+  const navigationKeys = i18n?.getResourceBundle('cs', 'navigation')
 
   return (
     <>

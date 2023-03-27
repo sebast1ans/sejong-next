@@ -13,11 +13,17 @@ const encodeSans = Saira_Semi_Condensed({
 function App ({ Component, pageProps }: AppProps) {
   return (
     <>
-      <main className={encodeSans.className}>
-        <Navigation/>
+      <style jsx global>{`
+        html {
+          font-family: ${encodeSans.style.fontFamily};
+        }
+      `}
+      </style>
+      <Navigation/>
+      <main>
         <Component {...pageProps} />
-        <Footer/>
       </main>
+      <Footer/>
     </>
   )
 }

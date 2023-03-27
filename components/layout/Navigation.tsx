@@ -33,7 +33,7 @@ const LanguageSelector = (): JSX.Element => {
   }
 
   const changeLanguageHandler = (language: string) => {
-    void router.push(pathname, asPath, { locale: language })
+    void router.push(pathname, asPath, { locale: language, scroll: false })
   }
 
   return (

@@ -15,6 +15,7 @@ const namespaces = {
   Home: 'home-page-navigation',
 }
 
+// TODO extend nav items with functions (e.g. for logout)
 const navigationItems = (componentName: string) => {
   switch (componentName) {
     case 'Home':
@@ -26,6 +27,7 @@ const navigationItems = (componentName: string) => {
 
 function App ({ Component, pageProps }: AppProps) {
   const componentName = Component.name
+
   return (
     <>
       <style jsx global>{`

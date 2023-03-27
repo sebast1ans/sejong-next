@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { Container, FormControl, MenuItem, Select } from '@mui/material'
-import { useTranslation, i18n } from 'next-i18next'
+import { useTranslation } from 'next-i18next'
 import Image from 'next/image'
 import logo from '../../public/logos/whiteLogo.svg'
 import styles from './Navigation.module.scss'
@@ -54,19 +54,28 @@ const LanguageSelector = (): JSX.Element => {
   )
 }
 
-export default function Navigation() {
-  const { t } = useTranslation('navigation')
-  const navigationKeys = i18n?.getResourceBundle('cs', 'navigation')
+interface Props {
+  navigationItems: string[]
+  namespace?: string
+}
+
+export default function Navigation({ navigationItems, namespace }: Props) {
+  const { pathname } = useRouter()
+  const { t } = useTranslation(namespace)
 
   return (
     <>
-      <nav className={`${styles.navigation} ${scrolledOverPx(300) && styles.scrolled}`}>
+      <nav className={`
+      ${styles.navigation}
+      ${pathname === '/' ? styles.navigationRoot : styles.navigationSubpage} 
+      ${scrolledOverPx(300) && styles.scrolled}
+      `}>
         <Container className={styles.container}>
           <Link href='/' className={styles.navLogo}>
             <Image src={logo} className={styles.logo} alt='Navigation logo'/>
           </Link>
           <ul>
-            {Object.keys(navigationKeys).map((key: string) => (
+            {navigationItems.map((key: string) => (
               <Link href={`#${key}`} className={styles.link} key={key}>
                 <li>{t(key)}</li>
               </Link>

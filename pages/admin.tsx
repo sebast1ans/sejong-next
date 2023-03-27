@@ -1,3 +1,5 @@
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+
 export default function Admin () {
   return (
     <>
@@ -5,3 +7,16 @@ export default function Admin () {
     </>
   )
 }
+
+// export async function getStaticProps (context: { locale: string }) {
+//   const { locale } = context
+//
+//   return {
+//     props: {
+//       ...(await serverSideTranslations(locale, [
+//         'common',
+//         'home-page-navigation',
+//       ]))
+//     }
+//   }
+// }

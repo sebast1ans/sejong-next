@@ -1,5 +1,5 @@
 import type { AppProps } from 'next/app'
-import { appWithTranslation } from 'next-i18next'
+import { appWithTranslation, i18n } from 'next-i18next'
 import Navigation from '../components/layout/Navigation'
 import Footer from '../components/layout/Footer'
 import { Saira_Semi_Condensed } from '@next/font/google'
@@ -10,7 +10,22 @@ const encodeSans = Saira_Semi_Condensed({
   subsets: ['latin', 'vietnamese']
 })
 
+
+const namespaces = {
+  Home: 'home-page-navigation',
+}
+
+const navigationItems = (componentName: string) => {
+  switch (componentName) {
+    case 'Home':
+      return Object.keys(i18n?.getResourceBundle('cs', namespaces.Home) || {})
+    default:
+      return []
+  }
+}
+
 function App ({ Component, pageProps }: AppProps) {
+  const componentName = Component.name
   return (
     <>
       <style jsx global>{`
@@ -19,7 +34,10 @@ function App ({ Component, pageProps }: AppProps) {
         }
       `}
       </style>
-      <Navigation/>
+      <Navigation
+        navigationItems={navigationItems(componentName)}
+        // FIXME: This is a hack to get the namespace to work
+        namespace={namespaces[componentName]}/>
       <main>
         <Component {...pageProps} />
       </main>

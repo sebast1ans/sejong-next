@@ -1,0 +1,33 @@
+.footer {
+  background-color: #777;
+
+  .sponsors {
+    padding-top: 2rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.1rem;
+
+    a {
+      display: flex;
+      align-items: center;
+
+      .logo {
+        width: 8rem;
+      }
+    }
+  }
+
+  .copyright {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 2rem 0;
+    color: white;
+
+    .copyrightLogo {
+      height: 3rem;
+    }
+  }
+}

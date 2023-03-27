@@ -7,19 +7,20 @@ import Image from 'next/image'
 import logo from '../../public/logos/whiteLogo.svg'
 import styles from './Navigation.module.scss'
 
-const scrolledOverPx = (pixels: number) => {
+const useScrolledOverPx = (pixels: number) => {
   const [scrolledOver, setScrolledOver] = useState(false)
 
-  const scrollHandler = () => {
-    window.scrollY > pixels
-      ? setScrolledOver(true)
-      : setScrolledOver(false)
-  }
-
   useEffect(() => {
+    const scrollHandler = () => {
+      window.scrollY > pixels
+        ? setScrolledOver(true)
+        : setScrolledOver(false)
+    }
+
+    scrollHandler()
     document.addEventListener('scroll', scrollHandler)
     return () => document.removeEventListener('scroll', scrollHandler)
-  }, [])
+  }, [pixels])
 
   return scrolledOver
 }
@@ -62,13 +63,14 @@ interface Props {
 export default function Navigation({ navigationItems, namespace }: Props) {
   const { pathname } = useRouter()
   const { t } = useTranslation(namespace)
+  const scrolledOver = useScrolledOverPx(300)
 
   return (
     <>
       <nav className={`
       ${styles.navigation}
       ${pathname === '/' ? styles.navigationRoot : styles.navigationSubpage} 
-      ${scrolledOverPx(300) && styles.scrolled}
+      ${scrolledOver && styles.scrolled}
       `}>
         <Container className={styles.container}>
           <Link href='/' className={styles.navLogo}>

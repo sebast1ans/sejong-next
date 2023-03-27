@@ -13,33 +13,25 @@ import prg4 from '../../public/logos/footer/prg4.png'
 import construct from '../../public/logos/footer/construct.png'
 
 export default function Footer () {
+  const sponsors = [
+    { name: 'World Taekwondo', url: 'http://www.worldtaekwondo.org/', logo: wt },
+    { name: 'Kukkiwon', url: 'https://www.kukkiwon.or.kr/front/eng/main.action', logo: kkw },
+    { name: 'World Taekwondo CZ', url: 'https://www.worldtaekwondo.cz/', logo: cssvaz },
+    { name: 'World Taekwondo Europe', url: 'https://worldtaekwondoeurope.org/', logo: wte },
+    { name: 'Moohwa', url: 'http://moohwa.net/', logo: moohwa },
+    { name: 'Prague', url: 'http://www.praha.eu/', logo: prg },
+    { name: 'Prague 4', url: 'https://www.praha4.cz/', logo: prg4 },
+    { name: 'Construct Service', url: 'https://www.constructservice.cz/', logo: construct },
+  ]
+
   return (
     <footer className={styles.footer}>
       <Container className={styles.sponsors}>
-        <Link href={'http://www.worldtaekwondo.org/'} target={'_blank'}>
-          <Image src={wt} className={styles.logo} alt={'World Taekwondo'}/>
-        </Link>
-        <Link href={'https://www.kukkiwon.or.kr/front/eng/main.action'} target={'_blank'}>
-          <Image src={kkw} className={styles.logo} alt={'Kukkiwon'}/>
-        </Link>
-        <Link href={'https://www.worldtaekwondo.cz/'} target={'_blank'}>
-          <Image src={cssvaz} className={styles.logo} alt={'World Taekwondo CZ'}/>
-        </Link>
-        <Link href={'https://worldtaekwondoeurope.org/'} target={'_blank'}>
-          <Image src={wte} className={styles.logo} alt={'World Taekwondo Europe'}/>
-        </Link>
-        <Link href={'http://moohwa.net/'} target={'_blank'}>
-          <Image src={moohwa} className={styles.logo} alt={'Moohwa'}/>
-        </Link>
-        <Link href={'http://www.praha.eu/'} target={'_blank'}>
-          <Image src={prg} className={styles.logo} alt={'Prague'}/>
-        </Link>
-        <Link href={'https://www.praha4.cz/'} target={'_blank'}>
-          <Image src={prg4} className={styles.logo} alt={'Prague 4'}/>
-        </Link>
-        <Link href={'https://www.constructservice.cz/'} target={'_blank'}>
-          <Image src={construct} className={styles.logo} alt={'Construct Service'}/>
-        </Link>
+        {sponsors.map(({ url, name, logo}) => (
+          <Link href={url} target={'_blank'} key={name}>
+            <Image src={logo} className={styles.logo} alt={name}></Image>
+          </Link>
+        ))}
       </Container>
       <p className={styles.copyright}>
         <Image

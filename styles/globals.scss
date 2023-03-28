@@ -1,5 +1,10 @@
 @use 'variables';
 
+html {
+    scroll-behavior: smooth !important;
+    scroll-padding-top: 8rem;
+}
+
 body,
 body > div{
     padding: 0;
@@ -12,6 +17,7 @@ body > div{
 
 main {
     flex-grow: 1;
+
 }
 
 * {

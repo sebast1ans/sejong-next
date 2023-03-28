@@ -6,6 +6,7 @@ import { getIntroductionData } from '../lib/getIntroductionData'
 import { getHeroImageURLs } from '../lib/getHeroImageURLs'
 import Hero from '../components/landing-page/Hero'
 import Introduction from '../components/landing-page/Introduction'
+import Contact from '../components/landing-page/Contact'
 
 export default function Home ({
   heroImageURLs,
@@ -21,6 +22,7 @@ export default function Home ({
       </Head>
       <Hero heroImages={heroImageURLs}/>
       <Introduction slidesData={introductionData}/>
+      <Contact />
     </>
   )
 }
@@ -37,7 +39,8 @@ export async function getStaticProps (context: { locale: string }) {
       ...(await serverSideTranslations(locale, [
         'common',
         'home-page-navigation',
-        'introduction'
+        'introduction',
+        'contact'
       ]))
     }
   }

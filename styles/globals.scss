@@ -31,3 +31,12 @@ a {
 a:hover {
     text-decoration: underline;
 }
+
+section {
+    padding-top: 3rem;
+    padding-bottom: 4rem;
+}
+
+[class*="MuiSvgIcon"] {
+    vertical-align: middle;
+}

@@ -12,6 +12,7 @@
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@hedgedoc/html-to-react": "^1.4.6",
+    "@mui/icons-material": "^5.11.11",
     "@mui/material": "^5.11.13",
     "@next/font": "13.1.6",
     "@types/node": "18.14.1",

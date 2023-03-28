@@ -1,7 +1,7 @@
-import { storage } from '../lib/firebase'
+import { storage } from './firebase'
 import { getDownloadURL, listAll, ref } from 'firebase/storage'
 
-export const useHeroImageURLs = async () => {
+export const getHeroImageURLs = async () => {
   const heroImagesFolderHref = ref(storage, 'images/hero')
   let heroImageURLs = []
 

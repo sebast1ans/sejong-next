@@ -1,7 +1,7 @@
 import { collection, DocumentData, getDocs } from 'firebase/firestore'
-import { db } from '../lib/firebase'
+import { db } from './firebase'
 
-export const useIntroductionData = async () => {
+export const getIntroductionData = async () => {
   let introductionData: DocumentData = []
 
   try {

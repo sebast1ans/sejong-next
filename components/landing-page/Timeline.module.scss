@@ -11,22 +11,28 @@
 
   .event {
     padding-top: 1.1rem;
-    border-top: 5px solid #DA0A16;
+    padding-right: 1.1rem;
+    border-top: .4rem solid variables.$sejongRed;
     position: relative;
+
+    &:last-child {
+      border-color: rgba(0, 0, 0, 0);
+    }
 
     .point {
       content: "";
       position: absolute;
       width: 1.7rem;
       height: 1.7rem;
-      border: 5px solid #DA0A16;
-      background-color: #f0f0f0;
+      border: .4rem solid variables.$sejongRed;
+      background-color: variables.$gray;
       border-radius: 50%;
-      top: -16px;
+      top: -1rem;
     }
 
     ul {
       list-style-type: none;
+      padding: 0;
     }
   }
 }

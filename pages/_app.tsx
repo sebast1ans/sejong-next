@@ -38,8 +38,7 @@ function App ({ Component, pageProps }: AppProps) {
       </style>
       <Navigation
         navigationItems={navigationItems(componentName)}
-        // FIXME: This is a hack to get the namespace to work
-        namespace={namespaces[componentName]}/>
+        namespace={namespaces[componentName as keyof typeof namespaces]}/>
       <main>
         <Component {...pageProps} />
       </main>

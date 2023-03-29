@@ -11,7 +11,7 @@ export default function Timeline() {
   const getEvents = (year: string): string[] => {
     return t(`years.${year}`, {returnObjects: true})
   }
-
+  //TODO translate locales!
   const EventsList = ({year}: { year: string }): JSX.Element => (
     <ul>
       {getEvents(year).map((event, index) => (

@@ -24,7 +24,7 @@ export default function Timeline() {
     <section id={'history'} className={styles.history}>
       <Heading text={t('our-story')}/>
       <Swiper
-        style={{overflow: 'visible'}}
+        className={styles.timeline}
         slidesPerView={2}
         centeredSlides={true}
         freeMode={true}

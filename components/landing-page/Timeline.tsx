@@ -1,5 +1,6 @@
 import { Heading } from './Heading'
 import { useTranslation } from 'next-i18next'
+import styles from './Timeline.module.scss'
 
 export default function Timeline() {
   const {t} = useTranslation('timeline')
@@ -18,11 +19,12 @@ export default function Timeline() {
   )
 
   return (
-    <section id={'history'}>
+    <section id={'history'} className={styles.history}>
       <Heading text={t('our-story')}/>
-      <ul>
+      <ul className={styles.timeline}>
         {years.map(year => (
-          <li key={year}>
+          <li className={styles.event} key={year}>
+            <div className={styles.point}></div>
             <h3>{year}</h3>
             <EventsList year={year}/>
           </li>

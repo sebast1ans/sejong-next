@@ -12,14 +12,6 @@ export default function Timeline() {
     return t(`years.${year}`, {returnObjects: true})
   }
   //TODO translate locales!
-  const EventsList = ({year}: { year: string }): JSX.Element => (
-    <ul>
-      {getEvents(year).map((event, index) => (
-        <li key={index}><p>{event}</p></li>
-      ))}
-    </ul>
-  )
-
   return (
     <section id={'history'} className={styles.history}>
       <Heading text={t('our-story')}/>
@@ -41,14 +33,18 @@ export default function Timeline() {
           }
         }}
       >
-      {years.map(year => (
-        <SwiperSlide className={styles.event} key={year}>
-          <div className={styles.point}></div>
-          <h3>{year}</h3>
-          <EventsList year={year}/>
-        </SwiperSlide>
-      ))}
-    </Swiper>
-</section>
-)
+        {years.map(year => (
+          <SwiperSlide className={styles.event} key={year}>
+            <div className={styles.point}></div>
+            <h3>{year}</h3>
+            <ul>
+              {getEvents(year).map((event, index) => (
+                <li key={index}><p>{event}</p></li>
+              ))}
+            </ul>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </section>
+  )
 }

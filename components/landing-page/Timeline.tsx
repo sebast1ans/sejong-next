@@ -1,5 +1,7 @@
 import { Heading } from './Heading'
 import { useTranslation } from 'next-i18next'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import 'swiper/swiper.css'
 import styles from './Timeline.module.scss'
 
 export default function Timeline() {
@@ -13,7 +15,7 @@ export default function Timeline() {
   const EventsList = ({year}: { year: string }): JSX.Element => (
     <ul>
       {getEvents(year).map((event, index) => (
-        <li key={index}>{event}</li>
+        <li key={index}><p>{event}</p></li>
       ))}
     </ul>
   )
@@ -21,15 +23,32 @@ export default function Timeline() {
   return (
     <section id={'history'} className={styles.history}>
       <Heading text={t('our-story')}/>
-      <ul className={styles.timeline}>
-        {years.map(year => (
-          <li className={styles.event} key={year}>
-            <div className={styles.point}></div>
-            <h3>{year}</h3>
-            <EventsList year={year}/>
-          </li>
-        ))}
-      </ul>
-    </section>
-  )
+      <Swiper
+        style={{overflow: 'visible'}}
+        slidesPerView={2}
+        centeredSlides={true}
+        freeMode={true}
+        initialSlide={0}
+        grabCursor={true}
+        breakpoints={{
+          900: {
+            slidesPerView: 4,
+            initialSlide: 1
+          },
+          1400: {
+            slidesPerView: 6,
+            initialSlide: 2
+          }
+        }}
+      >
+      {years.map(year => (
+        <SwiperSlide className={styles.event} key={year}>
+          <div className={styles.point}></div>
+          <h3>{year}</h3>
+          <EventsList year={year}/>
+        </SwiperSlide>
+      ))}
+    </Swiper>
+</section>
+)
 }

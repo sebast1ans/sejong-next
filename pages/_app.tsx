@@ -16,7 +16,7 @@ const namespaces = {
 }
 
 // TODO extend nav items with functions (e.g. for logout)
-const navigationItems = (componentName: string) => {
+const navigationItems = (componentName?: string) => {
   switch (componentName) {
     case 'Home':
       return Object.keys(i18n?.getResourceBundle('cs', namespaces.Home) || [])
@@ -26,7 +26,7 @@ const navigationItems = (componentName: string) => {
 }
 
 function App ({ Component, pageProps }: AppProps) {
-  const componentName = Component.name
+  const componentName = Component.displayName
 
   return (
     <>

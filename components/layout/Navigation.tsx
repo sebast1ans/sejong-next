@@ -56,7 +56,7 @@ const LanguageSelector = (): JSX.Element => {
 }
 
 interface Props {
-  navigationItems: string[]
+  navigationItems?: string[]
   namespace?: string
 }
 
@@ -73,11 +73,13 @@ export default function Navigation({ navigationItems, namespace }: Props) {
       ${scrolledOver && styles.scrolled}
       `}>
         <Container className={styles.container}>
-          <Link href='/' className={styles.navLogo}>
-            <Image src={logo} className={styles.logo} alt='Navigation logo'/>
-          </Link>
+          <div className={styles.navLogo}>
+            <Link href='/'>
+              <Image src={logo} className={styles.logo} alt='Navigation logo'/>
+            </Link>
+          </div>
           <ul>
-            {navigationItems.map((key: string) => (
+            {navigationItems && navigationItems.map((key: string) => (
               <Link href={`#${key}`} className={styles.link} key={key}>
                 <li>{t(key)}</li>
               </Link>

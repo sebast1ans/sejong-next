@@ -5,6 +5,7 @@ import { Container, FormControl, MenuItem, Select } from '@mui/material'
 import { useTranslation } from 'next-i18next'
 import Image from 'next/image'
 import logo from '../../public/logos/whiteLogo.svg'
+import 'flag-icons/css/flag-icons.min.css'
 import styles from './Navigation.module.scss'
 
 const useScrolledOverPx = (pixels: number) => {
@@ -27,14 +28,15 @@ const useScrolledOverPx = (pixels: number) => {
 
 const LanguageSelector = (): JSX.Element => {
   const router = useRouter()
-  const { pathname, asPath, locales, locale: activeLocale } = router
+  const {pathname, asPath, locales, locale: activeLocale} = router
+  const alpha2Code = {cs: 'cz', en: 'gb', vi: 'vn',}
 
   const displayLanguageNameIn = (language: string) => {
-    return new Intl.DisplayNames( [language],{type: 'language'})
+    return new Intl.DisplayNames([language], {type: 'language'})
   }
 
   const changeLanguageHandler = (language: string) => {
-    void router.push(pathname, asPath, { locale: language, scroll: false })
+    void router.push(pathname, asPath, {locale: language, scroll: false})
   }
 
   return (
@@ -47,6 +49,7 @@ const LanguageSelector = (): JSX.Element => {
       >
         {locales && locales.map(language => (
           <MenuItem key={language} value={language}>
+            <span className={`fi fi-${alpha2Code[language as keyof typeof alpha2Code]}`}></span>&nbsp;
             {displayLanguageNameIn(language).of(language)}
           </MenuItem>
         ))}
@@ -60,9 +63,9 @@ interface Props {
   namespace?: string
 }
 
-export default function Navigation({ navigationItems, namespace }: Props) {
-  const { pathname } = useRouter()
-  const { t } = useTranslation(namespace)
+export default function Navigation({navigationItems, namespace}: Props) {
+  const {pathname} = useRouter()
+  const {t} = useTranslation(namespace)
   const scrolledOver = useScrolledOverPx(300)
 
   return (

@@ -31,10 +31,6 @@ const LanguageSelector = (): JSX.Element => {
   const {pathname, asPath, locales, locale: activeLocale} = router
   const alpha2Code = {cs: 'cz', en: 'gb', vi: 'vn',}
 
-  const displayLanguageNameIn = (language: string) => {
-    return new Intl.DisplayNames([language], {type: 'language'})
-  }
-
   const changeLanguageHandler = (language: string) => {
     void router.push(pathname, asPath, {locale: language, scroll: false})
   }
@@ -42,15 +38,17 @@ const LanguageSelector = (): JSX.Element => {
   return (
     <FormControl size={'small'}>
       <Select
-        id='languageSelector'
         className={styles.select}
         value={activeLocale}
+        autoWidth
+        inputProps={{
+          IconComponent: () => null,
+      }}
         onChange={e => changeLanguageHandler(e.target.value as string)}
       >
         {locales && locales.map(language => (
           <MenuItem key={language} value={language}>
             <span className={`fi fi-${alpha2Code[language as keyof typeof alpha2Code]}`}></span>&nbsp;
-            {displayLanguageNameIn(language).of(language)}
           </MenuItem>
         ))}
       </Select>

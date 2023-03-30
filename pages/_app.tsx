@@ -19,7 +19,7 @@ const namespaces = {
 const navigationItems = (componentName: string) => {
   switch (componentName) {
     case 'Home':
-      return Object.keys(i18n?.getResourceBundle('cs', namespaces.Home) || {})
+      return Object.keys(i18n?.getResourceBundle('cs', namespaces.Home) || [])
     default:
       return []
   }

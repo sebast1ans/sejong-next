@@ -7,12 +7,12 @@ import styles from './PriceList.module.scss'
 export default function PriceList() {
   const {t} = useTranslation('price-list')
   const { locale } = useRouter()
-  const priceInCZK = (number: number) =>
+  const priceInCZK = (price: number) =>
     Intl.NumberFormat(locale, {
       style: 'currency',
       currency: 'CZK',
       maximumFractionDigits: 0
-    }).format(number)
+    }).format(price)
 
   return (
     <section id={'price-list'} className={styles.priceList}>

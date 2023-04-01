@@ -1,5 +1,5 @@
 import { Heading } from './Heading'
-import { Container } from '@mui/material'
+import { Container, Grid } from '@mui/material'
 import { useTranslation } from 'next-i18next'
 import styles from './PriceList.module.scss'
 
@@ -10,36 +10,42 @@ export default function PriceList() {
     <section id={'price-list'} className={styles.priceList}>
       <Heading text={t('price-list')}/>
       <Container>
-        <div className={styles.prices}>
-          <table>
-            <tbody>
-            <tr>
-              <td><strong>Děti 6 - 9 let:</strong></td>
-              <td>1 800,-/pololetí</td>
-            </tr>
-            <tr>
-              <td><strong>Děti 10 - 15 let:</strong></td>
-              <td>2 300,-/pololetí</td>
-            </tr>
-            <tr>
-              <td><strong>Dorost a dospělí:</strong></td>
-              <td>2 800,-/pololetí</td>
-            </tr>
-            </tbody>
-          </table>
-          <table>
-            <tbody>
-            <tr>
-              <td><strong>Děti 6 - 9 let:</strong></td>
-              <td>1 800,-/pololetí</td>
-            </tr>
-            <tr>
-              <td><strong>Děti 10 - 15 let:</strong></td>
-              <td>2 300,-/pololetí</td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
+        <Grid container spacing={4}>
+          <Grid item xs={12} sm={6}>
+            <h2>ZS Horackova</h2>
+            <table>
+              <tbody>
+              <tr>
+                <td><strong>Děti 6 - 9 let:</strong></td>
+                <td>1 800,-/pololetí</td>
+              </tr>
+              <tr>
+                <td><strong>Děti 10 - 15 let:</strong></td>
+                <td>2 300,-/pololetí</td>
+              </tr>
+              <tr>
+                <td><strong>Dorost a dospělí:</strong></td>
+                <td>2 800,-/pololetí</td>
+              </tr>
+              </tbody>
+            </table>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <h2>ZS Smolkova</h2>
+            <table>
+              <tbody>
+              <tr>
+                <td><strong>Děti 6 - 9 let:</strong></td>
+                <td>1 800,-/pololetí</td>
+              </tr>
+              <tr>
+                <td><strong>Děti 10 - 15 let:</strong></td>
+                <td>2 300,-/pololetí</td>
+              </tr>
+              </tbody>
+            </table>
+          </Grid>
+        </Grid>
         <hr/>
         <p><strong>Platbu můžete provést bankovním převodem na účet:</strong> 154282135/0300</p>
         <strong></strong>

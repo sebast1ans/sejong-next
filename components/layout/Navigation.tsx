@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { Container, FormControl, MenuItem, Select } from '@mui/material'
+import { Facebook, Instagram, YouTube } from '@mui/icons-material'
 import { useTranslation } from 'next-i18next'
 import Image from 'next/image'
 import logo from '../../public/logos/whiteLogo.svg'
@@ -24,6 +25,31 @@ const useScrolledOverPx = (pixels: number) => {
   }, [pixels])
 
   return scrolledOver
+}
+
+const SocialLinks = () => {
+  const socials = [{
+      icon: <Facebook/>,
+      href: 'https://www.facebook.com/SejongDojang/'
+    },
+    {
+      icon: <Instagram/>,
+      href: 'https://www.instagram.com/sejong_taekwondo/'
+    },
+    {
+      icon: <YouTube/>,
+      href: 'https://www.youtube.com/channel/UCENWwwDVUMEnVamN3ANXB2g'
+    }]
+
+  return (
+    <ul>
+      {socials.map(({icon, href}) => (
+        <li key={href}>
+          <Link href={href} target={'_blank'} className={`${styles.link} ${styles.socials}`}>{icon}</Link>
+        </li>
+      ))}
+    </ul>
+  )
 }
 
 const LanguageSelector = (): JSX.Element => {
@@ -88,6 +114,7 @@ export default function Navigation({navigationItems, namespace}: Props) {
               </li>
             ))}
           </ul>
+          <SocialLinks/>
           <LanguageSelector/>
         </Container>
       </nav>

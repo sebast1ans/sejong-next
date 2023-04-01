@@ -1,4 +1,6 @@
 import type { AppProps } from 'next/app'
+import { ThemeProvider } from '@mui/material'
+import { theme } from '../lib/mui-theme'
 import { appWithTranslation, i18n } from 'next-i18next'
 import Navigation from '../components/layout/Navigation'
 import Footer from '../components/layout/Footer'
@@ -36,13 +38,15 @@ function App ({ Component, pageProps }: AppProps) {
         }
       `}
       </style>
-      <Navigation
-        navigationItems={navigationItems(componentName)}
-        namespace={namespaces[componentName as keyof typeof namespaces]}/>
-      <main>
-        <Component {...pageProps} />
-      </main>
-      <Footer/>
+      <ThemeProvider theme={theme}>
+        <Navigation
+          navigationItems={navigationItems(componentName)}
+          namespace={namespaces[componentName as keyof typeof namespaces]}/>
+        <main>
+          <Component {...pageProps} />
+        </main>
+        <Footer/>
+      </ThemeProvider>
     </>
   )
 }

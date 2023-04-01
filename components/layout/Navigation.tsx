@@ -45,7 +45,7 @@ const SocialLinks = () => {
     <ul>
       {socials.map(({icon, href}) => (
         <li key={href}>
-          <Link href={href} target={'_blank'} className={styles.link}>{icon}</Link>
+          <Link href={href} target={'_blank'} className={`${styles.link} ${styles.socials}`}>{icon}</Link>
         </li>
       ))}
     </ul>

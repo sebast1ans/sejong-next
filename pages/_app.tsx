@@ -4,8 +4,8 @@ import { theme } from '../lib/mui-theme'
 import { appWithTranslation, i18n } from 'next-i18next'
 import Navigation from '../components/layout/Navigation'
 import Footer from '../components/layout/Footer'
-import '../styles/globals.scss'
 import { CssBaseline } from '@mui/material'
+import '../styles/globals.scss'
 
 const namespaces = {
   Home: 'home-page-navigation',

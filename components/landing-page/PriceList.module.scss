@@ -1,0 +1,14 @@
+@use 'styles/variables';
+
+.priceList {
+  background-color: variables.$gray;
+
+  .prices {
+    display: flex;
+    justify-content: space-between;
+
+    table {
+      width: auto;
+    }
+  }
+}

@@ -83,9 +83,9 @@ export default function Navigation({navigationItems, namespace}: Props) {
           </div>
           <ul>
             {navigationItems && navigationItems.map((key: string) => (
-              <Link href={`#${key}`} className={styles.link} key={key}>
-                <li>{t(key)}</li>
-              </Link>
+              <li key={key}>
+                <Link href={`#${key}`} className={styles.link}>{t(key)}</Link>
+              </li>
             ))}
           </ul>
           <LanguageSelector/>

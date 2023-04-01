@@ -39,7 +39,7 @@ export default function Footer () {
           className={styles.copyrightLogo}
           alt={'Sejong seal'}
         />
-        {new Date().getFullYear()} Sejong Taekwondo
+        ©&nbsp;{new Date().getFullYear()} Sejong Taekwondo
       </p>
     </footer>
   )

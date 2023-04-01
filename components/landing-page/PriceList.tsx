@@ -1,10 +1,18 @@
-import { Heading } from './Heading'
-import { Container, Grid } from '@mui/material'
+import { useRouter } from 'next/router'
 import { useTranslation } from 'next-i18next'
+import { Container, Grid } from '@mui/material'
+import { Heading } from './Heading'
 import styles from './PriceList.module.scss'
 
 export default function PriceList() {
   const {t} = useTranslation('price-list')
+  const { locale } = useRouter()
+  const priceInCZK = (number: number) =>
+    Intl.NumberFormat(locale, {
+      style: 'currency',
+      currency: 'CZK',
+      maximumFractionDigits: 0
+    }).format(number)
 
   return (
     <section id={'price-list'} className={styles.priceList}>
@@ -12,46 +20,52 @@ export default function PriceList() {
       <Container>
         <Grid container spacing={4}>
           <Grid item xs={12} sm={6}>
-            <h2>ZS Horackova</h2>
+            <h2>{t('primary-school')} Horáčkova</h2>
             <table>
               <tbody>
               <tr>
-                <td><strong>Děti 6 - 9 let:</strong></td>
-                <td>1 800,-/pololetí</td>
+                <td><strong>{t('children-6-9')}:</strong></td>
+                <td>{`${priceInCZK(1800)}/${t('term')}`}</td>
               </tr>
               <tr>
-                <td><strong>Děti 10 - 15 let:</strong></td>
-                <td>2 300,-/pololetí</td>
+                <td><strong>{t('children-10-15')}:</strong></td>
+                <td>{`${priceInCZK(2300)}/${t('term')}`}</td>
               </tr>
               <tr>
-                <td><strong>Dorost a dospělí:</strong></td>
-                <td>2 800,-/pololetí</td>
+                <td><strong>{t('juniors-and-adults')}:</strong></td>
+                <td>{`${priceInCZK(2800)}/${t('term')}`}</td>
               </tr>
               </tbody>
             </table>
           </Grid>
           <Grid item xs={12} sm={6}>
-            <h2>ZS Smolkova</h2>
+            <h2>{t('primary-school')} Smolkova</h2>
             <table>
               <tbody>
               <tr>
-                <td><strong>Děti 6 - 9 let:</strong></td>
-                <td>1 800,-/pololetí</td>
+                <td><strong>{t('children-6-9')}:</strong></td>
+                <td>{`${priceInCZK(1800)}/${t('term')}`}</td>
               </tr>
               <tr>
-                <td><strong>Děti 10 - 15 let:</strong></td>
-                <td>2 300,-/pololetí</td>
+                <td><strong>{t('children-10-15')}:</strong></td>
+                <td>{`${priceInCZK(2300)}/${t('term')}`}</td>
               </tr>
               </tbody>
             </table>
           </Grid>
         </Grid>
         <hr/>
-        <p><strong>Platbu můžete provést bankovním převodem na účet:</strong> 154282135/0300</p>
+        <p>
+          <strong>{t('you-can-pay-by-bank-transfer')}:</strong>
+          &nbsp;154282135/0300</p>
         <strong></strong>
-        <p><strong>Zpráva příjemci:</strong> jméno a příjmení cvičence
+        <p>
+          <strong>{t('message-to-recipient')}:</strong>
+          &nbsp;{t('name-and-surname-of-exerciser')}
         </p>
-        <p><strong>Variabilní symbol:</strong> rodné číslo bez lomítka
+        <p>
+          <strong>{t('variable-symbol')}:</strong>
+          &nbsp;{t('ni-number')}
         </p>
         <small>U vybraných zdravotních pojišťoven lze zažádat o příspěvek v rámci jednotlivých preventivních
           programů (příspěvek na sportovní kroužek, pohybové aktivity apod.). Klub vystaví potvrzení o

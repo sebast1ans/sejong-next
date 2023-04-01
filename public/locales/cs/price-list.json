@@ -1,3 +1,13 @@
 {
-  "price-list": "Ceník"
+  "price-list": "Ceník",
+  "primary-school": "ZŠ",
+  "term": "pololetí",
+  "children-6-9": "Děti 6-9 let",
+  "children-10-15": "Děti 10-15 let",
+  "juniors-and-adults": "Dorost a dospělí",
+  "you-can-pay-by-bank-transfer": "Platbu můžete provést bankovním převodem na účet",
+  "message-to-recipient": "Zpráva pro příjemce",
+  "name-and-surname-of-exerciser": "jméno a příjmení cvičence",
+  "variable-symbol": "Variabilní symbol",
+  "ni-number": "rodné číslo bez lomítka"
 }

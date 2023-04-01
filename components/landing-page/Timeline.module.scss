@@ -13,6 +13,7 @@
     border-top: .4rem solid variables.$sejongRed;
     position: relative;
     height: auto;
+    box-sizing: border-box;
 
     .point {
       content: "";

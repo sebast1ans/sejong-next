@@ -67,10 +67,7 @@ export default function PriceList() {
           <strong>{t('variable-symbol')}:</strong>
           &nbsp;{t('ni-number')}
         </p>
-        <small>U vybraných zdravotních pojišťoven lze zažádat o příspěvek v rámci jednotlivých preventivních
-          programů (příspěvek na sportovní kroužek, pohybové aktivity apod.). Klub vystaví potvrzení o
-          platbě, které pojišťovně předložíte. Konkrétní informace o podmínkách získáte u své zdravotní
-          pojišťovny.</small>
+        <small>{t('insurance-note')}</small>
       </Container>
     </section>
   )

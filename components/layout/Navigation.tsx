@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { MouseEventHandler, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { Container, FormControl, MenuItem, Select } from '@mui/material'
@@ -10,7 +10,7 @@ import logo from '../../public/logos/whiteLogo.svg'
 import 'flag-icons/css/flag-icons.min.css'
 import styles from './Navigation.module.scss'
 
-const useScrolledOverPx = (pixels: number) => {
+const useWindowScrolledOver = (pixels: number) => {
   const [scrolledOver, setScrolledOver] = useState(false)
 
   useEffect(() => {
@@ -28,14 +28,14 @@ const useScrolledOverPx = (pixels: number) => {
   return scrolledOver
 }
 
-const useWindowWidthResized = (pixels: number) => {
-  const [windowWidthResizedOver, setWindowWidthResizedOver] = useState(false)
+const useWindowWidthResizedOver = (pixels: number) => {
+  const [resizedOver, setResizedOver] = useState(false)
 
   useEffect(() => {
     const resizeHandler = () => {
       window.innerWidth > pixels
-        ? setWindowWidthResizedOver(true)
-        : setWindowWidthResizedOver(false)
+        ? setResizedOver(true)
+        : setResizedOver(false)
     }
 
     resizeHandler()
@@ -43,8 +43,23 @@ const useWindowWidthResized = (pixels: number) => {
     return () => window.removeEventListener('resize', resizeHandler)
   }, [pixels])
 
-  return windowWidthResizedOver
+  return resizedOver
 }
+
+interface HamburgerMenuProps {
+  isNavigationMenuHidden: boolean
+  setIsNavigationMenuHidden: MouseEventHandler
+}
+
+const HamburgerMenu = ({isNavigationMenuHidden, setIsNavigationMenuHidden}: HamburgerMenuProps) => (
+  <div
+    className={`${styles.hamburger} ${!isNavigationMenuHidden && styles.menuNotHidden}`}
+    onClick={setIsNavigationMenuHidden}>
+    <div className={styles.bun}>
+      <div className={styles.meat}></div>
+    </div>
+  </div>
+)
 
 const SocialLinks = () => {
   const socials = [{
@@ -111,33 +126,30 @@ interface Props {
 export default function Navigation({navigationItems, namespace}: Props) {
   const {pathname} = useRouter()
   const {t} = useTranslation(namespace)
-  const scrolledOver = useScrolledOverPx(300)
-  const isWindowWidthOverPx = useWindowWidthResized(theme.breakpoints.values.lg)
+  const isWindowScrolledOver = useWindowScrolledOver(300)
+  const isWindowWidthOver = useWindowWidthResizedOver(theme.breakpoints.values.lg)
   const [isNavigationMenuHidden, setIsNavigationMenuHidden] = useState(true)
 
   useEffect(() => {
-    setIsNavigationMenuHidden(!isWindowWidthOverPx)
-  }, [isWindowWidthOverPx])
+    setIsNavigationMenuHidden(!isWindowWidthOver)
+  }, [isWindowWidthOver])
 
   return (
     <>
       <nav className={`
       ${styles.navigation}
       ${pathname === '/' ? styles.navigationRoot : styles.navigationSubpage} 
-      ${(!scrolledOver && isWindowWidthOverPx) && styles.notScrolled}
+      ${(!isWindowScrolledOver && isWindowWidthOver) && styles.notScrolled}
       `}>
         <Container className={styles.container}>
           <div className={styles.navigationControl}>
             <Link href='/'>
               <Image src={logo} className={styles.logo} alt='Navigation logo'/>
             </Link>
-            <div
-              className={`${styles.hamburger} ${!isNavigationMenuHidden && styles.menuHidden}`}
-              onClick={() => setIsNavigationMenuHidden(current => !current)}>
-              <div className={styles.bun}>
-                <div className={styles.meat}></div>
-              </div>
-            </div>
+            <HamburgerMenu
+              isNavigationMenuHidden={isNavigationMenuHidden}
+              setIsNavigationMenuHidden={() => setIsNavigationMenuHidden(current => !current)}
+            />
           </div>
           <div className={`${styles.navigationItems} ${isNavigationMenuHidden && styles.inactive}`}>
             <ul className={styles.anchors}>
@@ -146,7 +158,7 @@ export default function Navigation({navigationItems, namespace}: Props) {
                   <Link
                     href={`#${key}`}
                     className={styles.link}
-                    onClick={!isWindowWidthOverPx ? () => setIsNavigationMenuHidden(true) : undefined}
+                    onClick={!isWindowWidthOver ? () => setIsNavigationMenuHidden(true) : undefined}
                   >
                     {t(key)}
                   </Link>

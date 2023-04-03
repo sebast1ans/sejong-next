@@ -83,18 +83,19 @@ $pillSize: 2rem;
         @include hamburger;
       }
 
-      .menuHidden {
+      .menuNotHidden {
         .bun {
-          &:before, &:after{
-            width:0;
+          &:before, &:after {
+            width: 0;
           }
 
           .meat {
-            &:before{
-              transform:rotate(135deg);
+            &:before {
+              transform: rotate(135deg);
             }
-            &:after{
-              transform:rotate(45deg);
+
+            &:after {
+              transform: rotate(45deg);
             }
           }
         }
@@ -161,14 +162,12 @@ $pillSize: 2rem;
   transition: all 0.5s ease-in-out;
 
   &.notScrolled {
-
     background: unset;
     backdrop-filter: unset;
     border-bottom: unset;
     box-shadow: unset;
   }
 }
-
 
 @media (width >= 900px) {
   .navigation {
@@ -180,6 +179,7 @@ $pillSize: 2rem;
         align-self: unset;
         display: flex;
         align-items: center;
+
         .anchors {
           flex-direction: row;
         }

@@ -6,27 +6,10 @@ import { Facebook, Instagram, YouTube } from '@mui/icons-material'
 import { useTranslation } from 'next-i18next'
 import { theme } from '../../lib/mui-theme'
 import Image from 'next/image'
+import { useWindowScrolledOver } from './hooks/useWindowScrolledOver'
 import logo from '../../public/logos/whiteLogo.svg'
 import 'flag-icons/css/flag-icons.min.css'
 import styles from './Navigation.module.scss'
-
-const useWindowScrolledOver = (pixels: number) => {
-  const [scrolledOver, setScrolledOver] = useState(false)
-
-  useEffect(() => {
-    const scrollHandler = () => {
-      window.scrollY > pixels
-        ? setScrolledOver(true)
-        : setScrolledOver(false)
-    }
-
-    scrollHandler()
-    document.addEventListener('scroll', scrollHandler)
-    return () => document.removeEventListener('scroll', scrollHandler)
-  }, [pixels])
-
-  return scrolledOver
-}
 
 const useWindowWidthResizedOver = (pixels: number) => {
   const [resizedOver, setResizedOver] = useState(false)

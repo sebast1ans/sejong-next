@@ -7,27 +7,10 @@ import { useTranslation } from 'next-i18next'
 import { theme } from '../../lib/mui-theme'
 import Image from 'next/image'
 import { useWindowScrolledOver } from './hooks/useWindowScrolledOver'
+import { useWindowWidthResizedOver } from './hooks/useWindowWidthResizedOver'
 import logo from '../../public/logos/whiteLogo.svg'
 import 'flag-icons/css/flag-icons.min.css'
 import styles from './Navigation.module.scss'
-
-const useWindowWidthResizedOver = (pixels: number) => {
-  const [resizedOver, setResizedOver] = useState(false)
-
-  useEffect(() => {
-    const resizeHandler = () => {
-      window.innerWidth > pixels
-        ? setResizedOver(true)
-        : setResizedOver(false)
-    }
-
-    resizeHandler()
-    window.addEventListener('resize', resizeHandler)
-    return () => window.removeEventListener('resize', resizeHandler)
-  }, [pixels])
-
-  return resizedOver
-}
 
 interface HamburgerMenuProps {
   isNavigationMenuHidden: boolean

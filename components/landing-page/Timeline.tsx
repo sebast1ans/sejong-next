@@ -14,7 +14,7 @@ export default function Timeline() {
       slidesPerView: 4,
       initialSlide: 1
     },
-    [muiBreakpoints.lg]: {
+    [muiBreakpoints.xl]: {
       slidesPerView: 6,
       initialSlide: 2
     },

@@ -67,7 +67,7 @@ $pillSize: 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      height: 8rem;
+      height: 7rem;
       width: 100%;
 
       a {
@@ -105,6 +105,9 @@ $pillSize: 2rem;
 
     .navigationItems {
       align-self: flex-end;
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
       padding-bottom: 1rem;
 
       &.inactive {
@@ -118,6 +121,7 @@ $pillSize: 2rem;
         margin: 0;
         padding: 0;
         list-style-type: none;
+        gap: .5rem;
 
         .link {
           color: white;
@@ -126,9 +130,15 @@ $pillSize: 2rem;
           text-transform: uppercase;
           white-space: nowrap;
           padding: .27rem;
+          transition: color .1s ease-in-out;
+
+          &.active {
+            background-color: red;
+          }
 
           &:hover {
             text-decoration: none;
+            color: darken(white, 27%);
           }
         }
       }
@@ -179,8 +189,13 @@ $pillSize: 2rem;
 
       .navigationItems {
         align-self: unset;
-        display: flex;
+        flex-direction: row;
+        gap: unset;
         align-items: center;
+
+        ul {
+          gap: unset;
+        }
 
         .anchors {
           flex-direction: row;
@@ -192,7 +207,7 @@ $pillSize: 2rem;
 
 @media (width >= 1200px) {
   .navigation {
-    height: 8rem;
+    height: 7rem;
 
     .container {
       flex-direction: row;

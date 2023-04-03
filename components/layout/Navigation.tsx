@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import { Container, FormControl, MenuItem, Select } from '@mui/material'
 import { Facebook, Instagram, YouTube } from '@mui/icons-material'
 import { useTranslation } from 'next-i18next'
+import { theme } from '../../lib/mui-theme'
 import Image from 'next/image'
 import logo from '../../public/logos/whiteLogo.svg'
 import 'flag-icons/css/flag-icons.min.css'
@@ -27,11 +28,29 @@ const useScrolledOverPx = (pixels: number) => {
   return scrolledOver
 }
 
+const useWindowWidthResized = (pixels: number) => {
+  const [windowWidthResizedOver, setWindowWidthResizedOver] = useState(false)
+
+  useEffect(() => {
+    const resizeHandler = () => {
+      window.innerWidth > pixels
+        ? setWindowWidthResizedOver(true)
+        : setWindowWidthResizedOver(false)
+    }
+
+    resizeHandler()
+    window.addEventListener('resize', resizeHandler)
+    return () => window.removeEventListener('resize', resizeHandler)
+  }, [pixels])
+
+  return windowWidthResizedOver
+}
+
 const SocialLinks = () => {
   const socials = [{
-      icon: <Facebook/>,
-      href: 'https://www.facebook.com/SejongDojang/'
-    },
+    icon: <Facebook/>,
+    href: 'https://www.facebook.com/SejongDojang/'
+  },
     {
       icon: <Instagram/>,
       href: 'https://www.instagram.com/sejong_taekwondo/'
@@ -42,10 +61,10 @@ const SocialLinks = () => {
     }]
 
   return (
-    <ul>
+    <ul className={styles.socials}>
       {socials.map(({icon, href}) => (
         <li key={href}>
-          <Link href={href} target={'_blank'} className={`${styles.link} ${styles.socials}`}>{icon}</Link>
+          <Link href={href} target={'_blank'} className={`${styles.link} ${styles.link}`}>{icon}</Link>
         </li>
       ))}
     </ul>
@@ -93,29 +112,50 @@ export default function Navigation({navigationItems, namespace}: Props) {
   const {pathname} = useRouter()
   const {t} = useTranslation(namespace)
   const scrolledOver = useScrolledOverPx(300)
+  const isWindowWidthOverPx = useWindowWidthResized(theme.breakpoints.values.lg)
+  const [isNavigationMenuHidden, setIsNavigationMenuHidden] = useState(true)
+
+  useEffect(() => {
+    setIsNavigationMenuHidden(!isWindowWidthOverPx)
+  }, [isWindowWidthOverPx])
 
   return (
     <>
       <nav className={`
       ${styles.navigation}
       ${pathname === '/' ? styles.navigationRoot : styles.navigationSubpage} 
-      ${scrolledOver && styles.scrolled}
+      ${(!scrolledOver && isWindowWidthOverPx) && styles.notScrolled}
       `}>
         <Container className={styles.container}>
-          <div className={styles.navLogo}>
+          <div className={styles.navigationControl}>
             <Link href='/'>
               <Image src={logo} className={styles.logo} alt='Navigation logo'/>
             </Link>
+            <div
+              className={`${styles.hamburger} ${!isNavigationMenuHidden && styles.menuHidden}`}
+              onClick={() => setIsNavigationMenuHidden(current => !current)}>
+              <div className={styles.bun}>
+                <div className={styles.meat}></div>
+              </div>
+            </div>
           </div>
-          <ul>
-            {navigationItems && navigationItems.map((key: string) => (
-              <li key={key}>
-                <Link href={`#${key}`} className={styles.link}>{t(key)}</Link>
-              </li>
-            ))}
-          </ul>
-          <SocialLinks/>
-          <LanguageSelector/>
+          <div className={`${styles.navigationItems} ${isNavigationMenuHidden && styles.inactive}`}>
+            <ul className={styles.anchors}>
+              {navigationItems && navigationItems.map((key: string) => (
+                <li key={key}>
+                  <Link
+                    href={`#${key}`}
+                    className={styles.link}
+                    onClick={!isWindowWidthOverPx ? () => setIsNavigationMenuHidden(true) : undefined}
+                  >
+                    {t(key)}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <SocialLinks/>
+            <LanguageSelector/>
+          </div>
         </Container>
       </nav>
     </>

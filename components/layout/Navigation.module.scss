@@ -1,3 +1,46 @@
+$pillSize: 2rem;
+
+@mixin pill {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 12%;
+  background: white;
+  border-radius: $pillSize;
+  transition: all .5s cubic-bezier(.1, .9, 0, 1.2);
+}
+
+@mixin hamburger {
+  position: relative;
+  width: $pillSize;
+  height: $pillSize;
+
+  .bun {
+    &:before {
+      @include pill;
+      top: 10%;
+      right: 0;
+    }
+
+    &:after {
+      @include pill;
+      bottom: 10%;
+      left: 0;
+    }
+
+    .meat {
+      display: flex;
+      align-items: center;
+      height: $pillSize;
+      width: $pillSize;
+
+      &:before, &:after {
+        @include pill;
+      }
+    }
+  }
+}
+
 @mixin background {
   border-bottom: 1px solid fade-out(white, .8);
   background: rgba(0, 0, 0, .78);
@@ -9,70 +52,156 @@
   position: sticky;
   top: 0;
   width: 100%;
-  height: 7rem;
   z-index: 2;
+  @include background;
 
   .container {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
     height: 100%;
 
-    .navLogo {
-      height: 100%;
-      flex-grow: 1;
-    }
-
-    .logo {
-      height: 100%;
-      width: auto;
-      padding: 1rem 0;
-    }
-
-    ul {
+    .navigationControl {
       display: flex;
-      height: 100%;
+      justify-content: space-between;
       align-items: center;
-      margin: 0;
-      padding: 0;
-      list-style-type: none;
+      height: 8rem;
+      width: 100%;
 
-      .link {
-        color: white;
-        font-weight: 500;
-        font-size: .9rem;
-        text-transform: uppercase;
-        white-space: nowrap;
-        padding: .27rem;
+      a {
+        height: 100%;
 
-        &:hover {
-          text-decoration: none;
+        .logo {
+          height: 100%;
+          width: auto;
+          padding: 1rem 0;
+        }
+      }
+
+      .hamburger {
+        @include hamburger;
+      }
+
+      .menuHidden {
+        .bun {
+          &:before, &:after{
+            width:0;
+          }
+
+          .meat {
+            &:before{
+              transform:rotate(135deg);
+            }
+            &:after{
+              transform:rotate(45deg);
+            }
+          }
+        }
+      }
+    }
+
+    .navigationItems {
+      align-self: flex-end;
+      padding-bottom: 1rem;
+
+      &.inactive {
+        display: none;
+      }
+
+      ul {
+        display: flex;
+        height: 100%;
+        align-items: flex-end;
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+
+        .link {
+          color: white;
+          font-weight: 500;
+          font-size: .9rem;
+          text-transform: uppercase;
+          white-space: nowrap;
+          padding: .27rem;
+
+          &:hover {
+            text-decoration: none;
+          }
         }
       }
 
       .socials {
-        display: block;
-        margin: auto;
-      }
-    }
+        justify-content: end;
 
-    .select {
-      color: white;
+        .link {
+          display: block;
+          margin: auto;
+        }
+      }
+
+      .anchors {
+        flex-direction: column;
+      }
+
+      .select {
+        color: white;
+      }
     }
   }
 }
+
 
 .navigationSubpage {
   @include background;
 }
 
 .navigationRoot {
-  height: 8rem;
   position: fixed;
-  transition: background 0.3s ease-in-out, height 0.3s ease-in-out;
+  transition: all 0.5s ease-in-out;
 
-  &.scrolled {
-    height: 7rem;
-    @include background
+  &.notScrolled {
+
+    background: unset;
+    backdrop-filter: unset;
+    border-bottom: unset;
+    box-shadow: unset;
+  }
+}
+
+
+@media (width >= 900px) {
+  .navigation {
+    .container {
+      flex-direction: column;
+      align-items: center;
+
+      .navigationItems {
+        align-self: unset;
+        display: flex;
+        align-items: center;
+        .anchors {
+          flex-direction: row;
+        }
+      }
+    }
+  }
+}
+
+@media (width >= 1200px) {
+  .navigation {
+    .container {
+      flex-direction: row;
+
+      .navigationControl {
+        .hamburger {
+          display: none;
+        }
+      }
+
+      .navigationItems {
+        padding-bottom: revert;
+      }
+    }
   }
 }

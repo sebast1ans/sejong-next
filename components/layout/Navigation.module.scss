@@ -14,6 +14,7 @@ $pillSize: 2rem;
   position: relative;
   width: $pillSize;
   height: $pillSize;
+  cursor: pointer;
 
   .bun {
     &:before {

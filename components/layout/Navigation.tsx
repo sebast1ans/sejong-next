@@ -1,4 +1,4 @@
-import { MouseEventHandler, useEffect, useState } from 'react'
+import { MouseEventHandler, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { Container, FormControl, MenuItem, Select } from '@mui/material'
@@ -8,6 +8,7 @@ import { theme } from '../../lib/mui-theme'
 import Image from 'next/image'
 import { useWindowScrolledOver } from './hooks/useWindowScrolledOver'
 import { useWindowWidthResizedOver } from './hooks/useWindowWidthResizedOver'
+import { useOutsideClicker } from './hooks/useOutsideClicker'
 import logo from '../../public/logos/whiteLogo.svg'
 import 'flag-icons/css/flag-icons.min.css'
 import styles from './Navigation.module.scss'
@@ -90,11 +91,14 @@ interface Props {
 }
 
 export default function Navigation({navigationItems, namespace}: Props) {
+  const navigationRef = useRef(null)
   const {pathname} = useRouter()
   const {t} = useTranslation(namespace)
   const isWindowScrolledOver = useWindowScrolledOver(300)
   const isWindowWidthOver = useWindowWidthResizedOver(theme.breakpoints.values.lg)
   const [isNavigationMenuHidden, setIsNavigationMenuHidden] = useState(true)
+
+  useOutsideClicker(navigationRef, isWindowWidthOver, () => setIsNavigationMenuHidden(true))
 
   useEffect(() => {
     setIsNavigationMenuHidden(!isWindowWidthOver)
@@ -102,11 +106,14 @@ export default function Navigation({navigationItems, namespace}: Props) {
 
   return (
     <>
-      <nav className={`
-      ${styles.navigation}
-      ${pathname === '/' ? styles.navigationRoot : styles.navigationSubpage} 
-      ${(!isWindowScrolledOver && isWindowWidthOver) && styles.notScrolled}
-      `}>
+      <nav
+        className={`
+          ${styles.navigation}
+          ${pathname === '/' ? styles.navigationRoot : styles.navigationSubpage} 
+          ${(!isWindowScrolledOver && isWindowWidthOver) && styles.notScrolled}
+      `}
+        ref={navigationRef}
+      >
         <Container className={styles.container}>
           <div className={styles.navigationControl}>
             <Link href='/'>

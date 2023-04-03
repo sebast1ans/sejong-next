@@ -75,7 +75,7 @@ $pillSize: 2rem;
         .logo {
           height: 100%;
           width: auto;
-          padding: 1rem 0;
+          padding: 1.3rem 0;
         }
       }
 
@@ -159,9 +159,10 @@ $pillSize: 2rem;
 
 .navigationRoot {
   position: fixed;
-  transition: all 0.5s ease-in-out;
+  transition: all .3s ease-in-out;
 
   &.notScrolled {
+    height: 9rem;
     background: unset;
     backdrop-filter: unset;
     border-bottom: unset;
@@ -190,6 +191,8 @@ $pillSize: 2rem;
 
 @media (width >= 1200px) {
   .navigation {
+    height: 8rem;
+
     .container {
       flex-direction: row;
 

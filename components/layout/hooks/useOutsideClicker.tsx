@@ -1,8 +1,13 @@
 import { RefObject, useEffect } from 'react'
 
-export const useOutsideClicker = (ref: RefObject<HTMLElement>, isWindowWidthOver: boolean, callback: () => void) => {
+export const useOutsideClicker = (
+  ref: RefObject<HTMLElement>,
+  isWindowWidthOver: boolean,
+  isLanguageSelectorOpen: boolean,
+  callback: () => void
+) => {
   useEffect(() => {
-    if (isWindowWidthOver) return
+    if (isWindowWidthOver || isLanguageSelectorOpen) return
     const handleClickOutside = (event: MouseEvent) => {
       if (ref.current && !ref.current.contains(event.target as Node)) {
         callback()
@@ -13,5 +18,5 @@ export const useOutsideClicker = (ref: RefObject<HTMLElement>, isWindowWidthOver
     return () => {
       document.removeEventListener('mousedown', handleClickOutside)
     }
-  }, [ref, isWindowWidthOver])
+  }, [ref, isWindowWidthOver, isLanguageSelectorOpen])
 }

@@ -53,7 +53,11 @@ const SocialLinks = () => {
   )
 }
 
-const LanguageSelector = (): JSX.Element => {
+interface LanguageSelectorProps {
+  isLangSelectOpen: (isOpen: boolean) => void
+}
+
+const LanguageSelector = ({ isLangSelectOpen }: LanguageSelectorProps): JSX.Element => {
   const router = useRouter()
   const {pathname, asPath, locales, locale: activeLocale} = router
   const alpha2Code = {cs: 'cz', en: 'gb', vi: 'vn',}
@@ -72,7 +76,9 @@ const LanguageSelector = (): JSX.Element => {
         id='languageSelector'
         className={styles.select}
         value={activeLocale}
-        onChange={e => changeLanguageHandler(e.target.value as string)}
+        onOpen={() => isLangSelectOpen(true)}
+        onClose={() => isLangSelectOpen(false)}
+        onChange={e => {changeLanguageHandler(e.target.value as string)}}
       >
         {locales && locales.map(language => (
           <MenuItem key={language} value={language}>
@@ -97,8 +103,9 @@ export default function Navigation({navigationItems, namespace}: Props) {
   const isWindowScrolledOver = useWindowScrolledOver(300)
   const isWindowWidthOver = useWindowWidthResizedOver(theme.breakpoints.values.lg)
   const [isNavigationMenuHidden, setIsNavigationMenuHidden] = useState(true)
+  const [isLanguageSelectorOpen, setIsLanguageSelectorOpen] = useState(false)
 
-  useOutsideClicker(navigationRef, isWindowWidthOver, () => setIsNavigationMenuHidden(true))
+  useOutsideClicker(navigationRef, isWindowWidthOver, isLanguageSelectorOpen, () => setIsNavigationMenuHidden(true))
 
   useEffect(() => {
     setIsNavigationMenuHidden(!isWindowWidthOver)
@@ -139,7 +146,7 @@ export default function Navigation({navigationItems, namespace}: Props) {
               ))}
             </ul>
             <SocialLinks/>
-            <LanguageSelector/>
+            <LanguageSelector isLangSelectOpen={setIsLanguageSelectorOpen}/>
           </div>
         </Container>
       </nav>

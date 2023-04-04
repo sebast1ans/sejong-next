@@ -45,4 +45,10 @@ $avatarSize: 5rem;
   }
 }
 
+@media (max-width: map-get(variables.$breakpoints, 'md')) {
+  .reference {
+    margin: 0 1rem;
+  }
+}
+
 // Styling for swiper has to be done in globals.scss to prevent automatic unique class names

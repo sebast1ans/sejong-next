@@ -1,0 +1,41 @@
+$avatarSize: 5rem;
+
+.smallHeading {
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.reference {
+  position: relative;
+  overflow: visible;
+
+  .avatar {
+    background-color: grey;
+    display: flex;
+    align-items: center;
+    width: $avatarSize;
+    height: $avatarSize;
+    position: absolute;
+    bottom: - calc($avatarSize / 2);
+    left: calc($avatarSize / 4);
+    border-radius: 50%;
+    overflow: hidden;
+
+    .image {
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .name {
+    position: absolute;
+    bottom: -2rem;
+    left: calc($avatarSize + 2rem);
+  }
+
+  .rating {
+    text-align: right;
+    padding-right: .7rem;
+    padding-bottom: .5rem;
+  }
+}

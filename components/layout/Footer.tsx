@@ -14,12 +14,12 @@ import construct from '../../public/logos/footer/construct.png'
 
 export default function Footer () {
   const sponsors = [
-    { name: 'World Taekwondo', url: 'http://www.worldtaekwondo.org/', logo: wt },
+    { name: 'World Taekwondo', url: 'https://www.worldtaekwondo.org/', logo: wt },
     { name: 'Kukkiwon', url: 'https://www.kukkiwon.or.kr/front/eng/main.action', logo: kkw },
     { name: 'World Taekwondo CZ', url: 'https://www.worldtaekwondo.cz/', logo: cssvaz },
     { name: 'World Taekwondo Europe', url: 'https://worldtaekwondoeurope.org/', logo: wte },
-    { name: 'Moohwa', url: 'http://moohwa.net/', logo: moohwa },
-    { name: 'Prague', url: 'http://www.praha.eu/', logo: prg },
+    { name: 'Moohwa', url: 'https://moohwa.net/', logo: moohwa },
+    { name: 'Prague', url: 'https://www.praha.eu/', logo: prg },
     { name: 'Prague 4', url: 'https://www.praha4.cz/', logo: prg4 },
     { name: 'Construct Service', url: 'https://www.constructservice.cz/', logo: construct },
   ]

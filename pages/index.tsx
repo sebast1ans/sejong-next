@@ -11,6 +11,7 @@ import Timeline from '../components/landing-page/Timeline'
 import References from '../components/landing-page/References'
 import PriceList from '../components/landing-page/PriceList'
 import Contact from '../components/landing-page/Contact'
+import { shuffle } from 'lodash'
 
 export default function Home ({
   heroImageURLs,
@@ -49,7 +50,7 @@ export async function getStaticProps (context: { locale: string }) {
     props: {
       heroImageURLs,
       introductionData: introductionData as DocumentData[],
-      referencesData: referencesData as DocumentData[],
+      referencesData: shuffle(referencesData) as DocumentData[],
       ...(await serverSideTranslations(locale, [
         'common',
         'home-page-navigation',

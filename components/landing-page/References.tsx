@@ -22,7 +22,7 @@ const ReferenceCard = ({text, avatarImage, name}: ReferenceCardProps) => (
       </CardContent>
       <div className={styles.avatar}>
         {avatarImage &&
-          <Image className={styles.image} src={avatarImage} width={50} height={50} alt={'world taekwondo'}/>
+          <Image className={styles.image} src={avatarImage} fill={true} alt={'world taekwondo'}/>
         }
       </div>
       <div className={styles.name}>
@@ -71,7 +71,7 @@ export default function References({data}: Props) {
             <ReferenceCard
               key={reference.id}
               text={reference.text}
-              avatarImage={reference.photo}
+              avatarImage={reference.photoURL}
               name={reference.name}
             />
           </SwiperSlide>

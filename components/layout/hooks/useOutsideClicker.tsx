@@ -18,5 +18,5 @@ export const useOutsideClicker = (
     return () => {
       document.removeEventListener('mousedown', handleClickOutside)
     }
-  }, [ref, isWindowWidthOver, isLanguageSelectorOpen])
+  }, [ref, isWindowWidthOver, isLanguageSelectorOpen, callback])
 }

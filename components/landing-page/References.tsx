@@ -3,6 +3,7 @@ import { Grade } from '@mui/icons-material'
 import Image from 'next/image'
 import { times } from 'lodash'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import { Autoplay } from 'swiper'
 import { DocumentData } from 'firebase/firestore'
 import styles from './References.module.scss'
 import { theme } from '../../lib/mui-theme'
@@ -22,15 +23,21 @@ const ReferenceCard = ({text, avatarImage, name}: ReferenceCardProps) => (
       </CardContent>
       <div className={styles.avatar}>
         {avatarImage &&
-          <Image className={styles.image} src={avatarImage} fill={true} alt={'world taekwondo'}/>
+          <Image
+            className={styles.image}
+            src={avatarImage}
+            fill
+            sizes={'100px'}
+            alt={'world taekwondo'}
+          />
         }
       </div>
       <div className={styles.name}>
         <strong>{name}</strong>
       </div>
       <div className={styles.rating}>
-        {times(5, () => (
-          <Grade sx={{color: '#FFC107', fontSize: '1.7rem'}}/>
+        {times(5, (i) => (
+          <Grade key={i} sx={{color: '#FFC107', fontSize: '1.7rem'}}/>
         ))}
       </div>
     </Card>
@@ -59,6 +66,11 @@ export default function References({data}: Props) {
     <section id={'references'} className={styles.references}>
       <h2 className={styles.smallHeading}>Reference</h2>
       <Swiper
+        modules={[Autoplay]}
+        autoplay={{
+          delay: 4000,
+          disableOnInteraction: false
+        }}
         slidesPerView={1}
         spaceBetween={10}
         initialSlide={0}
@@ -67,9 +79,8 @@ export default function References({data}: Props) {
         breakpoints={carouselBreakpoints}
       >
         {data && data.map(reference => (
-          <SwiperSlide>
+          <SwiperSlide key={reference.id}>
             <ReferenceCard
-              key={reference.id}
               text={reference.text}
               avatarImage={reference.photoURL}
               name={reference.name}

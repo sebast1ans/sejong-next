@@ -19,7 +19,6 @@ export default function Home ({
   referencesData
 }: InferGetStaticPropsType<typeof getStaticProps>) {
 
-  console.log(referencesData)
   return (
     <>
       <Head>

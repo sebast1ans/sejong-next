@@ -7,6 +7,7 @@ import { getHeroImageURLs } from '../lib/getHeroImageURLs'
 import Hero from '../components/landing-page/Hero'
 import Introduction from '../components/landing-page/Introduction'
 import Timeline from '../components/landing-page/Timeline'
+import References from '../components/landing-page/References'
 import PriceList from '../components/landing-page/PriceList'
 import Contact from '../components/landing-page/Contact'
 
@@ -24,6 +25,7 @@ export default function Home ({
       </Head>
       <Hero heroImages={heroImageURLs}/>
       <Introduction slidesData={introductionData}/>
+      <References />
       <Timeline />
       <PriceList />
       <Contact />

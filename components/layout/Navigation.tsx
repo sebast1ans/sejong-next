@@ -137,6 +137,7 @@ export default function Navigation({navigationItems, namespace}: Props) {
                 <li key={key}>
                   <Link
                     href={`#${key}`}
+                    replace
                     className={styles.link}
                     onClick={!isWindowWidthOver ? () => setIsNavigationMenuHidden(true) : undefined}
                   >

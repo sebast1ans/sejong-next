@@ -3,6 +3,7 @@ import Head from 'next/head'
 import { DocumentData } from 'firebase/firestore'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { getIntroductionData } from '../lib/getIntroductionData'
+import { getReferencesData } from '../lib/getReferencesData'
 import { getHeroImageURLs } from '../lib/getHeroImageURLs'
 import Hero from '../components/landing-page/Hero'
 import Introduction from '../components/landing-page/Introduction'
@@ -13,8 +14,11 @@ import Contact from '../components/landing-page/Contact'
 
 export default function Home ({
   heroImageURLs,
-  introductionData
+  introductionData,
+  referencesData
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+
+  console.log(referencesData)
   return (
     <>
       <Head>
@@ -25,7 +29,7 @@ export default function Home ({
       </Head>
       <Hero heroImages={heroImageURLs}/>
       <Introduction slidesData={introductionData}/>
-      <References />
+      <References data={referencesData} />
       <Timeline />
       <PriceList />
       <Contact />
@@ -39,11 +43,13 @@ export async function getStaticProps (context: { locale: string }) {
   const { locale } = context
   const heroImageURLs = await getHeroImageURLs()
   const introductionData = await getIntroductionData()
+  const referencesData = await getReferencesData()
 
   return {
     props: {
       heroImageURLs,
       introductionData: introductionData as DocumentData[],
+      referencesData: referencesData as DocumentData[],
       ...(await serverSideTranslations(locale, [
         'common',
         'home-page-navigation',

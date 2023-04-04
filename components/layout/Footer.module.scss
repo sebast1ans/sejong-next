@@ -6,15 +6,21 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 1.1rem;
+    gap: 2rem;
 
     a {
       display: flex;
       align-items: center;
+      filter: grayscale(100%);
+      transition: filter 0.2s ease-in-out;
 
       .logo {
-        width: 8rem;
+        width: 6rem;
         height: auto;
+      }
+
+      &:hover {
+        filter: unset;
       }
     }
   }

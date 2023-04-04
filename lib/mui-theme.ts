@@ -1,5 +1,6 @@
 import { createTheme } from '@mui/material/styles'
 import { Saira_Semi_Condensed } from '@next/font/google'
+import variables from '../styles/variables.module.scss'
 
 const encodeSans = Saira_Semi_Condensed({
   weight: ['400', '500', '800'],
@@ -7,14 +8,15 @@ const encodeSans = Saira_Semi_Condensed({
   display: 'swap',
 })
 
+
 export const theme = createTheme({
   breakpoints: {
     values: {
-      xs: 0,
-      sm: 600,
-      md: 900,
-      lg: 1200,
-      xl: 1536,
+      xs: +variables.xs,
+      sm: +variables.sm,
+      md: +variables.md,
+      lg: +variables.lg,
+      xl: +variables.xl,
     },
   },
   typography: {

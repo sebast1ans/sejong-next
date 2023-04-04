@@ -1,3 +1,5 @@
+@use '../../styles/variables.module';
+
 $pillSize: 2rem;
 
 @mixin pill {
@@ -132,10 +134,6 @@ $pillSize: 2rem;
           padding: .27rem;
           transition: color .1s ease-in-out;
 
-          &.active {
-            background-color: red;
-          }
-
           &:hover {
             text-decoration: none;
             color: darken(white, 27%);
@@ -181,7 +179,7 @@ $pillSize: 2rem;
   }
 }
 
-@media (width >= 900px) {
+@media (width >= map-get(variables.$breakpoints, 'md')) {
   .navigation {
     .container {
       flex-direction: column;
@@ -205,7 +203,7 @@ $pillSize: 2rem;
   }
 }
 
-@media (width >= 1200px) {
+@media (width >= map-get(variables.$breakpoints, 'lg')) {
   .navigation {
     height: 7rem;
 

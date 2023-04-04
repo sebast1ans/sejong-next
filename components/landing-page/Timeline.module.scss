@@ -1,4 +1,4 @@
-@use 'styles/variables';
+@use '/styles/variables.module';
 
 .history {
   background-color: variables.$gray;
@@ -39,7 +39,7 @@
         transform: translateY(-.2rem);
         border: none;
         border-radius: 0;
-        background-image: url("/logos/sejongSeal.svg");
+        background-image: url("../../public/logos/sejongSeal.svg");
       }
     }
 

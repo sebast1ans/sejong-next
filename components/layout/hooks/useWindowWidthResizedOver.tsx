@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 export const useWindowWidthResizedOver = (pixels: number) => {
-  const [resizedOver, setResizedOver] = useState(false)
+  const [resizedOver, setResizedOver] = useState(true)
 
   useEffect(() => {
     const resizeHandler = () => {

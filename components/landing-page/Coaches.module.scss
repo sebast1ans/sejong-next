@@ -1,6 +1,7 @@
 $cardSize: 20rem;
 $avatarSize: $cardSize - 4rem;
 $imageOffset: 3rem;
+$dialogAvatarSize: 4.5rem;
 
 .coaches {
   height: 100%;
@@ -36,3 +37,24 @@ $imageOffset: 3rem;
     }
   }
 }
+
+.dialogTitle {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  .dialogAvatar {
+    display: inline-block;
+    position: relative;
+    background-color: grey;
+    width: $dialogAvatarSize;
+    height: $dialogAvatarSize;
+    border-radius: 50%;
+    overflow: hidden;
+
+    .dialogImage {
+      object-fit: cover;
+    }
+  }
+}
+

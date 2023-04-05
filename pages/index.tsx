@@ -4,6 +4,7 @@ import { DocumentData } from 'firebase/firestore'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { getIntroductionData } from '../lib/getIntroductionData'
 import { getReferencesData } from '../lib/getReferencesData'
+import { getCoachesData } from '../lib/getCoachesData'
 import { getHeroImageURLs } from '../lib/getHeroImageURLs'
 import Hero from '../components/landing-page/Hero'
 import Introduction from '../components/landing-page/Introduction'
@@ -17,7 +18,8 @@ import { shuffle } from 'lodash'
 export default function Home ({
   heroImageURLs,
   introductionData,
-  referencesData
+  referencesData,
+  coachesData
 }: InferGetStaticPropsType<typeof getStaticProps>) {
 
   return (
@@ -31,7 +33,7 @@ export default function Home ({
       <Hero heroImages={heroImageURLs}/>
       <Introduction slidesData={introductionData}/>
       <References data={referencesData} />
-      <Coaches />
+      <Coaches data={coachesData}/>
       <Timeline />
       <PriceList />
       <Contact />
@@ -46,12 +48,14 @@ export async function getStaticProps (context: { locale: string }) {
   const heroImageURLs = await getHeroImageURLs()
   const introductionData = await getIntroductionData()
   const referencesData = await getReferencesData()
+  const coachesData = await getCoachesData()
 
   return {
     props: {
       heroImageURLs,
       introductionData: introductionData as DocumentData[],
       referencesData: shuffle(referencesData) as DocumentData[],
+      coachesData: coachesData as DocumentData[],
       ...(await serverSideTranslations(locale, [
         'common',
         'home-page-navigation',

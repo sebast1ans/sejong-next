@@ -1,5 +1,11 @@
 import styles from './Coaches.module.scss'
-export default function Coaches() {
+import { DocumentData } from 'firebase/firestore'
+
+interface Props {
+  data: DocumentData[]
+}
+export default function Coaches({data}: Props) {
+  console.log(data)
   return (
     <>
       <h1>Coaches</h1>

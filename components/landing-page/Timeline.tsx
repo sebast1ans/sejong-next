@@ -3,7 +3,7 @@ import { useTranslation } from 'next-i18next'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper.css'
 import styles from './Timeline.module.scss'
-import { theme } from '../../lib/mui-theme'
+import { theme } from '../../styles/mui-theme'
 
 export default function Timeline() {
   const {t} = useTranslation('timeline')

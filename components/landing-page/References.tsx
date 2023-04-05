@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay } from 'swiper'
 import { DocumentData } from 'firebase/firestore'
 import styles from './References.module.scss'
-import { theme } from '../../lib/mui-theme'
+import { theme } from '../../styles/mui-theme'
 
 
 interface ReferenceCardProps {

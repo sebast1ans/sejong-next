@@ -1,6 +1,6 @@
 import { createTheme } from '@mui/material/styles'
 import { Saira_Semi_Condensed } from '@next/font/google'
-import variables from '../styles/variables.module.scss'
+import variables from './variables.module.scss'
 
 const encodeSans = Saira_Semi_Condensed({
   weight: ['400', '500', '800'],
@@ -24,5 +24,10 @@ export const theme = createTheme({
       encodeSans.style.fontFamily,
       'sans-serif'
     ].join(','),
+  },
+  palette: {
+    primary: {
+      main: variables.sejongRed,
+    }
   }
 })

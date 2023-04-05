@@ -1,6 +1,6 @@
 import type { AppProps } from 'next/app'
 import { ThemeProvider } from '@mui/material/styles'
-import { theme } from '../lib/mui-theme'
+import { theme } from '../styles/mui-theme'
 import { appWithTranslation, i18n } from 'next-i18next'
 import Navigation from '../components/layout/Navigation'
 import Footer from '../components/layout/Footer'

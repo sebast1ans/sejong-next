@@ -9,6 +9,7 @@ import Hero from '../components/landing-page/Hero'
 import Introduction from '../components/landing-page/Introduction'
 import Timeline from '../components/landing-page/Timeline'
 import References from '../components/landing-page/References'
+import Coaches from '../components/landing-page/Coaches'
 import PriceList from '../components/landing-page/PriceList'
 import Contact from '../components/landing-page/Contact'
 import { shuffle } from 'lodash'
@@ -30,6 +31,7 @@ export default function Home ({
       <Hero heroImages={heroImageURLs}/>
       <Introduction slidesData={introductionData}/>
       <References data={referencesData} />
+      <Coaches />
       <Timeline />
       <PriceList />
       <Contact />

@@ -1,4 +1,3 @@
-import styles from './Coaches.module.scss'
 import { DocumentData } from 'firebase/firestore'
 import { Heading } from './Heading'
 import { useTranslation } from 'next-i18next'
@@ -16,6 +15,7 @@ import CloseIcon from '@mui/icons-material/Close'
 import convertHtmlToReact from '@hedgedoc/html-to-react'
 import Image from 'next/image'
 import { useState } from 'react'
+import styles from './Coaches.module.scss'
 
 type CoachDialogData = {
   name: string,

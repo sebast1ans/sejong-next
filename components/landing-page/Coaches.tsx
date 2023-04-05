@@ -77,6 +77,7 @@ interface Props {
 export default function Coaches({data}: Props) {
   const {t} = useTranslation('coaches')
   const [dialogOpen, setDialogOpen] = useState(false)
+  const mainCoaches = data.filter(coach => coach.role === 'main').reverse()
   const [coachDialogData, setCoachDialogData] = useState<CoachDialogData>()
 
   const handleClickOpen = ({name, subtitle, image, details}: CoachDialogData) => {
@@ -92,35 +93,33 @@ export default function Coaches({data}: Props) {
   return (
     <section id={'coaches'}>
       <Heading text={t('coaches')}/>
-      <Container className={styles.coaches}>
-        {data.reverse().map(coach => {
-          if (coach.role === 'main') {
-            return (
-              <Card className={styles.coach} key={coach.id}>
-                <CardContent sx={{width: '100%'}}>
-                  <Paper className={styles.avatar} elevation={6}>
-                    <Image src={coach.imageURL} alt={coach.name} fill sizes={'16rem'}/>
-                  </Paper>
-                  <h3>{coach.name}</h3>
-                  <em>{coach.subtitle}</em>
-                  <div>{convertHtmlToReact(coach.cardText)}</div>
-                </CardContent>
-                <Button
-                  className={styles.button}
-                  variant={'text'}
-                  onClick={() => handleClickOpen({
-                    name: coach.name,
-                    subtitle: coach.subtitle,
-                    image: coach.imageURL,
-                    details: coach.dialogText
-                  })}
-                >
-                  {t('more')}
-                </Button>
-              </Card>
-            )
-          }
-        })}
+      <Container>
+        <div className={styles.coaches}>
+          {mainCoaches.map(coach => (
+            <Card className={styles.coach} key={coach.id}>
+              <CardContent sx={{width: '100%'}}>
+                <Paper className={styles.avatar} elevation={6}>
+                  <Image src={coach.imageURL} alt={coach.name} fill sizes={'16rem'}/>
+                </Paper>
+                <h3>{coach.name}</h3>
+                <em>{coach.subtitle}</em>
+                <div>{convertHtmlToReact(coach.cardText)}</div>
+              </CardContent>
+              <Button
+                className={styles.button}
+                variant={'text'}
+                onClick={() => handleClickOpen({
+                  name: coach.name,
+                  subtitle: coach.subtitle,
+                  image: coach.imageURL,
+                  details: coach.dialogText
+                })}
+              >
+                {t('more')}
+              </Button>
+            </Card>
+          ))}
+        </div>
       </Container>
       <CoachDetailsDialog
         open={dialogOpen}

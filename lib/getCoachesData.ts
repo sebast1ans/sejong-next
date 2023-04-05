@@ -5,7 +5,11 @@ export const getCoachesData = async () => {
   const coachesData: DocumentData = []
 
   try {
-    const querySnapshot = await getDocs(query(collection(db, 'coaches'), where('role', '==', 'main')))
+    const q = query(
+      collection(db, 'coaches'),
+      where('role', '==', 'main'),
+    )
+    const querySnapshot = await getDocs(q)
     querySnapshot.forEach(doc => {
       coachesData.push({ id: doc.id, ...doc.data() })
     })

@@ -122,11 +122,11 @@ export default function Coaches({data}: Props) {
           }
         })}
       </Container>
-      <CoachDetailsDialog
-        open={dialogOpen}
-        onClose={handleClose}
-        coachData={coachDialogData}
-      />
+      {/*<CoachDetailsDialog*/}
+      {/*  open={dialogOpen}*/}
+      {/*  onClose={handleClose}*/}
+      {/*  coachData={coachDialogData}*/}
+      {/*/>*/}
     </section>
   )
 }

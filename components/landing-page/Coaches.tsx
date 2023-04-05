@@ -92,7 +92,8 @@ export default function Coaches({data}: Props) {
   return (
     <section id={'coaches'}>
       <Heading text={t('coaches')}/>
-      <Container className={styles.coaches}>
+      <Container>
+        <div className={styles.coaches}>
         {data.reverse().map(coach => (
 
               <Card className={styles.coach} key={coach.id}>
@@ -119,6 +120,7 @@ export default function Coaches({data}: Props) {
               </Card>
 
         ))}
+        </div>
       </Container>
       {/*<CoachDetailsDialog*/}
       {/*  open={dialogOpen}*/}

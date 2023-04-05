@@ -101,12 +101,12 @@ export default function Coaches({data}: Props) {
                   <Paper className={styles.avatar} elevation={6}>
                     <Image src={coach.imageURL} alt={coach.name} fill sizes={'16rem'}/>
                   </Paper>
-                  <h3>{coach.name}</h3>
+                  {/*<h3>{coach.name}</h3>*/}
                   {/*<em>{coach.subtitle}</em>*/}
                   {/*<div>{convertHtmlToReact(coach.cardText)}</div>*/}
                 </CardContent>
                 <Button
-                  className={styles.button}
+                  className={styles.detailButton}
                   variant={'text'}
                   onClick={() => handleClickOpen({
                     name: coach.name,

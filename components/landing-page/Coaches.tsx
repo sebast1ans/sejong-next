@@ -94,8 +94,7 @@ export default function Coaches({data}: Props) {
       <Heading text={t('coaches')}/>
       <Container>
         <div className={styles.coaches}>
-        {data.reverse().map(coach => (
-
+        {data.map(coach => (
               <Card className={styles.coach} key={coach.id}>
                 <CardContent sx={{width: '100%'}}>
                   <Paper className={styles.avatar} elevation={6}>
@@ -118,7 +117,6 @@ export default function Coaches({data}: Props) {
                   {t('more')}
                 </Button>
               </Card>
-
         ))}
         </div>
       </Container>

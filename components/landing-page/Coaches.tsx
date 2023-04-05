@@ -9,7 +9,6 @@ import {
   Container,
   Dialog,
   DialogContent,
-  DialogTitle,
   IconButton,
   Paper
 } from '@mui/material'
@@ -40,8 +39,8 @@ const CoachDetailsDialog = ({open, onClose, coachData}: CoachDetailsDialogProps)
     <Dialog open={open} onClose={handleClose}>
       {coachData &&
         <>
-          <DialogTitle className={styles.dialogTitle}>
-            <span className={styles.dialogAvatar}>
+          <DialogContent className={styles.dialogTitle}>
+            <div className={styles.dialogAvatar}>
               <Image
                 src={coachData.image}
                 className={styles.dialogImage}
@@ -49,9 +48,9 @@ const CoachDetailsDialog = ({open, onClose, coachData}: CoachDetailsDialogProps)
                 sizes={'100px'}
                 alt={coachData.name}
               />
-            </span>
+            </div>
             <div>
-              <div>{coachData.name}</div>
+              <div><strong>{coachData.name}</strong></div>
               <small><em>{coachData.subtitle}</em></small>
             </div>
             <IconButton
@@ -61,9 +60,9 @@ const CoachDetailsDialog = ({open, onClose, coachData}: CoachDetailsDialogProps)
             >
               <CloseIcon/>
             </IconButton>
-          </DialogTitle>
+          </DialogContent>
           <DialogContent dividers>
-            {convertHtmlToReact(coachData.details)}
+            {/*{convertHtmlToReact(coachData.details)}*/}
           </DialogContent>
         </>
       }
@@ -104,7 +103,7 @@ export default function Coaches({data}: Props) {
                   </Paper>
                   <h3>{coach.name}</h3>
                   <em>{coach.subtitle}</em>
-                  <p>{convertHtmlToReact(coach.cardText)}</p>
+                  {/*<div>{convertHtmlToReact(coach.cardText)}</div>*/}
                 </CardContent>
                 <Button
                   className={styles.button}
@@ -122,12 +121,12 @@ export default function Coaches({data}: Props) {
             )
           }
         })}
-        <CoachDetailsDialog
-          open={dialogOpen}
-          onClose={handleClose}
-          coachData={coachDialogData}
-        />
       </Container>
+      <CoachDetailsDialog
+        open={dialogOpen}
+        onClose={handleClose}
+        coachData={coachDialogData}
+      />
     </section>
   )
 }

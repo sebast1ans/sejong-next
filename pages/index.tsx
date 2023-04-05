@@ -61,6 +61,7 @@ export async function getStaticProps (context: { locale: string }) {
         'home-page-navigation',
         'introduction',
         'timeline',
+        'coaches',
         'price-list',
         'contact'
       ]))

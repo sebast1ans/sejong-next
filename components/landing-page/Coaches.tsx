@@ -93,9 +93,8 @@ export default function Coaches({data}: Props) {
     <section id={'coaches'}>
       <Heading text={t('coaches')}/>
       <Container className={styles.coaches}>
-        {data.reverse().map(coach => {
-          if (coach.role === 'main') {
-            return (
+        {data.reverse().map(coach => (
+
               <Card className={styles.coach} key={coach.id}>
                 <CardContent sx={{width: '100%'}}>
                   <Paper className={styles.avatar} elevation={6}>
@@ -118,9 +117,8 @@ export default function Coaches({data}: Props) {
                   {t('more')}
                 </Button>
               </Card>
-            )
-          }
-        })}
+
+        ))}
       </Container>
       {/*<CoachDetailsDialog*/}
       {/*  open={dialogOpen}*/}

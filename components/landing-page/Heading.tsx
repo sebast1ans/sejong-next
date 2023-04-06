@@ -1,4 +1,5 @@
 import styles from './Heading.module.scss'
+// import { Typography } from '@mui/material'
 
 interface Props {
   text: string

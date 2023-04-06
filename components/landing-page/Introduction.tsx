@@ -17,7 +17,7 @@ export default function Introduction ({ slidesData }: Props) {
   const { t } = useTranslation('introduction')
 
   return (
-    <section id='about-us'>
+    <section id='about-us' className={styles.introduction}>
       <Heading text={t('who-are-we')}/>
       <Swiper
         className={styles.slider}

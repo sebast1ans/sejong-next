@@ -8,6 +8,9 @@ $avatarSize: 5rem;
   .smallHeading {
     text-transform: uppercase;
     text-align: center;
+    font-size: 2.5rem;
+    font-weight: 600;
+    padding: 1rem 0
   }
 
   .reference {
@@ -35,6 +38,10 @@ $avatarSize: 5rem;
       position: absolute;
       bottom: -2rem;
       left: calc($avatarSize + 2rem);
+
+      & > * {
+        font-weight: 600;
+      }
     }
 
     .rating {

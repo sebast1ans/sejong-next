@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import { useTranslation } from 'next-i18next'
-import { Container, Grid } from '@mui/material'
+import { Container, Grid, Typography } from '@mui/material'
 import { Heading } from './Heading'
 import styles from './PriceList.module.scss'
 
@@ -20,34 +20,34 @@ export default function PriceList() {
       <Container>
         <Grid container spacing={4}>
           <Grid item xs={12} sm={6}>
-            <h2>{t('primary-school')} Horáčkova</h2>
+            <Typography variant={'h2'}>{t('primary-school')} Horáčkova</Typography>
             <table>
               <tbody>
               <tr>
-                <td><strong>{t('children-6-9')}:</strong></td>
+                <td><span>{t('children-6-9')}:</span></td>
                 <td>{`${priceInCZK(1800)}/${t('term')}`}</td>
               </tr>
               <tr>
-                <td><strong>{t('children-10-15')}:</strong></td>
+                <td><span>{t('children-10-15')}:</span></td>
                 <td>{`${priceInCZK(2300)}/${t('term')}`}</td>
               </tr>
               <tr>
-                <td><strong>{t('juniors-and-adults')}:</strong></td>
+                <td><span>{t('juniors-and-adults')}:</span></td>
                 <td>{`${priceInCZK(2800)}/${t('term')}`}</td>
               </tr>
               </tbody>
             </table>
           </Grid>
           <Grid item xs={12} sm={6}>
-            <h2>{t('primary-school')} Smolkova</h2>
+            <Typography variant={'h2'}>{t('primary-school')} Smolkova</Typography>
             <table>
               <tbody>
               <tr>
-                <td><strong>{t('children-6-9')}:</strong></td>
+                <td><span>{t('children-6-9')}:</span></td>
                 <td>{`${priceInCZK(1800)}/${t('term')}`}</td>
               </tr>
               <tr>
-                <td><strong>{t('children-10-15')}:</strong></td>
+                <td><span>{t('children-10-15')}:</span></td>
                 <td>{`${priceInCZK(2300)}/${t('term')}`}</td>
               </tr>
               </tbody>
@@ -56,16 +56,13 @@ export default function PriceList() {
         </Grid>
         <hr/>
         <p>
-          <strong>{t('you-can-pay-by-bank-transfer')}:</strong>
-          &nbsp;154282135/0300</p>
-        <strong></strong>
-        <p>
-          <strong>{t('message-to-recipient')}:</strong>
-          &nbsp;{t('name-and-surname-of-exerciser')}
+          <span>{t('you-can-pay-by-bank-transfer')}:</span>&nbsp;154282135/0300
         </p>
         <p>
-          <strong>{t('variable-symbol')}:</strong>
-          &nbsp;{t('ni-number')}
+          <span>{t('message-to-recipient')}:</span>&nbsp;{t('name-and-surname-of-exerciser')}
+        </p>
+        <p>
+          <span>{t('variable-symbol')}:</span>&nbsp;{t('ni-number')}
         </p>
         <small>{t('insurance-note')}</small>
       </Container>

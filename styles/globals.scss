@@ -37,6 +37,16 @@ section {
   vertical-align: middle;
 }
 
+#about-us .swiper-pagination {
+  .swiper-pagination-bullet {
+    background-color: white;
+  }
+
+  .swiper-pagination-bullet-active {
+    background-color: white;
+  }
+}
+
 #references .swiper {
   padding-bottom: 5rem;
 

@@ -1,4 +1,4 @@
-import { Card, CardContent } from '@mui/material'
+import { Card, CardContent, Paper, Typography } from '@mui/material'
 import { Grade } from '@mui/icons-material'
 import Image from 'next/image'
 import { times } from 'lodash'
@@ -18,10 +18,10 @@ interface ReferenceCardProps {
 const ReferenceCard = ({text, avatarImage, name}: ReferenceCardProps) => (
   <>
     <Card className={styles.reference}>
-      <CardContent sx={{paddingBottom: '3rem'}}>
-        <p>{text}</p>
+      <CardContent>
+        <Typography variant={'body2'}>{text}</Typography>
       </CardContent>
-      <div className={styles.avatar}>
+      <Paper elevation={6} className={styles.avatar}>
         {avatarImage &&
           <Image
             className={styles.image}
@@ -31,13 +31,13 @@ const ReferenceCard = ({text, avatarImage, name}: ReferenceCardProps) => (
             alt={'world taekwondo'}
           />
         }
-      </div>
+      </Paper>
       <div className={styles.name}>
-        <strong>{name}</strong>
+        <Typography variant={'body1'}>{name}</Typography>
       </div>
       <div className={styles.rating}>
         {times(5, (i) => (
-          <Grade key={i} sx={{color: '#FFC107', fontSize: '1.7rem'}}/>
+          <Grade key={i} sx={{color: '#FFC107', fontSize: '1.2rem'}}/>
         ))}
       </div>
     </Card>
@@ -64,7 +64,7 @@ export default function References({data}: Props) {
 
   return (
     <section id={'references'} className={styles.references}>
-      <h2 className={styles.smallHeading}>Reference</h2>
+      <Typography variant={'h2'} className={styles.smallHeading}>Reference</Typography>
       <Swiper
         modules={[Autoplay]}
         autoplay={{

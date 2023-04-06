@@ -3,7 +3,7 @@ import { Saira_Semi_Condensed } from '@next/font/google'
 import variables from './variables.module.scss'
 
 const encodeSans = Saira_Semi_Condensed({
-  weight: ['400', '500', '800'],
+  weight: ['400', '600', '800'],
   subsets: ['latin', 'vietnamese'],
   display: 'swap',
 })

@@ -16,7 +16,7 @@ $dialogAvatarSize: 4.5rem;
     align-items: flex-end;
     width: $cardSize;
     overflow: visible;
-    margin-top: $imageOffset;
+    margin-top: $imageOffset + 1rem;
 
     .avatar {
       position: relative;
@@ -24,10 +24,21 @@ $dialogAvatarSize: 4.5rem;
       margin: -$imageOffset auto 0;
       width: $avatarSize;
       height: $avatarSize;
+      overflow: hidden;
 
       .image {
         object-fit: cover;
       }
+    }
+
+    .name {
+      margin: 1.2rem 0 0;
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+
+    .subtitle {
+      margin-bottom: 1rem;
     }
 
     .button {
@@ -53,6 +64,11 @@ $dialogAvatarSize: 4.5rem;
     .dialogImage {
       object-fit: cover;
     }
+  }
+
+  .dialogName {
+    font-size: 1.3rem;
+    font-weight: 600;
   }
 }
 

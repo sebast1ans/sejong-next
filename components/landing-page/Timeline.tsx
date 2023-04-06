@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper.css'
 import styles from './Timeline.module.scss'
 import { theme } from '../../styles/mui-theme'
+import { Typography } from '@mui/material'
 
 export default function Timeline() {
   const {t} = useTranslation('timeline')
@@ -39,7 +40,7 @@ export default function Timeline() {
         {years.map(year => (
           <SwiperSlide className={styles.event} key={year}>
             <div className={styles.point}></div>
-            <h3>{year}</h3>
+            <Typography variant={'h2'} className={styles.year}>{year}</Typography>
             <ul>
               {getEvents(year).map((event, index) => (
                 <li key={index}><p>{event}</p></li>

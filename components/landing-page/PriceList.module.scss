@@ -3,12 +3,17 @@
 .priceList {
   background-color: variables.$gray;
 
-  .prices {
-    display: flex;
-    justify-content: space-between;
+  h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    padding-bottom: 1rem;
+  }
 
-    table {
-      width: auto;
-    }
+  table {
+    width: auto;
+  }
+
+  span {
+    font-weight: 600;
   }
 }

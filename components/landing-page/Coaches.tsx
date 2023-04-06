@@ -10,7 +10,7 @@ import {
   Dialog,
   DialogContent,
   IconButton,
-  Paper
+  Paper, Typography
 } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
 import ReadMoreIcon from '@mui/icons-material/ReadMore'
@@ -51,7 +51,7 @@ const CoachDetailsDialog = ({open, onClose, coachData}: CoachDetailsDialogProps)
               />
             </div>
             <div>
-              <div><strong>{coachData.name}</strong></div>
+              <div className={styles.dialogName}>{coachData.name}</div>
               <small><em>{coachData.subtitle}</em></small>
             </div>
             <IconButton
@@ -102,8 +102,8 @@ export default function Coaches({data}: Props) {
                 <Paper className={styles.avatar} elevation={6}>
                   <Image src={coach.imageURL} alt={coach.name} fill sizes={'16rem'}/>
                 </Paper>
-                <h3>{coach.name}</h3>
-                <em>{coach.subtitle}</em>
+                <Typography variant={'h2'} className={styles.name}>{coach.name}</Typography>
+                <Typography variant={'body1'} className={styles.subtitle}><em>{coach.subtitle}</em></Typography>
                 <div>{convertHtmlToReact(coach.cardText)}</div>
               </CardContent>
               <Button

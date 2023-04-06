@@ -55,6 +55,7 @@ $pillSize: 2rem;
   position: sticky;
   top: 0;
   width: 100%;
+  border-radius: 0 0 4px 4px;
   z-index: 2;
   @include background;
 
@@ -132,7 +133,7 @@ $pillSize: 2rem;
 
         .link {
           color: white;
-          font-weight: 500;
+          font-weight: 600;
           font-size: .9rem;
           text-transform: uppercase;
           white-space: nowrap;

@@ -1,3 +1,5 @@
+$textShadow: 2px 2px 20px rgba(0, 0, 0, 0.7);
+
 .introduction {
   padding-bottom: 0;
 
@@ -22,16 +24,17 @@
           justify-content: center;
           color: white;
 
-          h1 {
+          h2 {
             text-transform: uppercase;
-            text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.7);
-            font-size: 45px;
+            text-shadow: $textShadow;
+            font-size: 3rem;
             font-weight: 800;
+            margin: 1rem 0 3rem
           }
 
           p {
-            text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.7);
-            font-size: 19px;
+            text-shadow: $textShadow;
+            font-size: 1.2rem;
           }
         }
       }

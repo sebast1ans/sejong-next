@@ -1,4 +1,4 @@
-import { Container } from '@mui/material'
+import { Container, Typography } from '@mui/material'
 import { DocumentData } from 'firebase/firestore'
 import { useTranslation } from 'next-i18next'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -34,8 +34,8 @@ export default function Introduction ({ slidesData }: Props) {
           >
             <div className={styles.backdropFilter}>
               <Container className={styles.slideTextContainer}>
-                <h1>{convertHtmlToReact(slideData.title)}</h1>
-                <p>{convertHtmlToReact(slideData.text)}</p>
+                <Typography variant={'h2'}>{convertHtmlToReact(slideData.title)}</Typography>
+                <Typography variant={'body1'}>{convertHtmlToReact(slideData.text)}</Typography>
               </Container>
             </div>
           </SwiperSlide>

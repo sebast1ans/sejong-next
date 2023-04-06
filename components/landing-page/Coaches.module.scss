@@ -13,7 +13,7 @@ $dialogAvatarSize: 4.5rem;
   .coach {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: flex-end;
     width: $cardSize;
     overflow: visible;
     margin-top: $imageOffset;
@@ -31,9 +31,7 @@ $dialogAvatarSize: 4.5rem;
     }
 
     .button {
-      margin-top: auto;
-      margin-left: .5rem;
-      margin-bottom: .5rem;
+      margin: auto .5rem .5rem;
     }
   }
 }

@@ -13,6 +13,7 @@ import {
   Paper
 } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
+import ReadMoreIcon from '@mui/icons-material/ReadMore'
 import convertHtmlToReact from '@hedgedoc/html-to-react'
 import Image from 'next/image'
 import { useState } from 'react'
@@ -115,7 +116,7 @@ export default function Coaches({data}: Props) {
                   details: coach.dialogText
                 })}
               >
-                {t('more')}
+                {t('more')}&nbsp;<ReadMoreIcon/>
               </Button>
             </Card>
           ))}

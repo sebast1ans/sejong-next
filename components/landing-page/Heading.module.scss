@@ -16,3 +16,9 @@
   background-color: variables.$sejongRed;
   border-radius: .25rem;
 }
+
+@media (max-width: map-get(variables.$breakpoints, 'md')) {
+  .heading {
+    font-size: 3rem;
+  }
+}

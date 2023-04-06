@@ -1,3 +1,5 @@
+@use 'styles/variables.module';
+
 $cardSize: 20rem;
 $avatarSize: $cardSize - 4rem;
 $imageOffset: 3rem;
@@ -69,6 +71,17 @@ $dialogAvatarSize: 4.5rem;
   .dialogName {
     font-size: 1.3rem;
     font-weight: 600;
+  }
+
+  @media (max-width: map-get(variables.$breakpoints, 'sm')) {
+    .dialogAvatar {
+      width: $dialogAvatarSize - 1rem;
+      height: $dialogAvatarSize - 1rem;
+    }
+
+    .dialogName {
+      font-size: 1rem;
+    }
   }
 }
 

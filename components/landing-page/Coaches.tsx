@@ -28,7 +28,7 @@ type CoachDialogData = {
 interface CoachDetailsDialogProps {
   open: boolean,
   onClose: () => void
-  coachData?: CoachDialogData
+  coachData: CoachDialogData | null
 }
 
 const CoachDetailsDialog = ({open, onClose, coachData}: CoachDetailsDialogProps) => {
@@ -79,7 +79,7 @@ export default function Coaches({data}: Props) {
   const {t} = useTranslation('coaches')
   const [dialogOpen, setDialogOpen] = useState(false)
   const mainCoaches = data.filter(coach => coach.role === 'main').reverse()
-  const [coachDialogData, setCoachDialogData] = useState<CoachDialogData>()
+  const [coachDialogData, setCoachDialogData] = useState<CoachDialogData | null>(null)
 
   const handleClickOpen = ({name, subtitle, image, details}: CoachDialogData) => {
     setCoachDialogData({name, subtitle, image, details})
@@ -87,7 +87,7 @@ export default function Coaches({data}: Props) {
   }
 
   const handleClose = () => {
-    setCoachDialogData(undefined)
+    setCoachDialogData(null)
     setDialogOpen(false)
   }
 

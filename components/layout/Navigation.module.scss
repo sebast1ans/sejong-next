@@ -47,7 +47,7 @@ $pillSize: 2rem;
 @mixin background {
   border-bottom: 1px solid fade-out(white, .8);
   background: rgba(0, 0, 0, .78);
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(17px);
   box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 5px 8px 0 rgba(0, 0, 0, 0.14), 0 1px 14px 0 rgba(0, 0, 0, 0.12)
 }
 

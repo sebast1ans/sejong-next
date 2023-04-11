@@ -11,6 +11,7 @@ import Introduction from '../components/landing-page/Introduction'
 import Timeline from '../components/landing-page/Timeline'
 import References from '../components/landing-page/References'
 import Coaches from '../components/landing-page/Coaches'
+import AboutTaekwondo from '../components/landing-page/AboutTaekwondo'
 import PriceList from '../components/landing-page/PriceList'
 import Contact from '../components/landing-page/Contact'
 import { shuffle } from 'lodash'
@@ -35,6 +36,7 @@ export default function Home ({
       <References data={referencesData} />
       <Coaches data={coachesData}/>
       <Timeline />
+      <AboutTaekwondo />
       <PriceList />
       <Contact />
     </>
@@ -62,6 +64,7 @@ export async function getStaticProps (context: { locale: string }) {
         'introduction',
         'timeline',
         'coaches',
+        'about-taekwondo',
         'price-list',
         'contact'
       ]))

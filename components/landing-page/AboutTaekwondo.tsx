@@ -38,7 +38,9 @@ export default function AboutTaekwondo() {
           <Grid lg={3} sm={6} xs={12} item key={discipline.name}>
             <div className={styles.disciplineContainer}>
               <Image src={discipline.image} className={styles.image} alt={discipline.name}/>
-              <Typography variant={'h2'} className={styles.name}>{discipline.name}</Typography>
+              <div className={styles.nameContainer}>
+                <Typography variant={'h2'} className={styles.name}>{discipline.name}</Typography>
+              </div>
             </div>
           </Grid>
         ))}

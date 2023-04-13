@@ -13,29 +13,40 @@ $textShadow: 2px 2px 20px rgba(0, 0, 0, 0.7);
     transition: all .2s ease-in-out;
   }
 
-  .name {
+  .nameContainer {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-transform: uppercase;
-    color: white;
-    font-size: 2.3rem;
-    font-weight: 600;
-    text-shadow: $textShadow;
-    opacity: 0;
-    transition: all .2s ease-in-out;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: backdrop-filter .2s ease-in-out;
+
+    .name {
+      text-transform: uppercase;
+      color: white;
+      font-size: 2.2rem;
+      font-weight: 600;
+      text-shadow: $textShadow;
+      opacity: 0;
+      transition: all .2s ease-in-out;
+    }
   }
 
   &:hover {
     .image {
-      filter: brightness(.37) grayscale(1) blur(2px);
-      transform: scale(1.03);
+      scale: 1.03;
     }
 
-    .name {
-      opacity: 1;
-      font-size: 2rem;
+    .nameContainer {
+      backdrop-filter: brightness(.37) grayscale(1) blur(2px);
+
+      .name {
+        opacity: 1;
+        font-size: 2rem;
+      }
     }
   }
 }

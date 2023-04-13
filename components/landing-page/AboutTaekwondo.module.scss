@@ -1,10 +1,17 @@
 .disciplineContainer {
   aspect-ratio: 3 / 2;
   overflow: hidden;
+  cursor: pointer;
 
   .image {
     height: 100%;
     width: 100%;
     object-fit: cover;
+    transition: all .2s ease-in-out;
+
+    &:hover {
+      filter: brightness(.37) grayscale(1) blur(2px);
+      transform: scale(1.03);
+    }
   }
 }

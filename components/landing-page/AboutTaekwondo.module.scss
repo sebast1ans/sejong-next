@@ -27,7 +27,7 @@ $textShadow: 2px 2px 20px rgba(0, 0, 0, 0.7);
     .name {
       text-transform: uppercase;
       color: white;
-      font-size: 2.2rem;
+      font-size: 2.7rem;
       font-weight: 600;
       text-shadow: $textShadow;
       opacity: 0;
@@ -37,15 +37,15 @@ $textShadow: 2px 2px 20px rgba(0, 0, 0, 0.7);
 
   &:hover {
     .image {
-      scale: 1.03;
+      scale: 1.1;
     }
 
     .nameContainer {
-      backdrop-filter: brightness(.37) grayscale(1) blur(2px);
+      backdrop-filter: brightness(.8) blur(33px);
 
       .name {
         opacity: 1;
-        font-size: 2rem;
+        font-size: 2.5rem;
       }
     }
   }

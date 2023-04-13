@@ -1,7 +1,7 @@
 import styles from './AboutTaekwondo.module.scss'
 import { Heading } from './Heading'
 import { useTranslation } from 'next-i18next'
-import { Grid } from '@mui/material'
+import { Grid, Typography } from '@mui/material'
 import taekwondo from '../../public/images/about-taekwondo/taekwondo.jpg'
 import poomsae from '../../public/images/about-taekwondo/poomsae.jpg'
 import kyorugi from '../../public/images/about-taekwondo/kyorugi.jpg'
@@ -38,6 +38,7 @@ export default function AboutTaekwondo() {
           <Grid lg={3} sm={6} xs={12} item key={discipline.name}>
             <div className={styles.disciplineContainer}>
               <Image src={discipline.image} className={styles.image} alt={discipline.name}/>
+              <Typography variant={'h2'} className={styles.name}>{discipline.name}</Typography>
             </div>
           </Grid>
         ))}

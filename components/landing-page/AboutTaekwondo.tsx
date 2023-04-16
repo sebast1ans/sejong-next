@@ -1,12 +1,13 @@
 import styles from './AboutTaekwondo.module.scss'
 import { Heading } from './Heading'
 import { useTranslation } from 'next-i18next'
-import { Grid, Typography } from '@mui/material'
+import { Dialog, DialogContent, Grid, Typography } from '@mui/material'
 import taekwondo from '../../public/images/about-taekwondo/taekwondo.jpg'
 import poomsae from '../../public/images/about-taekwondo/poomsae.jpg'
 import kyorugi from '../../public/images/about-taekwondo/kyorugi.jpg'
 import kyokpa from '../../public/images/about-taekwondo/kyokpa.jpg'
 import Image from 'next/image'
+import { useState } from 'react'
 
 const disciplines = [
   {
@@ -27,12 +28,32 @@ const disciplines = [
   }
 ]
 
+interface DisciplineDialogProps {
+  open: boolean,
+  onClose: () => void
+}
+
+const DisciplineDialog = ({open, onClose}: DisciplineDialogProps) => {
+  const handleClose = () => {
+    onClose()
+  }
+
+  return (
+    <Dialog open={open} onClose={handleClose}>
+      <DialogContent>
+        <h1>Dialog</h1>
+      </DialogContent>
+    </Dialog>
+  )
+}
+
 export default function AboutTaekwondo() {
-  const { t } = useTranslation('about-taekwondo')
+  const {t} = useTranslation('about-taekwondo')
+  const [dialogOpen, setDialogOpen] = useState(false)
 
   return (
     <section id={'about-taekwondo'}>
-      <Heading text={t('what-is-taekwondo')} />
+      <Heading text={t('what-is-taekwondo')}/>
       <Grid container>
         {disciplines.map((discipline) => (
           <Grid lg={3} sm={6} xs={12} item key={discipline.name}>
@@ -45,6 +66,7 @@ export default function AboutTaekwondo() {
           </Grid>
         ))}
       </Grid>
+      <DisciplineDialog open={dialogOpen} onClose={() => setDialogOpen(false)}/>
     </section>
   )
 }

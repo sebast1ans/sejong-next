@@ -33,21 +33,26 @@ const disciplines: Discipline[] = [
   }
 ]
 
+type DisciplineDialogData = Omit<Discipline, 'image'>
+
 interface DisciplineDialogProps {
   open: boolean,
-  onClose: () => void
+  onClose: () => void,
+  disciplineData: DisciplineDialogData | null
 }
 
-const DisciplineDialog = ({open, onClose}: DisciplineDialogProps) => {
+const DisciplineDialog = ({open, onClose, disciplineData}: DisciplineDialogProps) => {
   const handleClose = () => {
     onClose()
   }
 
   return (
     <Dialog open={open} onClose={handleClose}>
-      <DialogContent>
-        <h1>Dialog</h1>
-      </DialogContent>
+      {disciplineData &&
+        <DialogContent>
+          <h1>{disciplineData.name}</h1>
+        </DialogContent>
+      }
     </Dialog>
   )
 }
@@ -55,6 +60,17 @@ const DisciplineDialog = ({open, onClose}: DisciplineDialogProps) => {
 export default function AboutTaekwondo() {
   const {t} = useTranslation('about-taekwondo')
   const [dialogOpen, setDialogOpen] = useState(false)
+  const [disciplineDialogData, setDisciplineDialogData] = useState<DisciplineDialogData | null>(null)
+
+  const handleOpenDialog = ({name}: DisciplineDialogData) => {
+    setDisciplineDialogData({name})
+    setDialogOpen(true)
+  }
+
+  const handleClose = () => {
+    setDisciplineDialogData(null)
+    setDialogOpen(false)
+  }
 
   return (
     <section id={'about-taekwondo'}>
@@ -62,7 +78,12 @@ export default function AboutTaekwondo() {
       <Grid container>
         {disciplines.map((discipline) => (
           <Grid lg={3} sm={6} xs={12} item key={discipline.name}>
-            <div className={styles.disciplineContainer}>
+            <div
+              className={styles.disciplineContainer}
+              onClick={() => handleOpenDialog({
+                name: discipline.name
+              })}
+            >
               <Image src={discipline.image} className={styles.image} alt={discipline.name}/>
               <div className={styles.nameContainer}>
                 <Typography variant={'h2'} className={styles.name}>{discipline.name}</Typography>
@@ -71,7 +92,11 @@ export default function AboutTaekwondo() {
           </Grid>
         ))}
       </Grid>
-      <DisciplineDialog open={dialogOpen} onClose={() => setDialogOpen(false)}/>
+      <DisciplineDialog
+        open={dialogOpen}
+        onClose={handleClose}
+        disciplineData={disciplineDialogData}
+      />
     </section>
   )
 }

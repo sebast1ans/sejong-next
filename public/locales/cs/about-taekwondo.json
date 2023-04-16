@@ -1,3 +1,12 @@
 {
-  "what-is-taekwondo": "Co je Taekwondo"
+  "what-is-taekwondo": "Co je Taekwondo",
+  "taekwondo-content": {
+    "p1": "Taekwondo je <strong>bojové umění</strong>, které se nezávisle vyvíjelo <strong>v Koreji</strong> po dobu více než dvě tisíciletí a stalo se tak <strong>moderním mezinárodním sportem</strong>. Stručně lze Taekwondo charakterizovat jako bojové umění, které používá ruce, nohy a ostatní části těla k odvrácení útoku protivníka.",
+    "p2": "Jelikož Taekwondo se již od počátku vyvíjelo jako sebeobranný systém, tak i veškeré aktivity v Taekwondo se zakládají v duchu sebeobrany. V dávných dobách lidé žily jednoduchý život s nedostatkem fyzického zatížení a ve stáří se jejich těla hrbila. Taekwondo také napomáhá upevnit zdraví, fyzickou i psychickou sílu a celkovou rovnováhu lidského těla.",
+    "p3": " Člověk, který se věnuje Taekwondo se musí naučit potlačit vlastní ego, ovládat své nitro a být uctivý k druhým, čili dospět k harmonii duchovna a fyzické síly, protože se učí technikám pro vlastní obranu s použitím celého těla. Pro člověka, který se učí technikám Taekwondo, je jeho celé tělo zbraní, kterou lze lehce zneškodnit protivníkův útok za pomoci vlastních nohou, rukou, pěstí, loktů, kolen, hlavy, či jiné části svého těla.",
+    "p4": "Taekwondista se nejdříve musí naučit ovládat sám sebe a vždy se musí zastat slabšího. Může se sice rovně postavit každému nepříteli, ale kodex zakazuje nepoctivý útok a použití nepřiměřené síly. Cvičení Taekwondo učí jednotlivce duševní skromnosti.",
+    "p5": "<strong>5 zásad taekwondo</strong>",
+    "p6": "Taekwondo je bojové umění, které vyžaduje i přísnou disciplínu. Proto by jeho pět zásad (taekwondo jeongsin) měl každý, kdo se věnuje taekwondo, nejenom znát, ale měl by i chápat jejich skutečný význam. Každý cvičenec taekwondo by se měl zásadami taekwondo řídit nejenom v tělocvične, ale i v běžném životě.",
+    "p7": "<strong>Zdvořilost</strong> 예의 [ye-hwi]<br/><strong>Čestnost</strong> 염치 [yeom-chi]<br/><strong>Vytrvalost</strong> 인내 [in-nae]<br/><strong>Sebeovládání</strong> 극기 [geuk-gi]<br/><strong>Nezlomný duch</strong> 백절불굴 [baekjeol-bulgul]"
+  }
 }

@@ -55,3 +55,38 @@ $textShadow: 2px 2px 20px rgba(0, 0, 0, 0.7);
   display: flex;
   align-items: center;
 }
+
+.contentImage {
+  object-fit: cover;
+}
+
+.taekwondoContent {
+  p:nth-of-type(5), p:nth-of-type(7) {
+    text-align: center;
+  }
+
+  .kihap, .concentration {
+    position: relative;
+    width: 17rem;
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+  }
+
+  .kihap {
+    float: right;
+    margin-left: 1rem;
+  }
+
+  .concentration {
+    float: left;
+    margin-right: 1rem;
+  }
+
+  .jongshin {
+    position: relative;
+    width: 80%;
+    aspect-ratio: 2 / 3;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+}

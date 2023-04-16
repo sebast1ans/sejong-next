@@ -1,55 +1,46 @@
 import styles from './AboutTaekwondo.module.scss'
 import { Heading } from './Heading'
 import { useTranslation } from 'next-i18next'
-import { Dialog, DialogContent, DialogTitle, Grid, IconButton, Typography } from '@mui/material'
+import { Dialog, DialogContent, DialogTitle, Grid, IconButton, Paper, Typography } from '@mui/material'
 import taekwondo from '../../public/images/about-taekwondo/taekwondo.jpg'
 import poomsae from '../../public/images/about-taekwondo/poomsae.jpg'
 import kyorugi from '../../public/images/about-taekwondo/kyorugi.jpg'
 import kyokpa from '../../public/images/about-taekwondo/kyokpa.jpg'
+import kihap from '../../public/images/about-taekwondo/contentPics/kihap.jpg'
+import concentration from '../../public/images/about-taekwondo/contentPics/concentrating.jpg'
+import jongshin from '../../public/images/about-taekwondo/contentPics/jongshin.jpg'
 import Image, { StaticImageData } from 'next/image'
 import { useState } from 'react'
 import CloseIcon from '@mui/icons-material/Close'
+import convertHtmlToReact from '@hedgedoc/html-to-react'
 
-const TaekwondoContent = () => (
-  <>
-    <p>
-      Taekwondo je <strong>bojové umění</strong>, které se nezávisle vyvíjelo <strong>v Koreji</strong> po dobu více
-      než dvě tisíciletí a stalo se tak <strong>moderním mezinárodním sportem</strong>.
-      Stručně lze Taekwondo charakterizovat jako bojové umění, které používá ruce, nohy a ostatní části těla
-      k odvrácení útoku protivníka.
-    </p>
-    <p>
-      Jelikož Taekwondo se již od počátku vyvíjelo jako sebeobranný systém, tak i veškeré aktivity v Taekwondo
-      se zakládají v duchu sebeobrany. V dávných dobách lidé žily jednoduchý život s nedostatkem fyzického zatížení
-      a ve stáří se jejich těla hrbila. Taekwondo také napomáhá upevnit zdraví, fyzickou i psychickou sílu
-      a celkovou rovnováhu lidského těla.
-    </p>
-    <p>
-      Člověk, který se věnuje Taekwondo se musí naučit potlačit vlastní ego, ovládat své nitro a být uctivý k druhým,
-      čili dospět k harmonii duchovna a fyzické síly, protože se učí technikám pro vlastní obranu s použitím celého
-      těla. Pro člověka, který se učí technikám Taekwondo, je jeho celé tělo zbraní, kterou lze lehce zneškodnit
-      protivníkův útok za pomoci vlastních nohou, rukou, pěstí, loktů, kolen, hlavy, či jiné části svého těla.
-    </p>
-    <p>
-      Taekwondista se nejdříve musí naučit ovládat sám sebe a vždy se musí zastat slabšího. Může se sice rovně postavit
-      každému nepříteli, ale kodex zakazuje nepoctivý útok a použití nepřiměřené síly. Cvičení Taekwondo učí jednotlivce
-      duševní skromnosti.
-    </p>
-    <p><strong>5 zásad taekwondo</strong></p>
-    <p>
-      Taekwondo je bojové umění, které vyžaduje i přísnou disciplínu. Proto by jeho pět zásad (taekwondo jeongsin) měl
-      každý, kdo se věnuje taekwondo, nejenom znát, ale měl by i chápat jejich skutečný význam. Každý cvičenec
-      taekwondo by se měl zásadami taekwondo řídit nejenom v tělocvične, ale i v běžném životě.
-    </p>
-    <p>
-      <strong>Zdvořilost</strong> 예의 [ye-hwi] <br/>
-      <strong>Čestnost</strong> 염치 [yeom-chi] <br/>
-      <strong>Vytrvalost</strong> 인내 [in-nae] <br/>
-      <strong>Sebeovládání</strong> 극기 [geuk-gi] <br/>
-      <strong>Nezlomný duch</strong> 백절불굴 [baekjeol-bulgul]
-    </p>
-  </>
-)
+const TaekwondoContent = () => {
+  const { t } = useTranslation(
+    'about-taekwondo',
+    {keyPrefix: 'taekwondo-content'}
+  )
+
+  return (
+    <article className={styles.taekwondoContent}>
+      <Paper className={styles.kihap}>
+        <Image src={kihap} className={styles.contentImage} fill sizes={'17rem'} alt={'Kihap'}/>
+      </Paper>
+      <p>{convertHtmlToReact(t('p1'))}</p>
+      <p>{convertHtmlToReact(t('p2'))}</p>
+      <Paper className={styles.concentration}>
+        <Image src={concentration} className={styles.contentImage} fill sizes={'17rem'} alt={'Concentration'}/>
+      </Paper>
+      <p>{convertHtmlToReact(t('p3'))}</p>
+      <p>{convertHtmlToReact(t('p4'))}</p>
+      <p>{convertHtmlToReact(t('p5'))}</p>
+      <p>{convertHtmlToReact(t('p6'))}</p>
+      <p>{convertHtmlToReact(t('p7'))}</p>
+      <Paper className={styles.jongshin}>
+        <Image src={jongshin} className={styles.contentImage} fill sizes={'17rem'} alt={'Jongshin'}/>
+      </Paper>
+    </article>
+  )
+}
 
 const PoomsaeContent = () => (
   <>
@@ -151,7 +142,7 @@ const DisciplineDialog = ({open, onClose, disciplineData}: DisciplineDialogProps
   }
 
   return (
-    <Dialog open={open} onClose={handleClose} fullWidth maxWidth={'xl'}>
+    <Dialog open={open} onClose={handleClose}>
       {disciplineData &&
         <>
           <DialogTitle className={styles.dialogTitle}>

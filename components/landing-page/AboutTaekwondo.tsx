@@ -6,10 +6,15 @@ import taekwondo from '../../public/images/about-taekwondo/taekwondo.jpg'
 import poomsae from '../../public/images/about-taekwondo/poomsae.jpg'
 import kyorugi from '../../public/images/about-taekwondo/kyorugi.jpg'
 import kyokpa from '../../public/images/about-taekwondo/kyokpa.jpg'
-import Image from 'next/image'
+import Image, { StaticImageData } from 'next/image'
 import { useState } from 'react'
 
-const disciplines = [
+type Discipline = {
+  name: string,
+  image: StaticImageData,
+}
+
+const disciplines: Discipline[] = [
   {
     name: 'Taekwondo',
     image: taekwondo,

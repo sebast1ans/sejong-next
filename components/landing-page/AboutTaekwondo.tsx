@@ -56,11 +56,11 @@ const PoomsaeContent = () => {
     <article className={styles.poomsaeContent}>
       <iframe
         className={styles.video}
-        width="560"
-        height="315"
-        src="https://www.youtube-nocookie.com/embed/Yf7qhc0AV7w"
-        title="Poomsae promo video"
-        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        width={'560'}
+        height={'315'}
+        src={'https://www.youtube-nocookie.com/embed/Yf7qhc0AV7w'}
+        title={'Poomsae promo video'}
+        allow={'accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'}
         allowFullScreen
       ></iframe>
       <p>{convertHtmlToReact(t('p1'))}</p>

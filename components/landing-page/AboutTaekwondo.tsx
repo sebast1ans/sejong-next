@@ -9,13 +9,15 @@ import kyokpa from '../../public/images/about-taekwondo/kyokpa.jpg'
 import kihap from '../../public/images/about-taekwondo/contentPics/kihap.jpg'
 import concentration from '../../public/images/about-taekwondo/contentPics/concentrating.jpg'
 import jongshin from '../../public/images/about-taekwondo/contentPics/jongshin.jpg'
+import yopchagi from '../../public/images/about-taekwondo/contentPics/yopchagi.jpg'
+import yopchagi2 from '../../public/images/about-taekwondo/contentPics/yopchagi2.jpg'
 import Image, { StaticImageData } from 'next/image'
 import { useState } from 'react'
 import CloseIcon from '@mui/icons-material/Close'
 import convertHtmlToReact from '@hedgedoc/html-to-react'
 
 const TaekwondoContent = () => {
-  const { t } = useTranslation(
+  const {t} = useTranslation(
     'about-taekwondo',
     {keyPrefix: 'taekwondo-content'}
   )
@@ -42,30 +44,38 @@ const TaekwondoContent = () => {
   )
 }
 
-const PoomsaeContent = () => (
-  <>
-    <p>
-      Poomsae (souborná cvičení) jsou závazná cvičení, vypracovaná mistry Taekwondo, za účelem předávání vědy o umění
-      boje a vlastních interpretacích tohoto umění.
-    </p>
-    <p>Poomsae se dělí na <strong>základní</strong> a <strong>mistrovské</strong>.</p>
-    <p>
-      V poomsae vystupují harmonicky spjaté všechny techniky obrany a útoku se vzrůstajícím stupněm obtížnosti, které
-      napomáhají k procvičení umění boje s jedním nebo více protivníky. Takto se můžou cvičit různé útočné a obrané
-      techniky bez skutečného protivníka a bez nebezpečí zranění.
-    </p>
-    <p>
-      Posloupnost pohybů je přesně vymezena a probíhá podle stanoveného diagramu kroku. Pohyby musí být silné,
-      koncentrované, přesné a rytmické při zachování stabilní polohy těla.
-    </p>
-    <p>Poomsae stanoví základní prvek zkoušky pro další stupeň školení nebo mistrovství.</p>
-    <p>Poomsae se dělí na <strong>8 základních</strong> (Taegeuk 1 – 8 Jang) a <strong>9 mistrovských</strong> (Yudanja
-      Poomsae), které jsou pojmenovány podle posvátných míst v Koreji nebo názvy, které se vztahují
-      ke <strong>korejským dějinám</strong> (Koryo, Keumgang, Taebaek, Pyongwon, Sipjin, Jitae, Cheonkwon, Hansoo
-      a Ilyeo).
-    </p>
-  </>
-)
+const PoomsaeContent = () => {
+  const {t} = useTranslation(
+    'about-taekwondo',
+    {keyPrefix: 'poomsae-content'}
+  )
+
+  return (
+    <article className={styles.poomsaeContent}>
+      <iframe
+        className={styles.video}
+        width="560"
+        height="315"
+        src="https://www.youtube-nocookie.com/embed/Yf7qhc0AV7w"
+        title="Poomsae promo video"
+        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowFullScreen
+      ></iframe>
+      <p>{convertHtmlToReact(t('p1'))}</p>
+      <Paper className={styles.yopchagi}>
+        <Image src={yopchagi} className={styles.contentImage} fill sizes={'17rem'} alt={'Concentration'}/>
+      </Paper>
+      <p>{convertHtmlToReact(t('p2'))}</p>
+      <p>{convertHtmlToReact(t('p3'))}</p>
+      <p>{convertHtmlToReact(t('p4'))}</p>
+      <Paper className={styles.yopchagi2}>
+        <Image src={yopchagi2} className={styles.contentImage} fill sizes={'17rem'} alt={'Concentration'}/>
+      </Paper>
+      <p>{convertHtmlToReact(t('p5'))}</p>
+      <p>{convertHtmlToReact(t('p6'))}</p>
+    </article>
+  )
+}
 
 const KyorugiContent = () => (
   <>

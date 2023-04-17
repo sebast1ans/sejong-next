@@ -21,6 +21,12 @@ import { useState } from 'react'
 import CloseIcon from '@mui/icons-material/Close'
 import convertHtmlToReact from '@hedgedoc/html-to-react'
 
+const ContentImage = ({src, className, alt} : {src: StaticImageData, className: string, alt: string}) => (
+  <Paper className={className}>
+    <Image src={src} className={styles.contentImage} fill sizes={'17rem'} alt={alt}/>
+  </Paper>
+)
+
 const TaekwondoContent = () => {
   const {t} = useTranslation(
     'about-taekwondo',
@@ -29,22 +35,16 @@ const TaekwondoContent = () => {
 
   return (
     <article className={styles.taekwondoContent}>
-      <Paper className={styles.kihap}>
-        <Image src={kihap} className={styles.contentImage} fill sizes={'17rem'} alt={'Kihap'}/>
-      </Paper>
+      <ContentImage src={kihap} className={styles.kihap} alt={'Kihap'}/>
       <p>{convertHtmlToReact(t('p1'))}</p>
       <p>{convertHtmlToReact(t('p2'))}</p>
-      <Paper className={styles.concentration}>
-        <Image src={concentration} className={styles.contentImage} fill sizes={'17rem'} alt={'Concentration'}/>
-      </Paper>
+      <ContentImage src={concentration} className={styles.concentration} alt={'Concentration'}/>
       <p>{convertHtmlToReact(t('p3'))}</p>
       <p>{convertHtmlToReact(t('p4'))}</p>
       <p>{convertHtmlToReact(t('p5'))}</p>
       <p>{convertHtmlToReact(t('p6'))}</p>
       <p>{convertHtmlToReact(t('p7'))}</p>
-      <Paper className={styles.jongshin}>
-        <Image src={jongshin} className={styles.contentImage} fill sizes={'17rem'} alt={'Jongshin'}/>
-      </Paper>
+      <ContentImage src={jongshin} className={styles.jongshin} alt={'5 Taekwondo Tennets'}/>
     </article>
   )
 }
@@ -67,15 +67,11 @@ const PoomsaeContent = () => {
         allowFullScreen
       ></iframe>
       <p>{convertHtmlToReact(t('p1'))}</p>
-      <Paper className={styles.yopchagi1}>
-        <Image src={yopchagi1} className={styles.contentImage} fill sizes={'17rem'} alt={'Concentration'}/>
-      </Paper>
+      <ContentImage src={yopchagi1} className={styles.yopchagi1} alt={'Yop chagi'}/>
       <p>{convertHtmlToReact(t('p2'))}</p>
       <p>{convertHtmlToReact(t('p3'))}</p>
       <p>{convertHtmlToReact(t('p4'))}</p>
-      <Paper className={styles.yopchagi2}>
-        <Image src={yopchagi2} className={styles.contentImage} fill sizes={'17rem'} alt={'Concentration'}/>
-      </Paper>
+      <ContentImage src={yopchagi2} className={styles.yopchagi2} alt={'Yop chagi 2'}/>
       <p>{convertHtmlToReact(t('p5'))}</p>
       <p>{convertHtmlToReact(t('p6'))}</p>
     </article>
@@ -100,14 +96,10 @@ const KyorugiContent = () => {
         allowFullScreen
       ></iframe>
       <p>{convertHtmlToReact(t('p1'))}</p>
-      <Paper className={styles.kyorugi1}>
-        <Image src={kyorugi1} className={styles.contentImage} fill sizes={'17rem'} alt={'Concentration'}/>
-      </Paper>
+      <ContentImage src={kyorugi1} className={styles.kyorugi1} alt={'Kyorugi 1'}/>
       <p>{convertHtmlToReact(t('p2'))}</p>
       <p>{convertHtmlToReact(t('p3'))}</p>
-      <Paper className={styles.kyorugi2}>
-        <Image src={kyorugi2} className={styles.contentImage} fill sizes={'17rem'} alt={'Concentration'}/>
-      </Paper>
+      <ContentImage src={kyorugi2} className={styles.kyorugi2} alt={'Kyorugi 2'}/>
       <p>{convertHtmlToReact(t('p4'))}</p>
     </article>
   )
@@ -123,16 +115,10 @@ const KyokpaContent = () => {
     <article className={styles.kyokpaContent}>
       <p>{convertHtmlToReact(t('p1'))}</p>
       <div className={styles.images1stGroup}>
-        <Paper className={styles.kyokpa1}>
-          <Image src={kyokpa1} className={styles.contentImage} fill sizes={'16rem'} alt={'Concentration'}/>
-        </Paper>
-        <Paper className={styles.kyokpa2}>
-          <Image src={kyokpa2} className={styles.contentImage} fill sizes={'16rem'} alt={'Concentration'}/>
-        </Paper>
+        <ContentImage src={kyokpa1} className={styles.kyokpa1} alt={'Kyokpa 1'}/>
+        <ContentImage src={kyokpa2} className={styles.kyokpa2} alt={'Kyokpa 2'}/>
       </div>
-      <Paper className={styles.kyokpa3}>
-        <Image src={kyokpa3} className={styles.contentImage} fill sizes={'16rem'} alt={'Concentration'}/>
-      </Paper>
+      <ContentImage src={kyokpa3} className={styles.kyokpa3} alt={'Kyokpa 3'}/>
     </article>
   )
 }

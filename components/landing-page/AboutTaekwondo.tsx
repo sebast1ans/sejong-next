@@ -9,8 +9,10 @@ import kyokpa from '../../public/images/about-taekwondo/kyokpa.jpg'
 import kihap from '../../public/images/about-taekwondo/contentPics/kihap.jpg'
 import concentration from '../../public/images/about-taekwondo/contentPics/concentrating.jpg'
 import jongshin from '../../public/images/about-taekwondo/contentPics/jongshin.jpg'
-import yopchagi from '../../public/images/about-taekwondo/contentPics/yopchagi.jpg'
+import yopchagi1 from '../../public/images/about-taekwondo/contentPics/yopchagi.jpg'
 import yopchagi2 from '../../public/images/about-taekwondo/contentPics/yopchagi2.jpg'
+import kyorugi1 from '../../public/images/about-taekwondo/contentPics/kyorugi1.jpg'
+import kyorugi2 from '../../public/images/about-taekwondo/contentPics/kyorugi2.jpg'
 import Image, { StaticImageData } from 'next/image'
 import { useState } from 'react'
 import CloseIcon from '@mui/icons-material/Close'
@@ -62,8 +64,8 @@ const PoomsaeContent = () => {
         allowFullScreen
       ></iframe>
       <p>{convertHtmlToReact(t('p1'))}</p>
-      <Paper className={styles.yopchagi}>
-        <Image src={yopchagi} className={styles.contentImage} fill sizes={'17rem'} alt={'Concentration'}/>
+      <Paper className={styles.yopchagi1}>
+        <Image src={yopchagi1} className={styles.contentImage} fill sizes={'17rem'} alt={'Concentration'}/>
       </Paper>
       <p>{convertHtmlToReact(t('p2'))}</p>
       <p>{convertHtmlToReact(t('p3'))}</p>
@@ -77,27 +79,36 @@ const PoomsaeContent = () => {
   )
 }
 
-const KyorugiContent = () => (
-  <>
-    <p>Kyorugi (zápas) se dělí na zápas <strong>řízený</strong> a <strong>volný</strong>.</p>
-    <p>
-      Řízený boj probíhá podle předem stanoveného schématu. Je to soubor konkrétních útoků a přesně vymezených technik
-      obrany po provedení <strong>tří kroků (sambon kyorugi)</strong>, <strong>dvou kroků (dubon kyorugi)</strong>, či
-      <strong>jednoho kroku (hanbon kyorugi)</strong>.
-    </p>
-    <p>
-      Ve <strong>cvičném volném boji (chayu kyorugi)</strong> se cvičenec musí rozhodovat rychle a samostatně, a musí
-      svá rozhodnutí přizpůsobit aktuální situaci. Musí se vyhnout jakékoli jednostrannosti ve stylu boje a vyčerpat
-      veškeré kombinace a uskutečňovat protiútoky.
-    </p>
-    <p>
-      Boj sledovaný rozhodčím podléhá naopak přísným sportovním pravidlům.<strong>Sportovní zápas</strong> se
-      uskutečňuje v plném kontaktu a trvá <strong>3 kola po 3 minutách</strong>, což vyžaduje pro sportovce velké
-      technické umění, pevnou fyzickou kondici, psychickou rovnováhu, bleskové reakce a ohromné důvěry ve vlastní
-      schopnosti. Při volném zápase se cvičenec vybaven chrániči hrudi, hlavy, holení, předloktí a suspensorem.
-    </p>
-  </>
-)
+const KyorugiContent = () => {
+  const {t} = useTranslation(
+    'about-taekwondo',
+    {keyPrefix: 'kyorugi-content'}
+  )
+
+  return (
+    <article className={styles.kyorugiContent}>
+      <iframe
+        className={styles.video}
+        width={'560'}
+        height={'315'}
+        src={'https://www.youtube-nocookie.com/embed/-VVRroxsWnU'}
+        title={'Kyorugi promo video'}
+        allow={'accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'}
+        allowFullScreen
+      ></iframe>
+      <p>{convertHtmlToReact(t('p1'))}</p>
+      <Paper className={styles.kyorugi1}>
+        <Image src={kyorugi1} className={styles.contentImage} fill sizes={'17rem'} alt={'Concentration'}/>
+      </Paper>
+      <p>{convertHtmlToReact(t('p2'))}</p>
+      <p>{convertHtmlToReact(t('p3'))}</p>
+      <Paper className={styles.kyorugi2}>
+        <Image src={kyorugi2} className={styles.contentImage} fill sizes={'17rem'} alt={'Concentration'}/>
+      </Paper>
+      <p>{convertHtmlToReact(t('p4'))}</p>
+    </article>
+  )
+}
 
 const KyokpaContent = () => (
   <>

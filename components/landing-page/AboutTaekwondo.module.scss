@@ -2,7 +2,9 @@ $textShadow: 2px 2px 20px rgba(0, 0, 0, 0.7);
 
 @mixin videoFrame {
   border: none;
+  aspect-ratio: 16 / 9;
   width: 100%;
+  height: auto;
   border-radius: 4px;
   background-color: #777777;
 }

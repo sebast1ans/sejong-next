@@ -13,6 +13,9 @@ import yopchagi1 from '../../public/images/about-taekwondo/contentPics/yopchagi.
 import yopchagi2 from '../../public/images/about-taekwondo/contentPics/yopchagi2.jpg'
 import kyorugi1 from '../../public/images/about-taekwondo/contentPics/kyorugi1.jpg'
 import kyorugi2 from '../../public/images/about-taekwondo/contentPics/kyorugi2.jpg'
+import kyokpa1 from '../../public/images/about-taekwondo/contentPics/kyokpa1.jpg'
+import kyokpa2 from '../../public/images/about-taekwondo/contentPics/kyokpa2.jpg'
+import kyokpa3 from '../../public/images/about-taekwondo/contentPics/kyokpa3.jpg'
 import Image, { StaticImageData } from 'next/image'
 import { useState } from 'react'
 import CloseIcon from '@mui/icons-material/Close'
@@ -110,15 +113,29 @@ const KyorugiContent = () => {
   )
 }
 
-const KyokpaContent = () => (
-  <>
-    <p>Kyokpa (přerážecí techniky) se dělí na <strong>silové přerážení</strong>, kde se zaměřuje především na sílu
-      prováděné techniky, a <strong>speciální přerážení</strong>, kde je nejdůležitějším faktorem obtížnost prováděné
-      techniky. Kjokpcha jsou součástí výcviku a jsou i soutěže v této disciplíně. Cvičenec jimi testuje sama sebe,
-      svoji šikovnost, sílu, přesnost, zručnost, schopnost soustředit se a tím i svoji vyspělost.
-    </p>
-  </>
-)
+const KyokpaContent = () => {
+  const {t} = useTranslation(
+    'about-taekwondo',
+    {keyPrefix: 'kyokpa-content'}
+  )
+
+  return (
+    <article className={styles.kyokpaContent}>
+      <p>{convertHtmlToReact(t('p1'))}</p>
+      <div className={styles.images1stGroup}>
+        <Paper className={styles.kyokpa1}>
+          <Image src={kyokpa1} className={styles.contentImage} fill sizes={'16rem'} alt={'Concentration'}/>
+        </Paper>
+        <Paper className={styles.kyokpa2}>
+          <Image src={kyokpa2} className={styles.contentImage} fill sizes={'16rem'} alt={'Concentration'}/>
+        </Paper>
+      </div>
+      <Paper className={styles.kyokpa3}>
+        <Image src={kyokpa3} className={styles.contentImage} fill sizes={'16rem'} alt={'Concentration'}/>
+      </Paper>
+    </article>
+  )
+}
 
 type Discipline = {
   name: string,

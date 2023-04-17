@@ -4,6 +4,7 @@ $textShadow: 2px 2px 20px rgba(0, 0, 0, 0.7);
   border: none;
   width: 100%;
   border-radius: 4px;
+  background-color: #777777;
 }
 
 @mixin paperFrame3to2 {
@@ -19,8 +20,8 @@ $textShadow: 2px 2px 20px rgba(0, 0, 0, 0.7);
 }
 
 @mixin imageOnTheRight {
-    float: right;
-    margin-left: 1rem;
+  float: right;
+  margin-left: 1rem;
 }
 
 .disciplineContainer {
@@ -124,5 +125,26 @@ $textShadow: 2px 2px 20px rgba(0, 0, 0, 0.7);
 
   .yopchagi2, .kyorugi1 {
     @include imageOnTheRight;
+  }
+}
+
+.kyokpaContent {
+
+  .images1stGroup {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .kyokpa1, .kyokpa2 {
+    @include paperFrame3to2;
+    display: inline-block;
+  }
+
+  .kyokpa3 {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    margin-top: 1rem;
+    overflow: hidden;
   }
 }

@@ -1,5 +1,5 @@
 import { createTheme } from '@mui/material/styles'
-import { Saira_Semi_Condensed } from '@next/font/google'
+import { Saira_Semi_Condensed } from "next/font/google"
 import variables from './variables.module.scss'
 
 const encodeSans = Saira_Semi_Condensed({

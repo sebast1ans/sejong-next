@@ -11,19 +11,19 @@ export default function TrainingSessions () {
     {
       name: 'Horáčkova',
       address: 'Horáčkova 1100',
-      city: `${t('prague', { ns: 'common' })} 4 - Pankrác`,
+      city: `${t('prague', { ns: 'common' })} 4 – Pankrác`,
       groups: [
         {
           name: t('children-6-9', { ns: 'common' }),
-          time: `${t('wednesday', { ns: 'common' })} 16:30 - 17:30`,
+          time: `${t('wednesday', { ns: 'common' })} 16:30 – 17:30`,
         },
         {
           name: t('children-10-15', { ns: 'common' }),
-          time: `${t('tuesday-and-thursday', { ns: 'common' })} 17:30 - 18:30`,
+          time: `${t('tuesday-and-thursday', { ns: 'common' })} 17:30 – 18:30`,
         },
         {
           name: t('juniors-and-adults', { ns: 'common' }),
-          time: `${t('tuesday-and-thursday', { ns: 'common' })} 18:00 - 19:30`,
+          time: `${t('tuesday-and-thursday', { ns: 'common' })} 18:00 – 19:30`,
         }
       ],
       metro: [`C – Pankrác (5 min ${t('by-foot')})`],
@@ -32,15 +32,15 @@ export default function TrainingSessions () {
     {
       name: 'Smolkova',
       address: 'Smolkova 565/8',
-      city: `${t('prague', { ns: 'common' })} 12 - Kamýk`,
+      city: `${t('prague', { ns: 'common' })} 12 – Kamýk`,
       groups: [
         {
           name: t('children-6-9', { ns: 'common' }),
-          time: `${t('friday', { ns: 'common' })} 15:00 - 16:00`,
+          time: `${t('friday', { ns: 'common' })} 15:00 – 16:00`,
         },
         {
           name: t('youth-and-adults', { ns: 'common' }),
-          time: `${t('wednesday', { ns: 'common' })} 18:30 - 20:00`,
+          time: `${t('wednesday', { ns: 'common' })} 18:30 – 20:00`,
         }
       ],
       bus: ['Sídliště Libuš (165)', 'Pavlíkova (197, 215)']

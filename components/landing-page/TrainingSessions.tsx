@@ -39,7 +39,7 @@ export default function TrainingSessions () {
           time: `${t('friday', { ns: 'common' })} 15:00 – 16:00`,
         },
         {
-          name: t('youth-and-adults', { ns: 'common' }),
+          name: t('juniors-and-adults', { ns: 'common' }),
           time: `${t('wednesday', { ns: 'common' })} 18:30 – 20:00`,
         }
       ],
@@ -80,17 +80,19 @@ export default function TrainingSessions () {
                   {location.metro && (
                     <Box sx={{ padding: '.1rem 0' }}>
                       <Typography variant={'body1'} sx={{ fontWeight: '600' }}>
-                        <Subway/> Metro:</Typography>
+                        <Subway/>&nbsp;{t('underground')}
+                      </Typography>
                       {location.metro.map(station => (
-                        <Typography variant={'body1'} key={station}>{station}</Typography>
+                        <Typography variant={'body1'} key={station}>• {station}</Typography>
                       ))}
                     </Box>)}
                   {location.bus && (
                     <Box sx={{ padding: '.1rem 0' }}>
                       <Typography variant={'body1'} sx={{ fontWeight: '600' }}>
-                        <DirectionsBus/> Bus:</Typography>
+                        <DirectionsBus/>&nbsp;{t('bus')}
+                      </Typography>
                       {location.bus.map(station => (
-                        <Typography variant={'body1'} key={station}>{station}</Typography>
+                        <Typography variant={'body1'} key={station}>• {station}</Typography>
                       ))}
                     </Box>
                   )}

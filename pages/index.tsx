@@ -21,7 +21,8 @@ export default function Home ({
   heroImageURLs,
   introductionData,
   referencesData,
-  coachesData
+  coachesData,
+  gMapsApiKey
 }: InferGetStaticPropsType<typeof getStaticProps>) {
 
   return (
@@ -38,7 +39,7 @@ export default function Home ({
       <Coaches data={coachesData}/>
       <Timeline />
       <AboutTaekwondo />
-      <TrainingSessions />
+      <TrainingSessions gMapsApiKey={gMapsApiKey!} />
       <PriceList />
       <Contact />
     </>
@@ -70,7 +71,8 @@ export async function getStaticProps (context: { locale: string }) {
         'training-sessions',
         'price-list',
         'contact'
-      ]))
+      ])),
+      gMapsApiKey: process.env.GMAPS_API_KEY
     }
   }
 }

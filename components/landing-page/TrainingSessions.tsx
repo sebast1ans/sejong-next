@@ -3,9 +3,17 @@ import { useTranslation } from 'next-i18next'
 import styles from './TrainingSessions.module.scss'
 import { Place, Schedule, Commute, Subway, DirectionsBus } from '@mui/icons-material'
 import { Box, Container, Grid, Typography } from '@mui/material'
+import { GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api'
 
-export default function TrainingSessions () {
+interface Props {
+  gMapsApiKey: string
+}
+
+export default function TrainingSessions ({ gMapsApiKey }: Props) {
   const { t } = useTranslation(['training-sessions', 'common'])
+  const { isLoaded } = useJsApiLoader({
+    googleMapsApiKey: gMapsApiKey.toString()
+  })
 
   const locations = [
     {
@@ -27,7 +35,9 @@ export default function TrainingSessions () {
         }
       ],
       metro: [`C – Pankrác (5 min ${t('by-foot')})`],
-      bus: ['Krčský hřbitov (193, 148)']
+      bus: ['Krčský hřbitov (193, 148)'],
+      lat: 50.0461,
+      lng: 14.4365
     },
     {
       name: 'Smolkova',
@@ -43,7 +53,9 @@ export default function TrainingSessions () {
           time: `${t('wednesday', { ns: 'common' })} 18:30 – 20:00`,
         }
       ],
-      bus: ['Sídliště Libuš (165)', 'Pavlíkova (197, 215)']
+      bus: ['Sídliště Libuš (165)', 'Pavlíkova (197, 215)'],
+      lat: 50.0085,
+      lng: 14.4514
     }
   ]
 
@@ -97,7 +109,17 @@ export default function TrainingSessions () {
                     </Box>
                   )}
                 </div>
-                <div className={styles.map}></div>
+                <div className={styles.map}>
+                  {isLoaded && (
+                    <GoogleMap
+                      mapContainerStyle={{ width: '100%', height: '100%' }}
+                      center={{ lat: location.lat, lng: location.lng }}
+                      zoom={15}
+                    >
+                      <Marker position={{ lat: location.lat, lng: location.lng }}/>
+                    </GoogleMap>
+                  )}
+                </div>
               </Grid>
             ))}
           </Grid>

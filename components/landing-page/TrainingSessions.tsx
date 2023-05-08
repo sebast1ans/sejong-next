@@ -69,7 +69,7 @@ export default function TrainingSessions () {
                 <Schedule className={`${styles.icon} ${styles.iconClock}`}/>
                 <div className={styles.time}>
                   {location.groups.map(group => (
-                    <Box sx={{ padding: '.5rem 0' }} key={group.name}>
+                    <Box sx={{ padding: '.1rem 0' }} key={group.name}>
                       <Typography variant={'body1'} sx={{ fontWeight: '600' }}>{group.name}</Typography>
                       <Typography variant={'body1'}>{group.time}</Typography>
                     </Box>
@@ -78,14 +78,14 @@ export default function TrainingSessions () {
                 <Commute className={`${styles.icon} ${styles.iconTransport}`}/>
                 <div className={styles.transport}>
                   {location.metro && (
-                    <Box sx={{ padding: '.5rem 0' }}>
+                    <Box sx={{ padding: '.1rem 0' }}>
                       <Typography variant={'body1'} sx={{ fontWeight: '600' }}>Metro:</Typography>
                       {location.metro.map(station => (
                         <Typography variant={'body1'} key={station}>{station}</Typography>
                       ))}
                     </Box>)}
                   {location.bus && (
-                    <Box sx={{ padding: '.5rem 0' }}>
+                    <Box sx={{ padding: '.1rem 0' }}>
                       <Typography variant={'body1'} sx={{ fontWeight: '600' }}>Bus:</Typography>
                       {location.bus.map(station => (
                         <Typography variant={'body1'} key={station}>{station}</Typography>

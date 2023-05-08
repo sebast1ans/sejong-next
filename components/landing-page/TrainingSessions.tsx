@@ -1,7 +1,7 @@
 import { Heading } from './Heading'
 import { useTranslation } from 'next-i18next'
 import styles from './TrainingSessions.module.scss'
-import { Place, Schedule, Commute } from '@mui/icons-material'
+import { Place, Schedule, Commute, Subway, DirectionsBus } from '@mui/icons-material'
 import { Box, Container, Grid, Typography } from '@mui/material'
 
 export default function TrainingSessions () {
@@ -79,14 +79,16 @@ export default function TrainingSessions () {
                 <div className={styles.transport}>
                   {location.metro && (
                     <Box sx={{ padding: '.1rem 0' }}>
-                      <Typography variant={'body1'} sx={{ fontWeight: '600' }}>Metro:</Typography>
+                      <Typography variant={'body1'} sx={{ fontWeight: '600' }}>
+                        <Subway/> Metro:</Typography>
                       {location.metro.map(station => (
                         <Typography variant={'body1'} key={station}>{station}</Typography>
                       ))}
                     </Box>)}
                   {location.bus && (
                     <Box sx={{ padding: '.1rem 0' }}>
-                      <Typography variant={'body1'} sx={{ fontWeight: '600' }}>Bus:</Typography>
+                      <Typography variant={'body1'} sx={{ fontWeight: '600' }}>
+                        <DirectionsBus/> Bus:</Typography>
                       {location.bus.map(station => (
                         <Typography variant={'body1'} key={station}>{station}</Typography>
                       ))}

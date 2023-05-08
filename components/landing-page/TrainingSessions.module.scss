@@ -25,8 +25,8 @@
 
 .location {
   display: grid;
-  place-items: center;
-  gap: .5rem;
+  align-items: center;
+  column-gap: .5rem;
   grid-template: repeat(3, 1fr) auto / auto 1fr;
   grid-template-areas:
     "icon-map address"

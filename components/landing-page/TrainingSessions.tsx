@@ -52,7 +52,7 @@ export default function TrainingSessions () {
       <Heading text={t('training-sessions')}/>
       <div className={styles.greyBackground}>
         <Container>
-          <Grid container spacing={1}>
+          <Grid container spacing={2}>
             {locations.map(location => (
               <Grid item xs={12} sm={12} md={6} lg={6} xl={6} key={location.name} className={styles.location}>
                 <Place className={`${styles.icon} ${styles.iconMap}`}/>

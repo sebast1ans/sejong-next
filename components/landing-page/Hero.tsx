@@ -8,6 +8,7 @@ import styles from './Hero.module.scss'
 interface Props {
   heroImages: string[]
 }
+
 export default function Hero ({ heroImages }: Props) {
   const [swiperLoaded, setSwiperLoaded] = useState(false)
 
@@ -35,7 +36,6 @@ export default function Hero ({ heroImages }: Props) {
       {swiperLoaded && (
         <div className={styles.heroLogo}></div>
       )}
-
     </>
   )
 }

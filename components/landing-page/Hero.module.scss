@@ -1,3 +1,6 @@
+@use 'styles/variables.module';
+@use 'styles/mixins.module';
+
 .background {
   filter: brightness(.2);
   background-size: cover!important;
@@ -13,12 +16,8 @@
   background-size: 50%;
   height: 100vh;
   width: 100vw;
-  animation: fade-in 1s;
 
-  @keyframes fade-in {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-  }
+  @include mixins.fade-in;
 
   @media (width <= 900px) {
     background-size: 80%;

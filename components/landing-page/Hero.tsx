@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Image from 'next/image'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay, EffectFade } from 'swiper'
 import 'swiper/swiper.css'
@@ -25,10 +26,8 @@ export default function Hero ({ heroImages }: Props) {
       >
         {heroImages.map(heroImage => (
           <SwiperSlide key={heroImage}>
-            <div
-              style={{background: `url(${heroImage}) no-repeat center`}}
-              className={styles.background}
-            >
+            <div className={styles.background}>
+              <Image src={heroImage} className={styles.image} alt={'Hero image'} fill sizes={'100vw'} />
             </div>
           </SwiperSlide>
         ))}

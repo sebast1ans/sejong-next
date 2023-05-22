@@ -1,4 +1,5 @@
 @use '../../styles/variables.module';
+@use '../../styles/mixins.module';
 
 $pillSize: 2rem;
 
@@ -57,7 +58,9 @@ $pillSize: 2rem;
   width: 100%;
   border-radius: 0 0 4px 4px;
   z-index: 2;
+
   @include background;
+  @include mixins.fade-in;
 
   .container {
     display: flex;

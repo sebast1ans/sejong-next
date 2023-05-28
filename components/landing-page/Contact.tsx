@@ -2,8 +2,9 @@ import { useTranslation } from 'next-i18next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { Heading } from './Heading'
-import { Typography } from '@mui/material'
+import { Button, Typography } from '@mui/material'
 import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar'
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward'
 import styles from './Contact.module.scss'
 
 export default function Contact () {
@@ -32,7 +33,14 @@ export default function Contact () {
         <Typography variant={'body1'}>
           <span>{t('bank-account-number')}: </span> 154282135/0300
         </Typography>
-        <br/>
+        <Link href={'#training-sessions'}>
+          <Button
+            variant={'outlined'}
+            sx={{margin: '1rem 0'}}
+          >
+            {t('training-sessions')}&nbsp;<ArrowUpwardIcon/>
+          </Button>
+        </Link>
         <Typography variant={'body1'}>
           <PermContactCalendarIcon/>
           <span> Mgr. Ondřej Havlíček</span>

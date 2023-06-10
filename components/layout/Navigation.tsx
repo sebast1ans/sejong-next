@@ -146,8 +146,13 @@ export default function Navigation({navigationItems, namespace}: Props) {
                 </li>
               ))}
             </ul>
-            <SocialLinks/>
-            <LanguageSelector isLangSelectOpen={setIsLanguageSelectorOpen}/>
+            {router.pathname === '/' && (
+              <>
+                <SocialLinks/>
+                <LanguageSelector isLangSelectOpen={setIsLanguageSelectorOpen}/>
+              </>
+            )}
+
           </div>
         </Container>
       </nav>

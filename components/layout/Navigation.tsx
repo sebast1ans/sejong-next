@@ -98,7 +98,7 @@ interface Props {
 
 export default function Navigation({navigationItems, namespace}: Props) {
   const navigationRef = useRef(null)
-  const {pathname} = useRouter()
+  const router = useRouter()
   const {t} = useTranslation(namespace)
   const isWindowScrolledOver = useWindowScrolledOver(300)
   const isWindowWidthOver = useWindowWidthResizedOver(theme.breakpoints.values.lg)
@@ -116,14 +116,14 @@ export default function Navigation({navigationItems, namespace}: Props) {
       <nav
         className={`
           ${styles.navigation}
-          ${pathname === '/' ? styles.navigationRoot : styles.navigationSubpage} 
+          ${router.pathname === '/' ? styles.navigationRoot : styles.navigationSubpage} 
           ${(!isWindowScrolledOver && isWindowWidthOver) && styles.notScrolled}
       `}
         ref={navigationRef}
       >
         <Container className={styles.container}>
           <div className={styles.navigationControl}>
-            <Link href='/'>
+            <Link href={router.pathname} onDoubleClick={() => router.push('/admin')}>
               <Image src={logo} className={styles.logo} alt='Navigation logo'/>
             </Link>
             <HamburgerMenu

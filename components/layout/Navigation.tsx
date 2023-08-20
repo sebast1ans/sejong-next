@@ -2,7 +2,7 @@ import { MouseEventHandler, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { Container, FormControl, MenuItem, Select } from '@mui/material'
-import { Facebook, Instagram, YouTube } from '@mui/icons-material'
+import { FacebookRounded, Instagram, YouTube } from '@mui/icons-material'
 import { useTranslation } from 'next-i18next'
 import { theme } from '../../styles/mui-theme'
 import Image from 'next/image'
@@ -30,7 +30,7 @@ const HamburgerMenu = ({isNavigationMenuHidden, setIsNavigationMenuHidden}: Hamb
 
 const SocialLinks = () => {
   const socials = [{
-    icon: <Facebook/>,
+    icon: <FacebookRounded/>,
     href: 'https://www.facebook.com/SejongDojang/'
   },
     {

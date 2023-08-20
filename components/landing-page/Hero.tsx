@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Autoplay, EffectFade } from 'swiper'
-import 'swiper/swiper.css'
+import { Autoplay, EffectFade } from 'swiper/modules'
+import 'swiper/css'
 import 'swiper/css/effect-fade'
 import styles from './Hero.module.scss'
 

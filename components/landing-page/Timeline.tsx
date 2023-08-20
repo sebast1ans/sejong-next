@@ -1,7 +1,7 @@
 import { Heading } from './Heading'
 import { useTranslation } from 'next-i18next'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import 'swiper/swiper.css'
+import 'swiper/css'
 import styles from './Timeline.module.scss'
 import { theme } from '../../styles/mui-theme'
 import { Typography } from '@mui/material'

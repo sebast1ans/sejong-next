@@ -1,6 +1,7 @@
 import { Container } from '@mui/material'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import styles from './Footer.module.scss'
 import sejongSealWhite from '../../public/logos/sejongSealWhite.svg'
 import wt from '../../public/logos/footer/wt.png'
@@ -23,16 +24,19 @@ export default function Footer () {
     { name: 'Prague 4', url: 'https://www.praha4.cz/', logo: prg4 },
     { name: 'Construct Service', url: 'https://www.constructservice.cz/', logo: construct },
   ]
+  const { pathname } = useRouter()
 
   return (
     <footer className={styles.footer}>
-      <Container className={styles.sponsors}>
-        {sponsors.map(({ url, name, logo}) => (
-          <Link href={url} target={'_blank'} key={name}>
-            <Image src={logo} className={styles.logo} alt={name}></Image>
-          </Link>
-        ))}
-      </Container>
+      {pathname === '/' && (
+        <Container className={styles.sponsors}>
+          {sponsors.map(({ url, name, logo}) => (
+            <Link href={url} target={'_blank'} key={name}>
+              <Image src={logo} className={styles.logo} alt={name}></Image>
+            </Link>
+          ))}
+        </Container>
+      )}
       <p className={styles.copyright}>
         <Image
           src={sejongSealWhite}

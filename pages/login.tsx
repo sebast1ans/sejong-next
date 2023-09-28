@@ -1,21 +1,16 @@
 import { Button } from '@mui/material'
-import { NextRouter } from 'next/router'
-import { ReactElement } from 'react'
+import { useRouter } from 'next/router'
+import { ReactElement, useContext, useEffect } from 'react'
+import { UserContext } from '../lib/context'
 import { auth, googleAuthProvider } from '../lib/firebase'
 import { signInWithPopup } from '@firebase/auth'
 
 
-interface SignInButtonProps {
-  router: NextRouter
-}
-
-export const SignInButton = ({ router }: SignInButtonProps): ReactElement => {
+export const SignInButton = (): ReactElement => {
   const signInWithGoogle = async () => {
+
     try {
       await signInWithPopup(auth, googleAuthProvider)
-      auth.onAuthStateChanged(user => {
-        user ? router.push('/portal') : router.reload
-      })
     } catch (error) {
       console.log(error)
     }
@@ -29,6 +24,15 @@ export const SignInButton = ({ router }: SignInButtonProps): ReactElement => {
 }
 
 export default function Login () {
+  const router = useRouter()
+  const user = useContext(UserContext)
+
+  useEffect(() => {
+    if (user) {
+      void router.push('/portal')
+    }
+  }, [user]);
+
   return (
     <h1>Login Page</h1>
   )

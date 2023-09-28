@@ -1,5 +1,8 @@
 import type { AppProps } from 'next/app'
 import { ThemeProvider } from '@mui/material/styles'
+import { useAuthState } from 'react-firebase-hooks/auth'
+import { UserContext } from '../lib/context'
+import { auth } from '../lib/firebase'
 import { theme } from '../styles/mui-theme'
 import { appWithTranslation, i18n } from 'next-i18next'
 import Navigation from '../components/layout/Navigation'
@@ -8,38 +11,40 @@ import { CssBaseline } from '@mui/material'
 import '../styles/globals.scss'
 import { SignInButton } from './login'
 import { SignOutButton } from './portal'
-import { useRouter } from 'next/router'
 
 const namespaces = {
   Home: 'home-page-navigation',
 }
 
 const navigationItems = (componentName?: string) => {
-  const router = useRouter()
   switch (componentName) {
     case 'Home':
       return Object.keys(i18n?.getResourceBundle('cs', namespaces.Home))
     case 'Login':
-      return [<SignInButton router={router} />]
+      return [<SignInButton/>]
     case 'Portal':
-      return [<SignOutButton router={router} />]
+      return [<SignOutButton/>]
     default:
       return []
   }
 }
 
 function App ({ Component, pageProps }: AppProps) {
+  const [user] = useAuthState(auth)
+
   return (
     <>
       <ThemeProvider theme={theme}>
         <CssBaseline/>
-        <Navigation
-          navigationItems={navigationItems(Component.displayName)}
-          namespace={namespaces[Component.displayName as keyof typeof namespaces]}/>
-        <main>
-          <Component {...pageProps} />
-        </main>
-        <Footer/>
+        <UserContext.Provider value={user}>
+          <Navigation
+            navigationItems={navigationItems(Component.displayName)}
+            namespace={namespaces[Component.displayName as keyof typeof namespaces]}/>
+          <main>
+            <Component {...pageProps} />
+          </main>
+          <Footer/>
+        </UserContext.Provider>
       </ThemeProvider>
     </>
   )

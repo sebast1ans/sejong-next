@@ -1,4 +1,4 @@
-import { MouseEventHandler, useEffect, useRef, useState } from 'react'
+import { MouseEventHandler, ReactElement, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { Container, FormControl, MenuItem, Select } from '@mui/material'
@@ -18,7 +18,7 @@ interface HamburgerMenuProps {
   setIsNavigationMenuHidden: MouseEventHandler
 }
 
-const HamburgerMenu = ({isNavigationMenuHidden, setIsNavigationMenuHidden}: HamburgerMenuProps) => (
+const HamburgerMenu = ({ isNavigationMenuHidden, setIsNavigationMenuHidden }: HamburgerMenuProps) => (
   <div
     className={`${styles.hamburger} ${!isNavigationMenuHidden && styles.menuNotHidden}`}
     onClick={setIsNavigationMenuHidden}>
@@ -44,7 +44,7 @@ const SocialLinks = () => {
 
   return (
     <ul className={styles.socials}>
-      {socials.map(({icon, href}) => (
+      {socials.map(({ icon, href }) => (
         <li key={href}>
           <Link href={href} target={'_blank'} className={`${styles.link} ${styles.link}`}>{icon}</Link>
         </li>
@@ -59,15 +59,15 @@ interface LanguageSelectorProps {
 
 const LanguageSelector = ({ isLangSelectOpen }: LanguageSelectorProps): JSX.Element => {
   const router = useRouter()
-  const {pathname, asPath, locales, locale: activeLocale} = router
-  const alpha2Code = {cs: 'cz', en: 'gb', vi: 'vn',}
+  const { pathname, asPath, locales, locale: activeLocale } = router
+  const alpha2Code = { cs: 'cz', en: 'gb', vi: 'vn', }
 
   const displayLanguageNameIn = (language: string) => {
-    return new Intl.DisplayNames([language], {type: 'language'})
+    return new Intl.DisplayNames([language], { type: 'language' })
   }
 
   const changeLanguageHandler = (language: string) => {
-    void router.push(pathname, asPath, {locale: language, scroll: false})
+    void router.push(pathname, asPath, { locale: language, scroll: false })
   }
 
   return (
@@ -92,14 +92,14 @@ const LanguageSelector = ({ isLangSelectOpen }: LanguageSelectorProps): JSX.Elem
 }
 
 interface Props {
-  navigationItems?: string[]
+  navigationItems: string[] | ReactElement[]
   namespace?: string
 }
 
-export default function Navigation({navigationItems, namespace}: Props) {
+export default function Navigation ({ navigationItems, namespace }: Props) {
   const navigationRef = useRef(null)
-  const {pathname} = useRouter()
-  const {t} = useTranslation(namespace)
+  const { pathname } = useRouter()
+  const { t } = useTranslation(namespace)
   const isWindowScrolledOver = useWindowScrolledOver(300)
   const isWindowWidthOver = useWindowWidthResizedOver(theme.breakpoints.values.lg)
   const [isNavigationMenuHidden, setIsNavigationMenuHidden] = useState(true)
@@ -110,6 +110,11 @@ export default function Navigation({navigationItems, namespace}: Props) {
   useEffect(() => {
     setIsNavigationMenuHidden(!isWindowWidthOver)
   }, [isWindowWidthOver])
+
+  const isArrayOfStrings = (value: unknown): value is string[] => {
+    return Array.isArray(value)
+      && value.every(item => typeof item === 'string')
+  }
 
   return (
     <>
@@ -133,21 +138,29 @@ export default function Navigation({navigationItems, namespace}: Props) {
           </div>
           <div className={`${styles.navigationItems} ${isNavigationMenuHidden && styles.inactive}`}>
             <ul className={styles.anchors}>
-              {navigationItems && navigationItems.map((key: string) => (
-                <li key={key}>
-                  <Link
-                    href={`#${key}`}
-                    replace
-                    className={styles.link}
-                    onClick={!isWindowWidthOver ? () => setIsNavigationMenuHidden(true) : undefined}
-                  >
-                    {t(key)}
-                  </Link>
-                </li>
-              ))}
+              {isArrayOfStrings(navigationItems)
+                ? navigationItems.map((key: string) => (
+                  <li key={key}>
+                    <Link
+                      href={`#${key}`}
+                      replace
+                      className={styles.link}
+                      onClick={!isWindowWidthOver ? () => setIsNavigationMenuHidden(true) : undefined}
+                    >
+                      {t(key)}
+                    </Link>
+                  </li>
+                )) : navigationItems.map((item, index) => (
+                  <li key={index}>{item}</li>
+                ))
+              }
             </ul>
-            <SocialLinks/>
-            <LanguageSelector isLangSelectOpen={setIsLanguageSelectorOpen}/>
+            {pathname === '/' ?? (
+              <>
+                <SocialLinks/>
+                <LanguageSelector isLangSelectOpen={setIsLanguageSelectorOpen}/>
+              </>
+            )}
           </div>
         </Container>
       </nav>

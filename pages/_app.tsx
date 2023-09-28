@@ -6,31 +6,36 @@ import Navigation from '../components/layout/Navigation'
 import Footer from '../components/layout/Footer'
 import { CssBaseline } from '@mui/material'
 import '../styles/globals.scss'
+import { SignInButton } from './login'
+import { SignOutButton } from './portal'
+import { useRouter } from 'next/router'
 
 const namespaces = {
   Home: 'home-page-navigation',
 }
 
-// TODO extend nav items with functions (e.g. for logout)
 const navigationItems = (componentName?: string) => {
+  const router = useRouter()
   switch (componentName) {
     case 'Home':
-      return Object.keys(i18n?.getResourceBundle('cs', namespaces.Home) || [])
+      return Object.keys(i18n?.getResourceBundle('cs', namespaces.Home))
+    case 'Login':
+      return [<SignInButton router={router} />]
+    case 'Portal':
+      return [<SignOutButton router={router} />]
     default:
       return []
   }
 }
 
-function App({Component, pageProps}: AppProps) {
-  const componentName = Component.displayName
-
+function App ({ Component, pageProps }: AppProps) {
   return (
     <>
       <ThemeProvider theme={theme}>
         <CssBaseline/>
         <Navigation
-          navigationItems={navigationItems(componentName)}
-          namespace={namespaces[componentName as keyof typeof namespaces]}/>
+          navigationItems={navigationItems(Component.displayName)}
+          namespace={namespaces[Component.displayName as keyof typeof namespaces]}/>
         <main>
           <Component {...pageProps} />
         </main>

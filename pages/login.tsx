@@ -32,7 +32,7 @@ export default function Login () {
     if (user) {
       void router.push('/portal')
     }
-  }, [user]);
+  }, [user, router]);
 
   return (
     <>

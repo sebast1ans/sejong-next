@@ -1,3 +1,4 @@
+import { uuidv4 } from '@firebase/util'
 import type { AppProps } from 'next/app'
 import { ThemeProvider } from '@mui/material/styles'
 import { useAuthState } from 'react-firebase-hooks/auth'
@@ -22,7 +23,10 @@ const navigationItems = (componentName?: string) => {
     case 'Login':
       return []
     case 'Portal':
-      return [<SignOutButton/>]
+      return [{
+        id: uuidv4(),
+        node: <SignOutButton/>
+  }]
     default:
       return []
   }

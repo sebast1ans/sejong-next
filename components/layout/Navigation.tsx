@@ -1,4 +1,4 @@
-import { MouseEventHandler, ReactElement, useEffect, useRef, useState } from 'react'
+import { MouseEventHandler, ReactNode, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { Container, FormControl, MenuItem, Select } from '@mui/material'
@@ -92,7 +92,7 @@ const LanguageSelector = ({ isLangSelectOpen }: LanguageSelectorProps): JSX.Elem
 }
 
 interface Props {
-  navigationItems: string[] | ReactElement[]
+  navigationItems: string[] | { id: string, node: ReactNode }[]
   namespace?: string
 }
 
@@ -152,8 +152,8 @@ export default function Navigation ({ navigationItems, namespace }: Props) {
                       {t(key)}
                     </Link>
                   </li>
-                )) : navigationItems.map((item, index) => (
-                  <li key={index}>{item}</li>
+                )) : navigationItems.map((item) => (
+                  <li key={item.id}>{item.node}</li>
                 ))
               }
             </ul>

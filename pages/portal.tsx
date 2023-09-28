@@ -25,7 +25,7 @@ export default function Portal () {
     if (!user) {
       void router.push('/login')
     }
-  }, [user]);
+  }, [user, router]);
 
     return user ? (
       <>

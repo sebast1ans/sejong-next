@@ -1,4 +1,5 @@
-import { Button } from '@mui/material'
+import { Logout } from '@mui/icons-material'
+import { Button, Container } from '@mui/material'
 import { useRouter } from 'next/router'
 import { useContext, useEffect } from 'react'
 import { UserContext } from '../lib/context'
@@ -13,12 +14,12 @@ export const SignOutButton = () => {
       console.log(error)
     }
   }
-  return <Button variant='contained' onClick={handleSignOut}>Sign Out</Button>
+  return <Button variant='contained' startIcon={<Logout />} onClick={handleSignOut}>Odhlásit&nbsp;se</Button>
 }
 
 export default function Portal () {
   const router = useRouter()
-  const user = useContext(UserContext)
+  const [user, loading, error] = useContext(UserContext)
 
   useEffect(() => {
     if (!user) {
@@ -28,7 +29,7 @@ export default function Portal () {
 
     return user ? (
       <>
-        <h1>{`Hi ${user ? user.displayName : ''}`}</h1>
+        <Container><h1>{`Hi ${user ? user.displayName : ''}`}</h1></Container>
       </>
     ) : null
 }

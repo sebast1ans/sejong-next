@@ -1,4 +1,4 @@
-import { User } from '@firebase/auth'
 import { createContext } from 'react'
+import { AuthStateHook } from 'react-firebase-hooks/auth'
 
-export const UserContext = createContext<User | null | undefined>(null)
+export const UserContext = createContext<AuthStateHook>([null, false, undefined])

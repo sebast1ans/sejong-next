@@ -131,10 +131,12 @@ export default function Navigation ({ navigationItems, namespace }: Props) {
             <Link href='/'>
               <Image src={logo} className={styles.logo} alt='Navigation logo'/>
             </Link>
-            <HamburgerMenu
-              isNavigationMenuHidden={isNavigationMenuHidden}
-              setIsNavigationMenuHidden={() => setIsNavigationMenuHidden(current => !current)}
-            />
+            {navigationItems.length > 0 ? (
+              <HamburgerMenu
+                isNavigationMenuHidden={isNavigationMenuHidden}
+                setIsNavigationMenuHidden={() => setIsNavigationMenuHidden(current => !current)}
+              />
+            ) : null}
           </div>
           <div className={`${styles.navigationItems} ${isNavigationMenuHidden && styles.inactive}`}>
             <ul className={styles.anchors}>
@@ -155,12 +157,12 @@ export default function Navigation ({ navigationItems, namespace }: Props) {
                 ))
               }
             </ul>
-            {pathname === '/' ?? (
+            {pathname === '/' ? (
               <>
                 <SocialLinks/>
                 <LanguageSelector isLangSelectOpen={setIsLanguageSelectorOpen}/>
               </>
-            )}
+            ): null}
           </div>
         </Container>
       </nav>

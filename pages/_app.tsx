@@ -9,7 +9,6 @@ import Navigation from '../components/layout/Navigation'
 import Footer from '../components/layout/Footer'
 import { CssBaseline } from '@mui/material'
 import '../styles/globals.scss'
-import { SignInButton } from './login'
 import { SignOutButton } from './portal'
 
 const namespaces = {
@@ -21,7 +20,7 @@ const navigationItems = (componentName?: string) => {
     case 'Home':
       return Object.keys(i18n?.getResourceBundle('cs', namespaces.Home))
     case 'Login':
-      return [<SignInButton/>]
+      return []
     case 'Portal':
       return [<SignOutButton/>]
     default:
@@ -30,13 +29,13 @@ const navigationItems = (componentName?: string) => {
 }
 
 function App ({ Component, pageProps }: AppProps) {
-  const [user] = useAuthState(auth)
+  const authState = useAuthState(auth)
 
   return (
     <>
       <ThemeProvider theme={theme}>
         <CssBaseline/>
-        <UserContext.Provider value={user}>
+        <UserContext.Provider value={[...authState]}>
           <Navigation
             navigationItems={navigationItems(Component.displayName)}
             namespace={namespaces[Component.displayName as keyof typeof namespaces]}/>

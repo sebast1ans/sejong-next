@@ -26,11 +26,11 @@ export default function Portal () {
     }
   }, [user]);
 
-    return (
+    return user ? (
       <>
         <h1>{`Hi ${user ? user.displayName : ''}`}</h1>
       </>
-    )
+    ) : null
 }
 
 Portal.displayName = 'Portal'

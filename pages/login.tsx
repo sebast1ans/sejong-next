@@ -1,8 +1,9 @@
+import { AuthError } from '@firebase/auth'
 import { LoadingButton } from '@mui/lab'
 import { Done, Login } from '@mui/icons-material'
-import { Box, TextField } from '@mui/material'
+import { Alert, Box, Snackbar, TextField } from '@mui/material'
 import { useRouter } from 'next/router'
-import { ReactElement, useContext, useEffect } from 'react'
+import { ReactElement, useContext, useEffect, useState } from 'react'
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { UserContext } from '../lib/context'
@@ -14,6 +15,8 @@ type LoginFormInputs = {
 }
 
 export const LoginWindow = (): ReactElement => {
+  const [open, setOpen] = useState(false)
+
   const {
     register,
     handleSubmit,
@@ -34,6 +37,25 @@ export const LoginWindow = (): ReactElement => {
     }
   }
 
+  useEffect(() => {
+    error && setOpen(true)
+  }, [error])
+
+  const handleClose = (_event: React.SyntheticEvent | Event) => {
+    setOpen(false);
+  }
+
+  const errorMessageInterpretation = (error?: AuthError) => {
+    switch (error?.code) {
+      case 'auth/user-not-found' || 'auth/email-not-found' :
+        return 'Uživatel nenalezen'
+      case 'auth/wrong-password' :
+        return 'Špatné heslo'
+      default:
+        return 'Nastala nějaká chyba'
+    }
+  }
+
   return (
     <Box
       component='form'
@@ -48,13 +70,21 @@ export const LoginWindow = (): ReactElement => {
       <LoadingButton
         type='submit'
         variant='outlined'
+        color={user ? 'success' : undefined}
         loading={loading}
         loadingPosition="start"
         startIcon={!user ? <Login/> : <Done/>}
       >
-        Přihlásit se
+        {!user ? 'Přihlásit se' : 'Přihlášen'}
       </LoadingButton>
-      {error && <p>{error.message}</p>}
+      <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
+        onClose={handleClose}
+      >
+        <Alert severity='error' onClose={handleClose} >{errorMessageInterpretation(error)}</Alert>
+      </Snackbar>
     </Box>
   )
 }
@@ -71,12 +101,7 @@ export default function LoginPage () {
 
   return (
     <>
-      <Box
-        sx={{
-          display: 'grid',
-          placeItems: 'center'
-        }}
-      >
+      <Box sx={{ display: 'grid', placeItems: 'center' }}>
         <h1>Vítejte na portálu Sejong Dojang</h1>
         <LoginWindow/>
       </Box>

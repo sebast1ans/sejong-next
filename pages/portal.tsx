@@ -8,7 +8,7 @@ import { UserContext } from '../lib/context'
 import { auth } from '../lib/firebase'
 
 export const SignOutButton = () => {
-  const [signOut, loading, error] = useSignOut(auth)
+  const [signOut, loading] = useSignOut(auth)
 
   const handleSignOut = async () => {
     try {

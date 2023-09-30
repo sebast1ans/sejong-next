@@ -1,35 +1,49 @@
 import { Logout } from '@mui/icons-material'
-import { Button, Container } from '@mui/material'
+import { LoadingButton } from '@mui/lab'
+import { Container } from '@mui/material'
 import { useRouter } from 'next/router'
 import { useContext, useEffect } from 'react'
+import { useSignOut } from 'react-firebase-hooks/auth'
 import { UserContext } from '../lib/context'
 import { auth } from '../lib/firebase'
 
 export const SignOutButton = () => {
-  const handleSignOut = async () => {
+  const [signOut, loading, error] = useSignOut(auth)
 
+  const handleSignOut = async () => {
     try {
-      await auth.signOut()
+      await signOut()
     } catch (error) {
       console.log(error)
     }
   }
-  return <Button variant='contained' startIcon={<Logout />} onClick={handleSignOut}>Odhlásit&nbsp;se</Button>
+
+  return (
+    <LoadingButton
+      variant='contained'
+      loading={loading}
+      loadingPosition="start"
+      startIcon={<Logout />}
+      onClick={handleSignOut}
+    >
+      Odhlásit&nbsp;se
+    </LoadingButton>
+  )
 }
 
 export default function Portal () {
-  const router = useRouter()
-  const [user, loading, error] = useContext(UserContext)
+  const { push } = useRouter()
+  const [user] = useContext(UserContext)
 
   useEffect(() => {
     if (!user) {
-      void router.push('/login')
+      void push('/login')
     }
-  }, [user, router]);
+  }, [user, push]);
 
     return user ? (
       <>
-        <Container><h1>{`Hi ${user ? user.displayName : ''}`}</h1></Container>
+        <Container><h1>{`Hi ${user ? user.email : ''}`}</h1></Container>
       </>
     ) : null
 }

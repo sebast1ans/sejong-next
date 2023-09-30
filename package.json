@@ -13,7 +13,9 @@
     "@emotion/styled": "^11.10.6",
     "@hedgedoc/html-to-react": "^1.4.6",
     "@mui/icons-material": "^5.11.11",
+    "@mui/lab": "^5.0.0-alpha.146",
     "@mui/material": "^5.11.13",
+    "@mui/x-date-pickers": "^6.16.0",
     "@react-google-maps/api": "^2.18.1",
     "@types/node": "18.14.1",
     "@types/react": "18.0.28",
@@ -27,6 +29,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-firebase-hooks": "^5.1.1",
+    "react-hook-form": "^7.46.2",
     "react-i18next": "^12.2.0",
     "swiper": "^10.2.0",
     "uuid": "^9.0.1"

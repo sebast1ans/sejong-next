@@ -1,38 +1,73 @@
-import { Google } from '@mui/icons-material'
-import { Box, Button } from '@mui/material'
+import { LoadingButton } from '@mui/lab'
+import { Done, Login } from '@mui/icons-material'
+import { Box, TextField } from '@mui/material'
 import { useRouter } from 'next/router'
 import { ReactElement, useContext, useEffect } from 'react'
+import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import { UserContext } from '../lib/context'
-import { auth, googleAuthProvider } from '../lib/firebase'
-import { signInWithPopup } from '@firebase/auth'
+import { auth } from '../lib/firebase'
 
+type LoginFormInputs = {
+  email: string
+  password: string
+}
 
-export const LoginWindow = ({loading}: {loading: boolean}): ReactElement => {
+export const LoginWindow = (): ReactElement => {
+  const {
+    register,
+    handleSubmit,
+  } = useForm<LoginFormInputs>({mode: 'onChange'})
 
-  const signInWithGoogle = async () => {
+  const [
+    signInWithEmailAndPassword,
+    user,
+    loading,
+    error,
+  ] = useSignInWithEmailAndPassword(auth)
+
+  const onSubmit: SubmitHandler<LoginFormInputs> = async (data)=> {
     try {
-      await signInWithPopup(auth, googleAuthProvider)
+      await signInWithEmailAndPassword(data.email, data.password)
     } catch (error) {
       console.log(error)
     }
   }
 
   return (
-    <Button startIcon={<Google />} onClick={signInWithGoogle}>
-      {`${loading ? 'Loading...' : 'Přihlásit se přes Google'}`}
-    </Button>
+    <Box
+      component='form'
+      onSubmit={handleSubmit(onSubmit)}
+      display='flex'
+      flexDirection='column'
+      alignItems='center'
+      gap='1rem'
+    >
+      <TextField size='small' type='email' {...register('email')} label='E-mail'/>
+      <TextField size='small' type='password' {...register('password')} label='Heslo'/>
+      <LoadingButton
+        type='submit'
+        variant='outlined'
+        loading={loading}
+        loadingPosition="start"
+        startIcon={!user ? <Login/> : <Done/>}
+      >
+        Přihlásit se
+      </LoadingButton>
+      {error && <p>{error.message}</p>}
+    </Box>
   )
 }
 
-export default function Login () {
-  const router = useRouter()
-  const [user, loading, error] = useContext(UserContext)
+export default function LoginPage () {
+  const { push } = useRouter()
+  const [user] = useContext(UserContext)
 
   useEffect(() => {
     if (user) {
-      void router.push('/portal')
+      void push('/portal')
     }
-  }, [user, router]);
+  }, [user, push]);
 
   return (
     <>
@@ -43,10 +78,10 @@ export default function Login () {
         }}
       >
         <h1>Vítejte na portálu Sejong Dojang</h1>
-        <LoginWindow loading={loading} />
+        <LoginWindow/>
       </Box>
     </>
   )
 }
 
-Login.displayName = 'Login'
+LoginPage.displayName = 'Login'

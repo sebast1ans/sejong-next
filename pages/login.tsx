@@ -132,5 +132,3 @@ export default function LoginPage () {
     </>
   )
 }
-
-LoginPage.displayName = 'Login'

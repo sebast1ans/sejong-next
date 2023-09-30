@@ -1,35 +1,8 @@
-import { Logout } from '@mui/icons-material'
-import { LoadingButton } from '@mui/lab'
 import { Container } from '@mui/material'
 import { useRouter } from 'next/router'
 import { useContext, useEffect } from 'react'
-import { useSignOut } from 'react-firebase-hooks/auth'
 import { UserContext } from '../../lib/context'
-import { auth } from '../../lib/firebase'
 
-export const SignOutButton = () => {
-  const [signOut, loading] = useSignOut(auth)
-
-  const handleSignOut = async () => {
-    try {
-      await signOut()
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  return (
-    <LoadingButton
-      variant='contained'
-      loading={loading}
-      loadingPosition="start"
-      startIcon={<Logout />}
-      onClick={handleSignOut}
-    >
-      Odhlásit&nbsp;se
-    </LoadingButton>
-  )
-}
 
 export default function Portal () {
   const { push } = useRouter()
@@ -47,6 +20,4 @@ export default function Portal () {
       </>
     ) : null
 }
-
-Portal.displayName = 'Portal'
 

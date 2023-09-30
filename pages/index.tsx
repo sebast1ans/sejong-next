@@ -46,8 +46,6 @@ export default function Home ({
   )
 }
 
-Home.displayName = 'Home'
-
 export async function getStaticProps (context: { locale: string }) {
   const { locale } = context
   const heroImageURLs = await getHeroImageURLs()

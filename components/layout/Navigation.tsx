@@ -1,9 +1,14 @@
-import { MouseEventHandler, ReactNode, useEffect, useRef, useState } from 'react'
+import { uuidv4 } from '@firebase/util'
+import { LoadingButton } from '@mui/lab'
+import { MouseEventHandler, ReactNode, useContext, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { Container, FormControl, MenuItem, Select } from '@mui/material'
-import { FacebookRounded, Instagram, YouTube } from '@mui/icons-material'
-import { useTranslation } from 'next-i18next'
+import { Box, Container, FormControl, MenuItem, Select, Typography } from '@mui/material'
+import { FacebookRounded, Instagram, Logout, YouTube } from '@mui/icons-material'
+import { i18n, useTranslation } from 'next-i18next'
+import { useSignOut } from 'react-firebase-hooks/auth'
+import { UserContext } from '../../lib/context'
+import { auth } from '../../lib/firebase'
 import { theme } from '../../styles/mui-theme'
 import Image from 'next/image'
 import { useWindowScrolledOver } from './hooks/useWindowScrolledOver'
@@ -12,6 +17,7 @@ import { useOutsideClicker } from './hooks/useOutsideClicker'
 import logo from '../../public/logos/whiteLogo.svg'
 import 'flag-icons/css/flag-icons.min.css'
 import styles from './Navigation.module.scss'
+
 
 interface HamburgerMenuProps {
   isNavigationMenuHidden: boolean
@@ -58,16 +64,22 @@ interface LanguageSelectorProps {
 }
 
 const LanguageSelector = ({ isLangSelectOpen }: LanguageSelectorProps): JSX.Element => {
-  const router = useRouter()
-  const { pathname, asPath, locales, locale: activeLocale } = router
+  const {
+    push,
+    pathname,
+    asPath,
+    locales,
+    locale: activeLocale
+  } = useRouter()
+
   const alpha2Code = { cs: 'cz', en: 'gb', vi: 'vn', }
 
   const displayLanguageNameIn = (language: string) => {
     return new Intl.DisplayNames([language], { type: 'language' })
   }
 
-  const changeLanguageHandler = (language: string) => {
-    void router.push(pathname, asPath, { locale: language, scroll: false })
+  const handleLanguageChange = (language: string) => {
+    void push(pathname, asPath, { locale: language, scroll: false })
   }
 
   return (
@@ -78,7 +90,7 @@ const LanguageSelector = ({ isLangSelectOpen }: LanguageSelectorProps): JSX.Elem
         value={activeLocale}
         onOpen={() => isLangSelectOpen(true)}
         onClose={() => isLangSelectOpen(false)}
-        onChange={e => {changeLanguageHandler(e.target.value as string)}}
+        onChange={e => {handleLanguageChange(e.target.value as string)}}
       >
         {locales && locales.map(language => (
           <MenuItem key={language} value={language}>
@@ -91,19 +103,43 @@ const LanguageSelector = ({ isLangSelectOpen }: LanguageSelectorProps): JSX.Elem
   )
 }
 
-interface Props {
-  navigationItems: string[] | { id: string, node: ReactNode }[]
-  namespace?: string
+export const SignOutButton = () => {
+  const [signOut, loading] = useSignOut(auth)
+
+  const handleSignOut = async () => {
+    try {
+      await signOut()
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  return (
+    <LoadingButton
+      variant='contained'
+      loading={loading}
+      loadingPosition="start"
+      startIcon={<Logout/>}
+      onClick={handleSignOut}
+    >
+      Odhlásit&nbsp;se
+    </LoadingButton>
+  )
 }
 
-export default function Navigation ({ navigationItems, namespace }: Props) {
+export default function Navigation () {
   const navigationRef = useRef(null)
-  const { pathname } = useRouter()
-  const { t } = useTranslation(namespace)
+  const { asPath, pathname } = useRouter()
+  const [user] = useContext(UserContext)
+  const [navigationItems, setNavigationItems]
+    = useState<string[] | { id: string, node: ReactNode }[]>([])
+  const { t } = useTranslation('home-page-navigation')
+
   const isWindowScrolledOver = useWindowScrolledOver(300)
   const isWindowWidthOver = useWindowWidthResizedOver(theme.breakpoints.values.lg)
   const [isNavigationMenuHidden, setIsNavigationMenuHidden] = useState(true)
   const [isLanguageSelectorOpen, setIsLanguageSelectorOpen] = useState(false)
+  const [isOnPortalRoute, setIsOnPortalRoute] = useState(false)
 
   useOutsideClicker(navigationRef, isWindowWidthOver, isLanguageSelectorOpen, () => setIsNavigationMenuHidden(true))
 
@@ -111,9 +147,29 @@ export default function Navigation ({ navigationItems, namespace }: Props) {
     setIsNavigationMenuHidden(!isWindowWidthOver)
   }, [isWindowWidthOver])
 
+  useEffect(() => {
+    setIsOnPortalRoute(!!asPath.match(/^\/portal(\/.*)?$/))
+  }, [asPath]);
+
+  useEffect(() => {
+    if (pathname === '/') {
+      setNavigationItems(Object.keys(i18n?.getResourceBundle('cs', 'home-page-navigation')))
+    } else if (pathname === '/login') {
+      setNavigationItems([])
+    } else if (isOnPortalRoute) {
+      setNavigationItems(Array(
+        {
+          id: uuidv4(),
+          node: <SignOutButton/>
+        }
+      ))
+    } else {
+      setNavigationItems([])
+    }
+  }, [pathname, isOnPortalRoute])
+
   const isArrayOfStrings = (value: unknown): value is string[] => {
-    return Array.isArray(value)
-      && value.every(item => typeof item === 'string')
+    return Array.isArray(value) && value.every(item => typeof item === 'string')
   }
 
   return (
@@ -131,6 +187,11 @@ export default function Navigation ({ navigationItems, namespace }: Props) {
             <Link href='/'>
               <Image src={logo} className={styles.logo} alt='Navigation logo'/>
             </Link>
+            {user && isOnPortalRoute ? (
+              <Box sx={{ flexGrow: '1', mr: '1rem', textAlign: 'end' }}>
+                <Typography color='white'>{user.email}</Typography>
+              </Box>
+            ) : null}
             {navigationItems.length > 0 ? (
               <HamburgerMenu
                 isNavigationMenuHidden={isNavigationMenuHidden}
@@ -162,7 +223,7 @@ export default function Navigation ({ navigationItems, namespace }: Props) {
                 <SocialLinks/>
                 <LanguageSelector isLangSelectOpen={setIsLanguageSelectorOpen}/>
               </>
-            ): null}
+            ) : null}
           </div>
         </Container>
       </nav>

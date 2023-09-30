@@ -1,4 +1,3 @@
-import { uuidv4 } from '@firebase/util'
 import type { AppProps } from 'next/app'
 import { ThemeProvider } from '@mui/material/styles'
 import { useAuthState } from 'react-firebase-hooks/auth'
@@ -10,27 +9,6 @@ import Navigation from '../components/layout/Navigation'
 import Footer from '../components/layout/Footer'
 import { CssBaseline } from '@mui/material'
 import '../styles/globals.scss'
-import { SignOutButton } from './portal'
-
-const namespaces = {
-  Home: 'home-page-navigation',
-}
-
-const navigationItems = (componentName?: string) => {
-  switch (componentName) {
-    case 'Home':
-      return Object.keys(i18n?.getResourceBundle('cs', namespaces.Home))
-    case 'Login':
-      return []
-    case 'Portal':
-      return [{
-        id: uuidv4(),
-        node: <SignOutButton/>
-  }]
-    default:
-      return []
-  }
-}
 
 function App ({ Component, pageProps }: AppProps) {
   const authState = useAuthState(auth)
@@ -40,9 +18,7 @@ function App ({ Component, pageProps }: AppProps) {
       <ThemeProvider theme={theme}>
         <CssBaseline/>
         <UserContext.Provider value={[...authState]}>
-          <Navigation
-            navigationItems={navigationItems(Component.displayName)}
-            namespace={namespaces[Component.displayName as keyof typeof namespaces]}/>
+          <Navigation/>
           <main>
             <Component {...pageProps} />
           </main>

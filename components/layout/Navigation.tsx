@@ -160,6 +160,10 @@ export default function Navigation () {
       setNavigationItems(Array(
         {
           id: uuidv4(),
+          node: <Typography color='white'>{user?.email}</Typography>
+        },
+        {
+          id: uuidv4(),
           node: <SignOutButton/>
         }
       ))
@@ -187,11 +191,6 @@ export default function Navigation () {
             <Link href='/'>
               <Image src={logo} className={styles.logo} alt='Navigation logo'/>
             </Link>
-            {user && isOnPortalRoute ? (
-              <Box sx={{ flexGrow: '1', mr: '1rem', textAlign: 'end' }}>
-                <Typography color='white'>{user.email}</Typography>
-              </Box>
-            ) : null}
             {navigationItems.length > 0 ? (
               <HamburgerMenu
                 isNavigationMenuHidden={isNavigationMenuHidden}

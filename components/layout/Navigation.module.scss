@@ -200,12 +200,9 @@ $pillSize: 2rem;
         gap: unset;
         align-items: center;
 
-        ul {
-          gap: unset;
-        }
-
         .anchors {
           flex-direction: row;
+          align-items: center;
         }
       }
     }

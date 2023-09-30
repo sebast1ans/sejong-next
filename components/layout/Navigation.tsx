@@ -62,7 +62,7 @@ interface LanguageSelectorProps {
   isLangSelectOpen: (isOpen: boolean) => void
 }
 
-const LanguageSelector = ({ isLangSelectOpen }: LanguageSelectorProps): JSX.Element => {
+const LanguageSelector = ({ isLangSelectOpen }: LanguageSelectorProps) => {
   const {
     push,
     pathname,

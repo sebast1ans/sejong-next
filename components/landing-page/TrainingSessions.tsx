@@ -3,7 +3,7 @@ import { useTranslation } from 'next-i18next'
 import styles from './TrainingSessions.module.scss'
 import { Place, Schedule, Commute, Subway, DirectionsBus } from '@mui/icons-material'
 import { Box, Container, Grid, Typography } from '@mui/material'
-import { GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api'
+import { GoogleMap, Marker, useLoadScript } from '@react-google-maps/api'
 
 interface Props {
   gMapsApiKey: string
@@ -11,8 +11,8 @@ interface Props {
 
 export default function TrainingSessions ({ gMapsApiKey }: Props) {
   const { t } = useTranslation(['training-sessions', 'common'])
-  const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: gMapsApiKey.toString()
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: gMapsApiKey.toString(),
   })
 
   const locations = [

@@ -46,7 +46,7 @@ export const LoginWindow = (): ReactElement => {
     setOpen(false);
   }
 
-  const errorMessageInterpretation = (error?: AuthError) => {
+  const interpretFirebaseErrorMessage = (error?: AuthError) => {
     switch (error?.code) {
       case 'auth/user-not-found' || 'auth/email-not-found' :
         return 'Uživatel nenalezen'
@@ -105,7 +105,7 @@ export const LoginWindow = (): ReactElement => {
         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
         onClose={handleClose}
       >
-        <Alert severity='error' onClose={handleClose}>{errorMessageInterpretation(error)}</Alert>
+        <Alert severity='error' onClose={handleClose}>{interpretFirebaseErrorMessage(error)}</Alert>
       </Snackbar>
     </Box>
   )

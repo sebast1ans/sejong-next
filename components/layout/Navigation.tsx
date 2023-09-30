@@ -128,7 +128,7 @@ export const SignOutButton = () => {
 
 export default function Navigation () {
   const navigationRef = useRef(null)
-  const { asPath, pathname } = useRouter()
+  const { asPath, pathname, push } = useRouter()
   const [user] = useContext(UserContext)
   const [navigationItems, setNavigationItems] = useState<string[] | ReactNode[]>([])
   const { t } = useTranslation('home-page-navigation')
@@ -180,7 +180,7 @@ export default function Navigation () {
       >
         <Container className={styles.container}>
           <div className={styles.navigationControl}>
-            <Link href='/'>
+            <Link href='/' onDoubleClick={() => void push('/portal')}>
               <Image src={logo} className={styles.logo} alt='Navigation logo'/>
             </Link>
             {navigationItems.length > 0 ? (

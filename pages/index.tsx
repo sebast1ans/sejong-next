@@ -20,13 +20,12 @@ import { shuffle } from 'lodash'
 
 export default function Home ({
   heroImageURLs,
-  newsArticlesData,
   introductionData,
   referencesData,
   coachesData,
   gMapsApiKey
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  console.log(newsArticlesData)
+
   return (
     <>
       <Head>

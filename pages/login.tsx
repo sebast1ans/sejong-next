@@ -1,7 +1,7 @@
 import { AuthError } from '@firebase/auth'
 import { LoadingButton } from '@mui/lab'
 import { Done, Login } from '@mui/icons-material'
-import { Alert, Box, Snackbar, TextField } from '@mui/material'
+import { Alert, Box, Snackbar, TextField, Typography } from '@mui/material'
 import { useRouter } from 'next/router'
 import { ReactElement, useContext, useEffect, useState } from 'react'
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth'
@@ -20,7 +20,8 @@ export const LoginWindow = (): ReactElement => {
   const {
     register,
     handleSubmit,
-  } = useForm<LoginFormInputs>({mode: 'onChange'})
+    formState
+  } = useForm<LoginFormInputs>({ mode: 'onBlur' })
 
   const [
     signInWithEmailAndPassword,
@@ -29,7 +30,7 @@ export const LoginWindow = (): ReactElement => {
     error,
   ] = useSignInWithEmailAndPassword(auth)
 
-  const onSubmit: SubmitHandler<LoginFormInputs> = async (data)=> {
+  const onSubmit: SubmitHandler<LoginFormInputs> = async (data) => {
     try {
       await signInWithEmailAndPassword(data.email, data.password)
     } catch (error) {
@@ -65,8 +66,27 @@ export const LoginWindow = (): ReactElement => {
       alignItems='center'
       gap='1rem'
     >
-      <TextField size='small' type='email' {...register('email')} label='E-mail'/>
-      <TextField size='small' type='password' {...register('password')} label='Heslo'/>
+      <Typography fontSize='1.2em' sx={{ alignSelf: 'flex-start' }}>Přihlásit se:</Typography>
+      <TextField
+        size='small'
+        type='email'
+        color='info'
+        label={!!formState.errors?.email ? formState.errors?.email?.message : 'E-mail'}
+        error={!!formState.errors?.email}
+        {...register('email', {
+          pattern: {
+            value: /^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/,
+            message: 'Vložte správný formát e-mailu'
+          }
+        })}
+      />
+      <TextField
+        size='small'
+        color='info'
+        type='password'
+        {...register('password')}
+        label='Heslo'
+      />
       <LoadingButton
         type='submit'
         variant='outlined'
@@ -80,10 +100,10 @@ export const LoginWindow = (): ReactElement => {
       <Snackbar
         open={open}
         autoHideDuration={6000}
-        anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
         onClose={handleClose}
       >
-        <Alert severity='error' onClose={handleClose} >{errorMessageInterpretation(error)}</Alert>
+        <Alert severity='error' onClose={handleClose}>{errorMessageInterpretation(error)}</Alert>
       </Snackbar>
     </Box>
   )

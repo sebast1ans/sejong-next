@@ -195,9 +195,7 @@ $pillSize: 2rem;
       align-items: center;
 
       .navigationItems {
-        align-self: unset;
         flex-direction: row;
-        gap: unset;
         align-items: center;
 
         .anchors {
@@ -223,6 +221,7 @@ $pillSize: 2rem;
       }
 
       .navigationItems {
+        align-self: center;
         padding-bottom: revert;
       }
     }

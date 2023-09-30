@@ -4,8 +4,8 @@ import { Container } from '@mui/material'
 import { useRouter } from 'next/router'
 import { useContext, useEffect } from 'react'
 import { useSignOut } from 'react-firebase-hooks/auth'
-import { UserContext } from '../lib/context'
-import { auth } from '../lib/firebase'
+import { UserContext } from '../../lib/context'
+import { auth } from '../../lib/firebase'
 
 export const SignOutButton = () => {
   const [signOut, loading] = useSignOut(auth)

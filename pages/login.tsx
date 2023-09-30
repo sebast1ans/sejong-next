@@ -74,6 +74,7 @@ export const LoginWindow = (): ReactElement => {
         label={formState.errors?.email ? formState.errors?.email?.message : 'E-mail'}
         error={!!formState.errors?.email}
         {...register('email', {
+          required: 'Vložte e-mail',
           pattern: {
             value: /^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/,
             message: 'Vložte správný formát e-mailu'

@@ -1,7 +1,7 @@
 import { AuthError } from '@firebase/auth'
 import { LoadingButton } from '@mui/lab'
 import { Done, Login } from '@mui/icons-material'
-import { Alert, Box, Snackbar, TextField, Typography } from '@mui/material'
+import { Alert, Box, Container, Snackbar, TextField, Typography } from '@mui/material'
 import { useRouter } from 'next/router'
 import { ReactElement, useContext, useEffect, useState } from 'react'
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth'
@@ -123,10 +123,12 @@ export default function LoginPage () {
 
   return (
     <>
-      <Box sx={{ display: 'grid', placeItems: 'center' }}>
-        <h1>Vítejte na portálu Sejong Dojang</h1>
-        <LoginWindow/>
-      </Box>
+      <Container>
+        <Box sx={{ display: 'grid', placeItems: 'center' }}>
+          <h1>Vítejte na portálu Sejong Dojang</h1>
+          <LoginWindow/>
+        </Box>
+      </Container>
     </>
   )
 }

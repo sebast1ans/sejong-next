@@ -3,7 +3,7 @@ import { LoadingButton } from '@mui/lab'
 import { Done, Login } from '@mui/icons-material'
 import { Alert, Box, Container, Snackbar, TextField, Typography } from '@mui/material'
 import { useRouter } from 'next/router'
-import { ReactElement, useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { UserContext } from '../lib/context'
@@ -14,7 +14,7 @@ type LoginFormInputs = {
   password: string
 }
 
-export const LoginWindow = (): ReactElement => {
+export const LoginWindow = () => {
   const [open, setOpen] = useState(false)
 
   const {

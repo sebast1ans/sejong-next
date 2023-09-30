@@ -1,9 +1,8 @@
-import { uuidv4 } from '@firebase/util'
 import { LoadingButton } from '@mui/lab'
 import { MouseEventHandler, ReactNode, useContext, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { Box, Container, FormControl, MenuItem, Select, Typography } from '@mui/material'
+import { Container, FormControl, MenuItem, Select, Typography } from '@mui/material'
 import { FacebookRounded, Instagram, Logout, YouTube } from '@mui/icons-material'
 import { i18n, useTranslation } from 'next-i18next'
 import { useSignOut } from 'react-firebase-hooks/auth'
@@ -131,8 +130,7 @@ export default function Navigation () {
   const navigationRef = useRef(null)
   const { asPath, pathname } = useRouter()
   const [user] = useContext(UserContext)
-  const [navigationItems, setNavigationItems]
-    = useState<string[] | { id: string, node: ReactNode }[]>([])
+  const [navigationItems, setNavigationItems] = useState<string[] | ReactNode[]>([])
   const { t } = useTranslation('home-page-navigation')
 
   const isWindowScrolledOver = useWindowScrolledOver(300)
@@ -157,16 +155,10 @@ export default function Navigation () {
     } else if (pathname === '/login') {
       setNavigationItems([])
     } else if (isOnPortalRoute) {
-      setNavigationItems(Array(
-        {
-          id: uuidv4(),
-          node: <Typography color='white'>{user?.email}</Typography>
-        },
-        {
-          id: uuidv4(),
-          node: <SignOutButton/>
-        }
-      ))
+      setNavigationItems([
+        <Typography color='white'>{user?.email}</Typography>,
+        <SignOutButton/>
+      ])
     } else {
       setNavigationItems([])
     }
@@ -201,7 +193,7 @@ export default function Navigation () {
           <div className={`${styles.navigationItems} ${isNavigationMenuHidden && styles.inactive}`}>
             <ul className={styles.anchors}>
               {isArrayOfStrings(navigationItems)
-                ? navigationItems.map((key: string) => (
+                ? navigationItems.map((key) => (
                   <li key={key}>
                     <Link
                       href={`#${key}`}
@@ -212,8 +204,8 @@ export default function Navigation () {
                       {t(key)}
                     </Link>
                   </li>
-                )) : navigationItems.map((item) => (
-                  <li key={item.id}>{item.node}</li>
+                )) : navigationItems.map((item, index) => (
+                  <li key={index}>{item}</li>
                 ))
               }
             </ul>

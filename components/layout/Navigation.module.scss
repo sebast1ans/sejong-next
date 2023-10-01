@@ -60,7 +60,6 @@ $pillSize: 2rem;
   z-index: 2;
 
   @include background;
-  @include mixins.fade-in;
 
   .container {
     display: flex;

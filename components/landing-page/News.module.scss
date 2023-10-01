@@ -1,0 +1,21 @@
+@use '../../styles/variables.module';
+
+.newsPanel {
+  display: grid;
+  grid-template: 1fr 1fr/ 1fr;
+  overflow: hidden;
+}
+
+@media (width >= map-get(variables.$breakpoints, 'sm')) {
+  .newsPanel {
+    display: grid;
+    grid-template: 1fr 1fr/ 1fr 1fr;
+  }
+}
+
+@media (width >= map-get(variables.$breakpoints, 'md')) {
+  .newsPanel {
+    display: grid;
+    grid-template: 1fr / repeat(4, 1fr);
+  }
+}

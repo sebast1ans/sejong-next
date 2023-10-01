@@ -2,7 +2,7 @@ import { InferGetStaticPropsType } from 'next'
 import Head from 'next/head'
 import { DocumentData } from 'firebase/firestore'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { getArticlesData } from '../lib/getArticlesData'
+import News from '../components/landing-page/News'
 import { getIntroductionData } from '../lib/getIntroductionData'
 import { getReferencesData } from '../lib/getReferencesData'
 import { getCoachesData } from '../lib/getCoachesData'
@@ -35,6 +35,7 @@ export default function Home ({
         <link rel="icon" href="/favicon.png"/>
       </Head>
       <Hero heroImages={heroImageURLs}/>
+      <News />
       <Introduction slidesData={introductionData}/>
       <References data={referencesData} />
       <Coaches data={coachesData}/>
@@ -50,7 +51,6 @@ export default function Home ({
 export async function getStaticProps (context: { locale: string }) {
   const { locale } = context
   const heroImageURLs = await getHeroImageURLs()
-  const newsArticlesData = await getArticlesData()
   const introductionData = await getIntroductionData()
   const referencesData = await getReferencesData()
   const coachesData = await getCoachesData()
@@ -58,13 +58,13 @@ export async function getStaticProps (context: { locale: string }) {
   return {
     props: {
       heroImageURLs,
-      newsArticlesData: newsArticlesData as DocumentData[],
       introductionData: introductionData as DocumentData[],
       referencesData: shuffle(referencesData) as DocumentData[],
       coachesData: coachesData as DocumentData[],
       ...(await serverSideTranslations(locale, [
         'common',
         'home-page-navigation',
+        'news',
         'introduction',
         'timeline',
         'coaches',

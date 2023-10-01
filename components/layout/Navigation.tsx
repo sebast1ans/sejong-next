@@ -156,14 +156,14 @@ export default function Navigation () {
     } else if (pathname === '/login') {
       setNavigationItems([])
     } else if (isOnPortalRoute) {
-      setNavigationItems([
+      setNavigationItems(Array(
         <Typography color='white'>{user?.email}</Typography>,
         <SignOutButton/>
-      ])
+      ))
     } else {
       setNavigationItems([])
     }
-  }, [pathname, isOnPortalRoute])
+  }, [pathname, isOnPortalRoute, user])
 
   const isArrayOfStrings = (value: unknown): value is string[] => {
     return Array.isArray(value) && value.every(item => typeof item === 'string')

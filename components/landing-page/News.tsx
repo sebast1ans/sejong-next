@@ -20,7 +20,6 @@ import { Heading } from './Heading'
 import styles from './News.module.scss'
 import { theme } from '../../styles/mui-theme'
 
-// @ts-ignore
 const NewsPanel = () => {
   const { t } = useTranslation('news')
   const { locale, push } = useRouter()

@@ -15,15 +15,18 @@ export default function ArticleView ({ articleData }: InferGetStaticPropsType<ty
   )
 }
 
-export const getStaticPaths = (async () => {
+export const getStaticPaths = (async ({locales}) => {
   const articles = await getArticlesData()
-  const paths = articles.map(article => {
-    return {
-      params: {
-        slug: article.slug
+  const paths = locales!.map(locale => {
+    return articles.map(article => {
+       return {
+        params: {
+          slug: article.slug
+        },
+        locale: locale
       }
-    }
-  })
+    })
+  }).flat()
 
   return {
     paths,

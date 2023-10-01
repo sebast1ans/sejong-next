@@ -183,7 +183,7 @@ export default function Navigation () {
         <Container className={styles.container}>
           <div className={styles.navigationControl}>
             {isOnPortalRoute || pathname === '/login' ? (
-              <Link href='/portal' onDoubleClick={() => void push('/')}>
+              <Link href={isOnPortalRoute ? '/portal' : '/login'} onDoubleClick={() => void push('/')}>
                 <Box sx={{
                   display: 'flex',
                   alignItems: 'center',
@@ -198,7 +198,7 @@ export default function Navigation () {
                 </Box>
               </Link>
             ) : (
-              <Link href='/' onDoubleClick={() => void push('/portal')}>
+              <Link href='/' onDoubleClick={() => void push('/login')}>
                 <Image src={logo} className={styles.logo} alt='Navigation logo'/>
               </Link>
             )}

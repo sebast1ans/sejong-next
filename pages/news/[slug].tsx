@@ -10,23 +10,22 @@ import { getArticlesData } from '../../lib/getArticlesData'
 export default function ArticleView ({ articleData }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <Container>
-      <Article article={articleData} />
+      <Article article={articleData}/>
     </Container>
   )
 }
 
-export const getStaticPaths = (async ({locales}) => {
+export const getStaticPaths = (async ({ locales }) => {
   const articles = await getArticlesData()
-  const paths = locales!.map(locale => {
-    return articles.map(article => {
-       return {
-        params: {
-          slug: article.slug
-        },
-        locale: locale
-      }
-    })
-  }).flat()
+  const paths =
+    locales!.map(locale =>
+      articles.map(article => ({
+          params: {
+            slug: article.slug
+          },
+          locale: locale
+        })
+      )).flat()
 
   return {
     paths,

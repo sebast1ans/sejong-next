@@ -1,6 +1,7 @@
 @use '../../styles/variables.module';
 
 .newsPanel {
+  margin-top: .5rem;
   display: grid;
   grid-template: 1fr 1fr/ 1fr;
   overflow: hidden;

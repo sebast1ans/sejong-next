@@ -86,8 +86,12 @@ $pillSize: 2rem;
           transition: all .2s cubic-bezier(.1, .9, 0, 1.2);
 
           &:hover {
-            transform: scale(1.1);
+            transform: scale(1.05);
           }
+        }
+
+        &:hover {
+          text-decoration: none;
         }
       }
 
@@ -190,6 +194,7 @@ $pillSize: 2rem;
 
 @media (width >= map-get(variables.$breakpoints, 'md')) {
   .navigation {
+
     .container {
       flex-direction: column;
       align-items: center;
@@ -210,11 +215,22 @@ $pillSize: 2rem;
 @media (width >= map-get(variables.$breakpoints, 'lg')) {
   .navigation {
     height: 4.2rem;
+    display: flex;
+    align-items: center;
 
     .container {
       flex-direction: row;
+      height: 4rem;
 
       .navigationControl {
+        height: 100%;
+
+        a {
+          .logo {
+            padding: .4rem 0;
+          }
+        }
+
         .hamburger {
           display: none;
         }

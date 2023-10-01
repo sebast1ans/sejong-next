@@ -2,7 +2,7 @@ import { LoadingButton } from '@mui/lab'
 import { MouseEventHandler, ReactNode, useContext, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { Container, FormControl, MenuItem, Select, Typography } from '@mui/material'
+import { Box, Container, FormControl, MenuItem, Select, Typography } from '@mui/material'
 import { FacebookRounded, Instagram, Logout, YouTube } from '@mui/icons-material'
 import { i18n, useTranslation } from 'next-i18next'
 import { useSignOut } from 'react-firebase-hooks/auth'
@@ -14,6 +14,7 @@ import { useWindowScrolledOver } from './hooks/useWindowScrolledOver'
 import { useWindowWidthResizedOver } from './hooks/useWindowWidthResizedOver'
 import { useOutsideClicker } from './hooks/useOutsideClicker'
 import logo from '../../public/logos/whiteLogo.svg'
+import sejongSeal from '../../public/logos/sejongSeal.svg'
 import 'flag-icons/css/flag-icons.min.css'
 import styles from './Navigation.module.scss'
 
@@ -180,9 +181,26 @@ export default function Navigation () {
       >
         <Container className={styles.container}>
           <div className={styles.navigationControl}>
-            <Link href='/' onDoubleClick={() => void push('/portal')}>
-              <Image src={logo} className={styles.logo} alt='Navigation logo'/>
-            </Link>
+            {isOnPortalRoute || pathname === '/login' ? (
+              <Link href='/portal' onDoubleClick={() => void push('/')}>
+                <Box sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '1rem',
+                  height: '100%'
+                }}
+                >
+                  <Image src={sejongSeal} className={styles.logo} alt='Navigation logo'/>
+                  <Typography sx={{ color: 'white', fontSize: '1.2rem' }}>
+                    {`${'Portal'.toUpperCase()}`}
+                  </Typography>
+                </Box>
+              </Link>
+            ) : (
+              <Link href='/' onDoubleClick={() => void push('/portal')}>
+                <Image src={logo} className={styles.logo} alt='Navigation logo'/>
+              </Link>
+            )}
             {navigationItems.length > 0 ? (
               <HamburgerMenu
                 isNavigationMenuHidden={isNavigationMenuHidden}

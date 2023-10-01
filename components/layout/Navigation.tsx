@@ -139,7 +139,7 @@ export default function Navigation () {
   const [isNavigationMenuHidden, setIsNavigationMenuHidden] = useState(true)
   const [isLanguageSelectorOpen, setIsLanguageSelectorOpen] = useState(false)
   const [isOnPortalRoute, setIsOnPortalRoute] = useState(false)
-
+  const [isOnNewsRoute, setIsOnNewsRoute] = useState(false)
   useOutsideClicker(navigationRef, isWindowWidthOver, isLanguageSelectorOpen, () => setIsNavigationMenuHidden(true))
 
   useEffect(() => {
@@ -148,6 +148,7 @@ export default function Navigation () {
 
   useEffect(() => {
     setIsOnPortalRoute(!!asPath.match(/^\/portal(\/.*)?$/))
+    setIsOnNewsRoute(!!asPath.match(/^\/news(\/.*)?$/))
   }, [asPath]);
 
   useEffect(() => {
@@ -201,12 +202,12 @@ export default function Navigation () {
                 <Image src={logo} className={styles.logo} alt='Navigation logo'/>
               </Link>
             )}
-            {navigationItems.length > 0 ? (
+            {(navigationItems.length > 0 || isOnNewsRoute) ? (
               <HamburgerMenu
                 isNavigationMenuHidden={isNavigationMenuHidden}
                 setIsNavigationMenuHidden={() => setIsNavigationMenuHidden(current => !current)}
               />
-            ) : null}
+            ) : null }
           </div>
           <div className={`${styles.navigationItems} ${isNavigationMenuHidden && styles.inactive}`}>
             <ul className={styles.anchors}>
@@ -227,7 +228,7 @@ export default function Navigation () {
                 ))
               }
             </ul>
-            {pathname === '/' ? (
+            {(pathname === '/' || isOnNewsRoute) ? (
               <>
                 <SocialLinks/>
                 <LanguageSelector isLangSelectOpen={setIsLanguageSelectorOpen}/>

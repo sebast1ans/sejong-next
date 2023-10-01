@@ -1,24 +1,31 @@
 import { Container } from '@mui/material'
-import { GetStaticProps, InferGetStaticPropsType } from 'next'
+import { useTranslation } from 'next-i18next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { Heading } from '../../components/landing-page/Heading'
 import { ArticlesList } from '../../components/news/ArticlesList'
-import { getArticlesData } from '../../lib/getArticlesData'
 
-export default function News({articlesData}: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function News () {
+  const { t } = useTranslation('news')
+
   return (
-    <Container>
-      <Heading text='Novinky' />
-      <ArticlesList articles={articlesData} />
-    </Container>
+    <>
+      <Heading text={t('news')}/>
+      <Container>
+        <ArticlesList />
+      </Container>
+    </>
   )
 }
 
-export const getStaticProps = (async () => {
-  const articlesData = await getArticlesData()
+export async function getStaticProps (context: { locale: string }) {
+  const { locale } = context
 
   return {
     props: {
-      articlesData
-    },
+      ...(await serverSideTranslations(locale, [
+        'common',
+        'news',
+      ])),
+    }
   }
-}) satisfies GetStaticProps
+}

@@ -15,6 +15,7 @@ import { useRouter } from 'next/router'
 import { useContext } from 'react'
 import { NewsContext } from '../../lib/context'
 import formatDate from '../../utils/formatDate'
+import htmlStripper from '../../utils/htmlStripper'
 import textClamper from '../../utils/textClamper'
 import { Heading } from './Heading'
 import styles from './News.module.scss'
@@ -59,7 +60,7 @@ const NewsPanel = () => {
                 variant={'body2'}
                 sx={{ color: 'dimgray', }}
               >
-                {textClamper(article.content.replace(/<\/?[^>]+(>|$)|&nbsp;/g, " "), 222)}
+                {textClamper(htmlStripper(article.content), 222)}
               </Typography>
             </CardContent>
             <CardActions>

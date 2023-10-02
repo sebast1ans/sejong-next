@@ -34,7 +34,7 @@ interface ArticleDialogProps {
 const ArticleDialog = ({ open, onClose, article }: ArticleDialogProps) => {
 
   return (
-    <Dialog open={open} onClose={onClose} >
+    <Dialog open={open} onClose={onClose} PaperProps={{sx: { maxWidth: '50rem'}}}>
       {article ? (
           <>
             <DialogContent

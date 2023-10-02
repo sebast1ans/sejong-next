@@ -136,7 +136,7 @@ const NewsPanel = () => {
           )) : null}
         </Box>
         <Button
-          sx={{ margin: '1rem', alignSelf: 'end' }}
+          sx={{ mb: '.8rem', mr: '1rem', alignSelf: 'end' }}
           onClick={() => push(`/news`)}
           startIcon={<Newspaper/>}
         >

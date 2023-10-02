@@ -1,7 +1,7 @@
 @use '../../styles/variables.module';
 
 .article {
-  padding: 1rem;
+  padding: 1rem!important;
 
   .title {
     font-size: 2rem;
@@ -21,7 +21,7 @@
 
 @media (width >= map-get(variables.$breakpoints, 'sm')) {
   .article {
-    padding: 1rem 3rem;
+    padding: 1rem 3rem!important;
 
     .title {
       font-size: 2.5rem;

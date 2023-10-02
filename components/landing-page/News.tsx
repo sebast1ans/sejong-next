@@ -32,7 +32,7 @@ interface ArticleDialogProps {
 }
 
 const ArticleDialog = ({ open, onClose, article }: ArticleDialogProps) => {
-  console.log(article)
+
   return (
     <Dialog open={open} onClose={onClose} >
       {article ? (

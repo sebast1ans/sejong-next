@@ -6,7 +6,7 @@ import type {
 } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import Head from 'next/head'
-import { ArticleComponent } from '../../components/news/ArticleComponent'
+import { Article } from '../../components/news/Article'
 import { getArticlesData } from '../../lib/getArticlesData'
 
 export default function ArticleView ({ articleData }: InferGetStaticPropsType<typeof getStaticProps>) {
@@ -20,7 +20,7 @@ export default function ArticleView ({ articleData }: InferGetStaticPropsType<ty
         <link rel="icon" href="/favicon.png"/>
       </Head>
       <Container>
-        <ArticleComponent article={articleData}/>
+        <Article article={articleData}/>
       </Container>
     </>
   )

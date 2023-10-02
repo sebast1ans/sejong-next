@@ -18,26 +18,23 @@ import convertHtmlToReact from '@hedgedoc/html-to-react'
 import Image from 'next/image'
 import { useState } from 'react'
 
-type CoachDialogData = {
-  name: string,
-  subtitle: string,
-  image: string,
+interface CoachDialogData  {
+  name: string
+  subtitle: string
+  image: string
   details: string
 }
 
 interface CoachDetailsDialogProps {
-  open: boolean,
+  open: boolean
   onClose: () => void
   coachData: CoachDialogData | null
 }
 
 const CoachDetailsDialog = ({open, onClose, coachData}: CoachDetailsDialogProps) => {
-  const handleClose = () => {
-    onClose()
-  }
 
   return (
-    <Dialog open={open} onClose={handleClose}>
+    <Dialog open={open} onClose={onClose}>
       {coachData &&
         <>
           <DialogContent className={styles.dialogTitle}>

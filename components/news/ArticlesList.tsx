@@ -22,7 +22,6 @@ export const ArticlesList = () => {
         </Typography>
         <Box sx={{ mt: '-2rem' }}>
           {articles.map(article => (
-
             <Box key={article.id} className={styles.articleCard}>
               <Box className={styles.date}>
                 <em>{formatDate(article.updatesTimestamp.slice(-1), locale)}</em>

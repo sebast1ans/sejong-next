@@ -1,10 +1,30 @@
 @use '../../styles/variables.module';
 
-.date {
-  display: inline-block;
-  padding-top: 2rem;
-  margin-bottom: 1rem;
-  border-top: .2rem solid variables.$sejongRed;
-  width: fit-content;
-  color: dimgray;
+.article {
+  padding: 1rem;
+
+  .title {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+  }
+
+  .date {
+    display: inline-block;
+    padding-top: 2rem;
+    margin-bottom: 1rem;
+    border-top: .2rem solid variables.$sejongRed;
+    width: fit-content;
+    color: dimgray;
+  }
+}
+
+@media (width >= map-get(variables.$breakpoints, 'sm')) {
+  .article {
+    padding: 1rem 3rem;
+
+    .title {
+      font-size: 2.5rem;
+    }
+  }
 }

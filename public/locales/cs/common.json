@@ -1,10 +1,11 @@
 {
   "primary-school": "ZŠ",
   "prague": "Praha",
-  "children-6-9": "Děti 6-9 let",
-  "children-10-15": "Děti 10-15 let",
+  "children-6-9": "Děti 6 – 9 let",
+  "children-6-12": "Děti 6 – 12 let",
+  "children-10-15": "Děti 10 – 15 let",
   "juniors-and-adults": "Dorost a dospělí",
-  "adult-beginners": "Dospělí začátečníci",
+  "adults-beginners": "Dospělí začátečníci",
   "tuesday-and-thursday": "Úterý a čtvrtek",
   "wednesday": "Středa",
   "friday": "Pátek"

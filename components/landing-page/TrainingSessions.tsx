@@ -45,11 +45,11 @@ export default function TrainingSessions ({ gMapsApiKey }: Props) {
       city: `${t('prague', { ns: 'common' })} 12 – Kamýk`,
       groups: [
         {
-          name: t('children-6-9', { ns: 'common' }),
+          name: t('children-6-12', { ns: 'common' }),
           time: `${t('friday', { ns: 'common' })} 15:00 – 16:00`,
         },
         {
-          name: t('juniors-and-adults', { ns: 'common' }),
+          name: t('adult-beginners', { ns: 'common' }),
           time: `${t('wednesday', { ns: 'common' })} 18:30 – 20:00`,
         }
       ],

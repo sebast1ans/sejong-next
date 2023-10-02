@@ -5,14 +5,24 @@ import type {
   GetStaticPaths,
 } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import Head from 'next/head'
 import { ArticleComponent } from '../../components/news/ArticleComponent'
 import { getArticlesData } from '../../lib/getArticlesData'
 
 export default function ArticleView ({ articleData }: InferGetStaticPropsType<typeof getStaticProps>) {
+
   return (
-    <Container>
-      <ArticleComponent article={articleData}/>
-    </Container>
+    <>
+      <Head>
+        <title>{`${articleData.title} | Sejong Taekwondo`}</title>
+        <meta name="description" content="Sejong Taekwondo – sportovní klub Taekwondo WT v Praze"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="icon" href="/favicon.png"/>
+      </Head>
+      <Container>
+        <ArticleComponent article={articleData}/>
+      </Container>
+    </>
   )
 }
 

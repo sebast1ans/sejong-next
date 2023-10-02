@@ -2,6 +2,7 @@ import { AuthError } from '@firebase/auth'
 import { LoadingButton } from '@mui/lab'
 import { Done, Login } from '@mui/icons-material'
 import { Alert, Box, Container, Snackbar, TextField, Typography } from '@mui/material'
+import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useContext, useEffect, useState } from 'react'
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth'
@@ -123,6 +124,12 @@ export default function LoginPage () {
 
   return (
     <>
+      <Head>
+        <title>Log In | Sejong Taekwondo</title>
+        <meta name="description" content="Sejong Taekwondo – sportovní klub Taekwondo WT v Praze"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="icon" href="/favicon.png"/>
+      </Head>
       <Container>
         <Box sx={{ display: 'grid', placeItems: 'center' }}>
           <h1>Vítejte na portálu Sejong Dojang</h1>

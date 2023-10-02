@@ -31,7 +31,7 @@ export const ArticleComponent = ({ article }: Props) => {
           </Typography>
           <Typography
             variant='h1'
-            sx={{fontWeight: '600', fontSize: '2.5rem', mb: '1.2rem', mt: '-1rem'}}
+            sx={{fontWeight: '600', fontSize: '2.5rem', mb: '1.2rem'}}
           >
             {article.title}
           </Typography>

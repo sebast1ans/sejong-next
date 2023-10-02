@@ -53,7 +53,7 @@ $dialogAvatarSize: 4.5rem;
   display: flex;
   align-items: center;
   gap: 1rem;
-  overflow-y: unset;
+  overflow-y: unset!important;
   padding: 1rem;
 
   .dialogAvatar {

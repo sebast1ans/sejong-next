@@ -42,7 +42,7 @@ const ArticleDialog = ({ open, onClose, article }: ArticleDialogProps) => {
               sx={{
                 display: 'flex',
                 alignItems: 'center',
-                overflowY: 'unset',
+                overflowY: 'unset!important',
                 padding: '.7rem'
               }}
             >

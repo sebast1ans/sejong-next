@@ -1,5 +1,7 @@
 {
   "news": "News",
   "fullArticle": "Full article",
-  "allArticles": "All articles"
+  "allArticles": "All articles",
+  "backToArticlesList": "Back to articles list"
+
 }

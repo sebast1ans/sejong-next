@@ -1,0 +1,10 @@
+@use '../../styles/variables.module';
+
+.date {
+  display: inline-block;
+  padding-top: 2rem;
+  margin-bottom: 1rem;
+  border-top: .2rem solid variables.$sejongRed;
+  width: fit-content;
+  color: dimgray;
+}

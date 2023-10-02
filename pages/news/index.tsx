@@ -17,13 +17,11 @@ export default function News () {
   )
 }
 
-export async function getStaticProps (context: { locale: string }) {
-  const { locale } = context
+export async function getStaticProps ( { locale }: {locale: string}) {
 
   return {
     props: {
       ...(await serverSideTranslations(locale, [
-        'common',
         'news',
       ])),
     }

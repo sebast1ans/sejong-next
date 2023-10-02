@@ -1,5 +1,6 @@
 {
-  "news": "Novinky",
+  "news": "Aktuality",
   "fullArticle": "Celý článek",
-  "allArticles": "Všechny články"
+  "allArticles": "Všechny články",
+  "backToArticlesList": "Zpět na seznam článků"
 }

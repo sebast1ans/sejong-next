@@ -15,6 +15,7 @@ $breakpoints: ('xs': 0px,'sm': 600px, 'md': 900px, 'lg': 1180px, 'xl': 1536px);
 
 :export {
   sejongRed: $sejongRed;
+  gray: $gray;
   xs: strip-unit(map-get($breakpoints, 'xs'));
   sm: strip-unit(map-get($breakpoints, 'sm'));
   md: strip-unit(map-get($breakpoints, 'md'));

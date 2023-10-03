@@ -18,12 +18,12 @@ const TabPanel = ({ children, value, index, ...rest }: TabPanelProps) => (
     id={`tabpanel-${index}`}
     aria-labelledby={`tab-${index}`}
     {...rest}
-    >
+  >
     {value === index ? (
-      <Box sx={{p: 3}}>
+      <Box sx={{ p: 3 }}>
         {children}
       </Box>
-    ): null}
+    ) : null}
   </div>
 )
 
@@ -59,21 +59,20 @@ export default function Portal () {
       </Head>
       <Container sx={{ my: '2rem' }}>
         <Paper elevation={2}>
-          <Box>
-            <Tabs
-              value={currentTab}
-              onChange={handleChangeTab}
-              variant='scrollable'
-              scrollButtons='auto'
-              aria-label='tabs'
-            >
-              <Tab icon={<Newspaper/>} iconPosition='start' label='Aktuality' {...a11yProps(0)} />
-              <Tab icon={<Web/>} iconPosition='start' label='Obsah' {...a11yProps(1)} />
-              <Tab icon={<Groups2/>} iconPosition='start'  label='Členové' {...a11yProps(2)} />
-              <Tab icon={<CalendarMonth/>} iconPosition='start' label='Kalendář' {...a11yProps(3)} />
-              <Tab icon={<Folder/>} iconPosition='start' label='Soubory' {...a11yProps(4)} />
-            </Tabs>
-          </Box>
+          <Tabs
+            value={currentTab}
+            onChange={handleChangeTab}
+            variant='scrollable'
+            scrollButtons='auto'
+            allowScrollButtonsMobile
+            aria-label='tabs'
+          >
+            <Tab icon={<Newspaper/>} iconPosition='start' label='Aktuality' {...a11yProps(0)} />
+            <Tab icon={<Web/>} iconPosition='start' label='Obsah' {...a11yProps(1)} />
+            <Tab icon={<Groups2/>} iconPosition='start' label='Členové' {...a11yProps(2)} />
+            <Tab icon={<CalendarMonth/>} iconPosition='start' label='Kalendář' {...a11yProps(3)} />
+            <Tab icon={<Folder/>} iconPosition='start' label='Soubory' {...a11yProps(4)} />
+          </Tabs>
           <Box>
             <TabPanel index={0} value={currentTab}>
               Aktuality

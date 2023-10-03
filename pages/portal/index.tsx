@@ -1,3 +1,4 @@
+import { CalendarMonth, Folder, Groups2, Newspaper, Web } from '@mui/icons-material'
 import { ReactNode, SyntheticEvent, useContext, useEffect, useState } from 'react'
 import { Box, Container, Paper, Tab, Tabs } from '@mui/material'
 import Head from 'next/head'
@@ -56,15 +57,21 @@ export default function Portal () {
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <link rel="icon" href="/favicon.png"/>
       </Head>
-      <Container sx={{ my: '3rem' }}>
+      <Container sx={{ my: '2rem' }}>
         <Paper elevation={2}>
           <Box>
-            <Tabs value={currentTab} onChange={handleChangeTab} aria-label='tabs'>
-              <Tab label='Aktuality' {...a11yProps(0)} />
-              <Tab label='Obsah' {...a11yProps(1)} />
-              <Tab label='Členové' {...a11yProps(2)} />
-              <Tab label='Kalendář' {...a11yProps(3)} />
-              <Tab label='Soubory' {...a11yProps(4)} />
+            <Tabs
+              value={currentTab}
+              onChange={handleChangeTab}
+              variant='scrollable'
+              scrollButtons='auto'
+              aria-label='tabs'
+            >
+              <Tab icon={<Newspaper/>} iconPosition='start' label='Aktuality' {...a11yProps(0)} />
+              <Tab icon={<Web/>} iconPosition='start' label='Obsah' {...a11yProps(1)} />
+              <Tab icon={<Groups2/>} iconPosition='start'  label='Členové' {...a11yProps(2)} />
+              <Tab icon={<CalendarMonth/>} iconPosition='start' label='Kalendář' {...a11yProps(3)} />
+              <Tab icon={<Folder/>} iconPosition='start' label='Soubory' {...a11yProps(4)} />
             </Tabs>
           </Box>
           <Box>

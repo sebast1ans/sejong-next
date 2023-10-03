@@ -4,6 +4,7 @@ import { Box, Container, Paper, Tab, Tabs } from '@mui/material'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { UserContext } from '../../lib/context'
+import NewsPortalPanel from '../../components/portal/NewsPortalPanel'
 
 interface TabPanelProps {
   children?: ReactNode
@@ -20,7 +21,7 @@ const TabPanel = ({ children, value, index, ...rest }: TabPanelProps) => (
     {...rest}
   >
     {value === index ? (
-      <Box sx={{ p: 3 }}>
+      <Box sx={{ p: '1rem' }}>
         {children}
       </Box>
     ) : null}
@@ -75,7 +76,7 @@ export default function Portal () {
           </Tabs>
           <Box>
             <TabPanel index={0} value={currentTab}>
-              Aktuality
+              <NewsPortalPanel />
             </TabPanel>
             <TabPanel index={1} value={currentTab}>
               Obsah

@@ -1,3 +1,4 @@
+import { Box } from '@mui/material'
 import { useState } from 'react'
 import Image from 'next/image'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -14,7 +15,7 @@ export default function Hero ({ heroImages }: Props) {
   const [swiperLoaded, setSwiperLoaded] = useState(false)
 
   return (
-    <>
+    <Box sx={{backgroundColor: 'black', width: '100%', height: '100vh'}}>
       <Swiper
         modules={[Autoplay, EffectFade]}
         autoplay={{delay: 3000}}
@@ -35,7 +36,7 @@ export default function Hero ({ heroImages }: Props) {
       {swiperLoaded && (
         <div className={styles.heroLogo}></div>
       )}
-    </>
+    </Box>
   )
 }
 

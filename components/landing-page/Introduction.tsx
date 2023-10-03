@@ -28,7 +28,7 @@ export default function Introduction ({ slidesData }: Props) {
       >
         {slidesData && slidesData.map(slideData => (
           <SwiperSlide
-            style={{ background: `url(${slideData.backgroundURL})` }}
+            style={{ backgroundColor: 'black', background: `url(${slideData.backgroundURL})` }}
             className={styles.slide}
             key={slideData.id}
           >

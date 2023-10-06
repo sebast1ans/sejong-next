@@ -44,7 +44,7 @@ export default function Portal () {
     if (!user) {
       void push('/login')
     }
-  }, [user, push]);
+  }, [user, push])
 
   const handleChangeTab = (event: SyntheticEvent, newValue: number) => {
     setCurrentTab(newValue)

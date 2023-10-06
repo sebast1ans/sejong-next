@@ -30,11 +30,11 @@ function App ({ Component, pageProps }: AppProps) {
         <CssBaseline/>
         <UserContext.Provider value={[...authState]}>
           <Navigation/>
-          <main>
+          <div className='site'>
             <NewsContext.Provider value={[...articlesData]}>
               <Component {...pageProps} />
             </NewsContext.Provider>
-          </main>
+          </div>
           <Footer/>
         </UserContext.Provider>
       </ThemeProvider>

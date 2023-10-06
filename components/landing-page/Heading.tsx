@@ -1,5 +1,5 @@
+import { Typography } from '@mui/material'
 import styles from './Heading.module.scss'
-// import { Typography } from '@mui/material'
 
 interface Props {
   text: string
@@ -7,7 +7,7 @@ interface Props {
 // TODO Maybe move this to a 'features' folder
 export const Heading = ({ text }: Props) => (
   <>
-    <h1 className={styles.heading}>{text}</h1>
+    <Typography variant='h1' fontWeight='bold' className={styles.heading} >{text}</Typography>
     <div className={styles.accentLine}></div>
   </>
 )

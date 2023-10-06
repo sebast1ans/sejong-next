@@ -10,20 +10,15 @@ const encodeSans = Saira_Semi_Condensed({
 
 
 export const theme = createTheme({
-  breakpoints: {
-    values: {
-      xs: +variables.xs,
-      sm: +variables.sm,
-      md: +variables.md,
-      lg: +variables.lg,
-      xl: +variables.xl,
-    },
-  },
   typography: {
     fontFamily: [
       encodeSans.style.fontFamily,
       'sans-serif'
     ].join(','),
+    fontWeightBold: 800,
+    fontWeightMedium: 600,
+    fontWeightRegular: 400,
+
     h1: {
       fontSize: '3rem'
     },
@@ -36,6 +31,15 @@ export const theme = createTheme({
     h4: {
       fontSize: '1rem'
     }
+  },
+  breakpoints: {
+    values: {
+      xs: +variables.xs,
+      sm: +variables.sm,
+      md: +variables.md,
+      lg: +variables.lg,
+      xl: +variables.xl,
+    },
   },
   palette: {
     primary: {

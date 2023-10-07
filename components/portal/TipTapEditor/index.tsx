@@ -1,34 +1,35 @@
+import { StarterKit } from '@tiptap/starter-kit'
+import { Underline } from '@tiptap/extension-underline'
+
 import { useRef } from 'react'
 import {
-  MenuButtonBold, MenuButtonItalic,
+  MenuButtonBold, MenuButtonItalic, MenuButtonStrikethrough,
+  MenuButtonUnderline,
   MenuControlsContainer,
   MenuDivider,
   MenuSelectHeading,
   RichTextEditor,
   type RichTextEditorRef
 } from 'mui-tiptap'
-import StarterKit from '@tiptap/starter-kit'
-import ClientOnly from './ClientOnly'
+import ClientOnly from '../ClientOnly'
 
 export default function TipTapEditor () {
-
-  const rteRef = useRef<RichTextEditorRef>(null);
-
+  const rteRef = useRef<RichTextEditorRef>(null)
 
   return (
     <ClientOnly>
       <RichTextEditor
         ref={rteRef}
-        extensions={[StarterKit]} // Or any Tiptap extensions you wish!
-        content="<p>Hello world</p>" // Initial content for the editor
-        // Optionally include `renderControls` for a menu-bar atop the editor:
+        extensions={[StarterKit, Underline]}
+        content="<p>Hello world</p>"
         renderControls={() => (
           <MenuControlsContainer>
             <MenuSelectHeading/>
             <MenuDivider/>
             <MenuButtonBold/>
             <MenuButtonItalic/>
-            {/* Add more controls of your choosing here */}
+            <MenuButtonUnderline/>
+            <MenuButtonStrikethrough />
           </MenuControlsContainer>
         )}
       />

@@ -18,7 +18,6 @@ export const theme = createTheme({
     fontWeightBold: 800,
     fontWeightMedium: 600,
     fontWeightRegular: 400,
-
     h1: {
       fontSize: '3rem'
     },

@@ -1,4 +1,5 @@
-import { Box, Container, Paper, TextField, Typography } from '@mui/material'
+import { Save, Publish } from '@mui/icons-material'
+import { Box, Button, Container, Paper, TextField, Typography } from '@mui/material'
 import TipTapEditor from './TipTapEditor'
 
 interface Props {
@@ -24,11 +25,24 @@ export default function ArticleForm ({ editMode }: Props) {
             type='text'
             color='info'
             label='Titulek'
-            sx={{
-              minWidth: '40rem'
-            }}
           />
           <TipTapEditor />
+          <Box sx={{display: 'flex', justifyContent: 'end', gap: '1rem'}}>
+            <Button
+              startIcon={<Save/>}
+              variant='outlined'
+              // onClick={() => push(`${pathname}/create-article`)}
+            >
+              Uložit
+            </Button>
+            <Button
+              startIcon={<Publish/>}
+              variant='contained'
+              // onClick={() => push(`${pathname}/create-article`)}
+            >
+              Publikovat
+            </Button>
+          </Box>
         </Box>
       </Paper>
     </Container>

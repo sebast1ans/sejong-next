@@ -1,18 +1,36 @@
 import { Save, Publish } from '@mui/icons-material'
 import { Box, Button, Container, Paper, TextField, Typography } from '@mui/material'
+import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 import TipTapEditor from './TipTapEditor'
+
+export type ArticleFormInputs = {
+  title: string
+  content: string
+}
 
 interface Props {
   editMode?: boolean
 }
 
 export default function ArticleForm ({ editMode }: Props) {
+  const methods = useForm<ArticleFormInputs>({
+    mode: 'onBlur'
+  })
 
+  const onSubmit: SubmitHandler<ArticleFormInputs> = (data) => {
+    try {
+      console.log(data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  console.log(methods.watch())
   return (
     <Container sx={{ my: '2rem' }}>
       <Paper elevation={2}>
         <Box
           component='form'
+          onSubmit={methods.handleSubmit(onSubmit)}
           sx={{
             p: '1rem',
             display: 'flex',
@@ -20,17 +38,23 @@ export default function ArticleForm ({ editMode }: Props) {
             gap: '1rem'
           }}
         >
-          <Typography variant='h2'>{editMode ? 'Upravit článek' : 'Nový článek'}</Typography>
+          <Typography variant='h2' fontWeight='bold'>{editMode ? 'Upravit článek' : 'Nový článek'}</Typography>
           <TextField
             type='text'
             color='info'
             label='Titulek'
+            {...methods.register('title', {
+              required: 'Vyplňte titulek'
+            })}
           />
-          <TipTapEditor />
-          <Box sx={{display: 'flex', justifyContent: 'end', gap: '1rem'}}>
+          <FormProvider {...methods}>
+            <TipTapEditor/>
+          </FormProvider>
+          <Box sx={{ display: 'flex', justifyContent: 'end', gap: '1rem' }}>
             <Button
               startIcon={<Save/>}
               variant='outlined'
+              type='submit'
               // onClick={() => push(`${pathname}/create-article`)}
             >
               Uložit
@@ -43,6 +67,7 @@ export default function ArticleForm ({ editMode }: Props) {
               Publikovat
             </Button>
           </Box>
+
         </Box>
       </Paper>
     </Container>

@@ -36,4 +36,8 @@ yarn-error.log*
 next-env.d.ts
 
 .firebaserc
+firestore.indexes.json
+firestore.rules
+storage.rules
 firebase.json
+*.log

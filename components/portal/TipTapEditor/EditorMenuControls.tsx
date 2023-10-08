@@ -1,11 +1,11 @@
 import {
-  LinkBubbleMenu,
+  LinkBubbleMenu, MenuButtonAddTable,
   MenuButtonBold, MenuButtonBulletedList, MenuButtonEditLink, MenuButtonHighlightColor, MenuButtonHorizontalRule,
   MenuButtonItalic, MenuButtonOrderedList,
   MenuButtonRedo, MenuButtonStrikethrough, MenuButtonUnderline,
   MenuButtonUndo, MenuControlsContainer,
   MenuDivider,
-  MenuSelectHeading
+  MenuSelectHeading, TableBubbleMenu
 } from 'mui-tiptap'
 
 export default function EditorMenuControls () {
@@ -20,6 +20,7 @@ export default function EditorMenuControls () {
       <MenuButtonItalic/>
       <MenuButtonUnderline/>
       <MenuButtonStrikethrough/>
+      <MenuButtonHorizontalRule/>
       <MenuButtonHighlightColor
         swatchColors={[
           { value: "#595959", label: "Dark grey" },
@@ -36,9 +37,11 @@ export default function EditorMenuControls () {
       <LinkBubbleMenu/>
       <MenuButtonEditLink/>
       <MenuDivider/>
-      <MenuButtonHorizontalRule/>
       <MenuButtonOrderedList/>
       <MenuButtonBulletedList/>
+      <MenuDivider/>
+      <MenuButtonAddTable />
+      <TableBubbleMenu />
     </MenuControlsContainer>
   )
 }

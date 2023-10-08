@@ -11,6 +11,7 @@ import { TableCell } from '@tiptap/extension-table-cell'
 import { TableHeader } from '@tiptap/extension-table-header'
 import { TableRow } from '@tiptap/extension-table-row'
 import { LinkBubbleMenuHandler, TableImproved } from 'mui-tiptap'
+import { ListItem } from '@tiptap/extension-list-item'
 
 import { useMemo } from 'react'
 
@@ -38,6 +39,7 @@ export default function useExtensions({placeholder}: UseExtensionsOptions = {}):
        types: ["heading", "paragraph"],
      }),
      TextStyle,
+     ListItem,
      Color,
      CustomLinkExtension.configure({
        autolink: true,

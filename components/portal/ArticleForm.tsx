@@ -1,4 +1,4 @@
-import { Save, Publish } from '@mui/icons-material'
+import { Save, Publish, DeleteOutline } from '@mui/icons-material'
 import { Box, Button, Container, Paper, TextField, Typography } from '@mui/material'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 import TipTapEditor from './TipTapEditor'
@@ -50,8 +50,17 @@ export default function ArticleForm ({ editMode }: Props) {
           <FormProvider {...methods}>
             <TipTapEditor/>
           </FormProvider>
-          <Box sx={{ display: 'flex', justifyContent: 'end', gap: '1rem' }}>
-            <Button
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap-reverse' }}>
+              <Button
+                startIcon={<DeleteOutline/>}
+                variant='outlined'
+                color='warning'
+                // onClick={() => push(`${pathname}/create-article`)}
+              >
+                Zahodit
+              </Button>
+            <Box sx={{display: 'flex', gap: '1rem', flexWrap: 'wrap'}}>
+              <Button
               startIcon={<Save/>}
               variant='outlined'
               type='submit'
@@ -59,13 +68,14 @@ export default function ArticleForm ({ editMode }: Props) {
             >
               Uložit
             </Button>
-            <Button
-              startIcon={<Publish/>}
-              variant='contained'
-              // onClick={() => push(`${pathname}/create-article`)}
-            >
-              Publikovat
-            </Button>
+              <Button
+                startIcon={<Publish/>}
+                variant='contained'
+                // onClick={() => push(`${pathname}/create-article`)}
+              >
+                Publikovat
+              </Button>
+            </Box>
           </Box>
 
         </Box>

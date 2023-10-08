@@ -5,7 +5,8 @@ import {
   MenuButtonRedo, MenuButtonStrikethrough, MenuButtonTextColor, MenuButtonUnderline,
   MenuButtonUndo, MenuControlsContainer,
   MenuDivider,
-  MenuSelectHeading, MenuSelectTextAlign, TableBubbleMenu
+  MenuSelectHeading, MenuSelectTextAlign, TableBubbleMenu,
+  isTouchDevice, MenuButtonIndent, MenuButtonUnindent,
 } from 'mui-tiptap'
 
 export default function EditorMenuControls () {
@@ -52,6 +53,12 @@ export default function EditorMenuControls () {
       <MenuDivider/>
       <MenuButtonOrderedList/>
       <MenuButtonBulletedList/>
+      {isTouchDevice() && (
+        <>
+          <MenuButtonIndent />
+          <MenuButtonUnindent />
+        </>
+      )}
       <MenuDivider/>
       <MenuButtonAddTable />
       <TableBubbleMenu />

@@ -1,4 +1,4 @@
-import { ReactElement, useRef } from 'react'
+import { ReactElement, useEffect, useRef } from 'react'
 import {
   RichTextEditor,
   type RichTextEditorRef
@@ -18,23 +18,31 @@ const ConnectForm = <TFieldValues extends FieldValues> ({ children }: ConnectFor
     return children({ ...methods })
   }
 
-export default function TipTapEditor () {
-  const rteRef = useRef<RichTextEditorRef>(null)
+export default function TipTapEditor ({isDirty}: {isDirty: boolean}) {
+  const rteRef = useRef<RichTextEditorRef | null>(null)
   const extensions = useExtensions({
     placeholder: "Zde napište článek...",
   })
 
+  useEffect(() => {
+    if (!isDirty) rteRef.current?.editor?.commands.setContent("")
+  }, [isDirty]);
+
   return (
     <ClientOnly>
       <ConnectForm<ArticleFormInputs>>
-        {({ control }) =>
+        {({ control}) =>
           <Controller
             control={control}
             name="content"
-            render={({ field: { onChange, onBlur } }) =>
+            render={({ field: { onChange, onBlur, ref, value } }) =>
               <RichTextEditor
-                ref={rteRef}
-                onUpdate={() => onChange(rteRef?.current?.editor?.getHTML())}
+                content={value}
+                ref={(e) => {
+                  ref(e)
+                  rteRef.current = e
+                }}
+                onUpdate={() => onChange(rteRef.current?.editor?.getHTML())}
                 onBlur={onBlur}
                 extensions={extensions}
                 renderControls={() => <EditorMenuControls/>}

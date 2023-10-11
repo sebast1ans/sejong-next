@@ -6,7 +6,7 @@ import { getFirestore } from 'firebase/firestore'
 const firebaseConfig = {
   apiKey: "AIzaSyCUX8y9yDt2P8l_qMXstVycf1Jm1BFai9A",
   authDomain: "sejong-web.firebaseapp.com",
-  databaseURL: "https://sejong-web.firebaseio.com",
+  // databaseURL: "https://sejong-web.firebaseio.com",
   projectId: "sejong-web",
   storageBucket: "sejong-web.appspot.com",
   messagingSenderId: "698109956681",
@@ -18,3 +18,6 @@ const app = initializeApp(firebaseConfig)
 export const storage = getStorage(app)
 export const db = getFirestore(app)
 export const auth = getAuth(app)
+
+// connectFirestoreEmulator(db, 'localhost', 8080);
+

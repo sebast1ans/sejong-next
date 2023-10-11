@@ -38,9 +38,10 @@ export const getStaticPaths = (async ({ locales }) => {
         })
       )).flat()
 
+  console.log(paths)
   return {
     paths,
-    fallback: false
+    fallback: true
   }
 }) satisfies GetStaticPaths
 

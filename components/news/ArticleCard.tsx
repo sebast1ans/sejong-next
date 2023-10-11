@@ -37,7 +37,7 @@ export const ArticleCard = ({ article, inDialog }: Props) => {
           {article.title}
         </Typography>
         <Box className={styles.date}>
-          <em>{formatDate(article.updatesTimestamp.slice(-1), locale)}</em>
+          <em>{formatDate(article.updatesTimestamp?.slice(-1), locale)}</em>
         </Box>
         <Box sx={{ mb: '1rem' }}>
           {convertHtmlToReact(article.content)}

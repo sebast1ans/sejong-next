@@ -1,7 +1,10 @@
+import { addDoc, collection } from '@firebase/firestore'
+import { db } from '../../lib/firebase'
 import { Save, Publish, DeleteOutline } from '@mui/icons-material'
 import { Box, Button, Container, Paper, TextField, Typography } from '@mui/material'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 import TipTapEditor from './TipTapEditor'
+import slugify from 'slugify'
 
 export type ArticleFormInputs = {
   title: string
@@ -14,17 +17,26 @@ interface Props {
 
 export default function ArticleForm ({ editMode }: Props) {
   const methods = useForm<ArticleFormInputs>({
+    defaultValues: {
+      title: "",
+      content: ""
+    },
     mode: 'onBlur'
   })
 
-  const onSubmit: SubmitHandler<ArticleFormInputs> = (data) => {
+  const onSubmit: SubmitHandler<ArticleFormInputs>
+    = async (data) => {
     try {
-      console.log(data)
+      await addDoc(collection(db, 'news'), {
+        ...data,
+        slug: slugify(data.title),
+        timestamp: Date.now()
+      })
     } catch (error) {
       console.log(error)
     }
   }
-  console.log(methods.watch())
+
   return (
     <Container sx={{ my: '2rem' }}>
       <Paper elevation={2}>
@@ -48,14 +60,14 @@ export default function ArticleForm ({ editMode }: Props) {
             })}
           />
           <FormProvider {...methods}>
-            <TipTapEditor/>
+            <TipTapEditor isDirty={methods.formState.isDirty}/>
           </FormProvider>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap-reverse' }}>
               <Button
                 startIcon={<DeleteOutline/>}
                 variant='outlined'
                 color='warning'
-                // onClick={() => push(`${pathname}/create-article`)}
+                onClick={() => methods.reset()}
               >
                 Zahodit
               </Button>
@@ -63,7 +75,6 @@ export default function ArticleForm ({ editMode }: Props) {
               <Button
               startIcon={<Save/>}
               variant='outlined'
-              type='submit'
               // onClick={() => push(`${pathname}/create-article`)}
             >
               Uložit
@@ -71,7 +82,7 @@ export default function ArticleForm ({ editMode }: Props) {
               <Button
                 startIcon={<Publish/>}
                 variant='contained'
-                // onClick={() => push(`${pathname}/create-article`)}
+
               >
                 Publikovat
               </Button>

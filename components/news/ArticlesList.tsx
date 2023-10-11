@@ -21,10 +21,10 @@ export const ArticlesList = () => {
           <NewspaperOutlined fontSize='large' sx={{ color: 'lightgray' }}/>
         </Typography>
         <Box sx={{ mt: '-2rem' }}>
-          {articles.map(article => (
+          {articles ? articles.map(article => (
             <Box key={article.id} className={styles.articleCard}>
               <Box className={styles.date}>
-                <em>{formatDate(article.updatesTimestamp.slice(-1), locale)}</em>
+                <em>{formatDate(article.updatesTimestamp?.slice(-1), locale)}</em>
               </Box>
               <Box className={styles.article}>
                 <Typography
@@ -45,7 +45,7 @@ export const ArticlesList = () => {
                 </Button>
               </Box>
             </Box>
-          ))}
+          )) : null}
         </Box>
       </CardContent>
     </Card>

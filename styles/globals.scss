@@ -33,7 +33,7 @@ html {
 
 
 strong, b {
-  font-weight: 600!important;
+  font-weight: 600 !important;
 }
 
 a {
@@ -48,6 +48,16 @@ a:hover {
 section {
   padding-top: 3rem;
   padding-bottom: 4rem;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+ tbody, td, th {
+  border: 1px solid dimgray;
+  padding: 0 .5rem;
+
 }
 
 [class*="MuiSvgIcon"] {

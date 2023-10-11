@@ -114,7 +114,7 @@ const NewsPanel = () => {
                   {textClamper(article.title, 68)}
                 </Typography>
                 <Typography variant={'body2'} sx={{ color: 'dimgray', mb: '1rem' }}>
-                  <em>{formatDate(article.updatesTimestamp.slice(-1), locale)}</em>
+                  <em>{formatDate(article.updatesTimestamp?.slice(-1), locale)}</em>
                 </Typography>
                 <Typography
                   variant={'body2'}

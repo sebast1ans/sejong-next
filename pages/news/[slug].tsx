@@ -41,7 +41,7 @@ export const getStaticPaths = (async ({ locales }) => {
   console.log(paths)
   return {
     paths,
-    fallback: true
+    fallback: 'blocking'
   }
 }) satisfies GetStaticPaths
 

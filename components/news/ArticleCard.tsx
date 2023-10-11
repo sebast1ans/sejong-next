@@ -34,13 +34,13 @@ export const ArticleCard = ({ article, inDialog }: Props) => {
           variant='h1'
           className={styles.title}
         >
-          {article.title}
+          {article?.title}
         </Typography>
         <Box className={styles.date}>
-          <em>{formatDate(article.updatesTimestamp?.slice(-1), locale)}</em>
+          <em>{formatDate(article?.updatesTimestamp?.slice(-1), locale)}</em>
         </Box>
         <Box sx={{ mb: '1rem' }}>
-          {convertHtmlToReact(article.content)}
+          {convertHtmlToReact(article?.content)}
         </Box>
       </CardContent>
     </Card>

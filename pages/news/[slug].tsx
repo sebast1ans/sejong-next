@@ -14,7 +14,7 @@ export default function ArticleView ({ articleData }: InferGetStaticPropsType<ty
   return (
     <>
       <Head>
-        <title>{`${articleData.title} | Sejong Taekwondo`}</title>
+        <title>{`${articleData?.title} | Sejong Taekwondo`}</title>
         <meta name="description" content="Sejong Taekwondo – sportovní klub Taekwondo WT v Praze"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <link rel="icon" href="/favicon.png"/>

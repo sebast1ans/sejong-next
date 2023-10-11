@@ -41,7 +41,7 @@ export const getStaticPaths = (async ({ locales }) => {
   console.log(paths)
   return {
     paths,
-    fallback: 'blocking'
+    fallback: true,
   }
 }) satisfies GetStaticPaths
 
@@ -54,6 +54,7 @@ export const getStaticProps = (async ({ params, locale }) => {
       ...(await serverSideTranslations(locale!, [
         'news',
       ])),
+      revalidate: 10
     },
   }
 }) satisfies GetStaticProps

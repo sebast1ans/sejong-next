@@ -32,6 +32,7 @@ export default function ArticleForm ({ editMode }: Props) {
         slug: slugify(data.title),
         timestamp: Date.now()
       })
+      console.log('Published')
     } catch (error) {
       console.log(error)
     }
@@ -82,7 +83,7 @@ export default function ArticleForm ({ editMode }: Props) {
               <Button
                 startIcon={<Publish/>}
                 variant='contained'
-
+                type='submit'
               >
                 Publikovat
               </Button>

@@ -1,4 +1,4 @@
-import { Container } from '@mui/material'
+import { Container, Typography } from '@mui/material'
 import type {
   InferGetStaticPropsType,
   GetStaticProps,
@@ -8,9 +8,9 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import Head from 'next/head'
 import { Article } from '../../components/news/Article'
 import { getArticlesData } from '../../lib/getArticlesData'
+import { getArticleData } from '../../lib/getArticleData'
 
 export default function ArticleView ({ articleData }: InferGetStaticPropsType<typeof getStaticProps>) {
-
   return (
     <>
       <Head>
@@ -20,7 +20,7 @@ export default function ArticleView ({ articleData }: InferGetStaticPropsType<ty
         <link rel="icon" href="/favicon.png"/>
       </Head>
       <Container>
-        <Article article={articleData}/>
+        {articleData ? <Article article={articleData}/> : <Typography variant="h1">Článek neexistuje :(</Typography>}
       </Container>
     </>
   )
@@ -38,7 +38,6 @@ export const getStaticPaths = (async ({ locales }) => {
         })
       )).flat()
 
-  console.log(paths)
   return {
     paths,
     fallback: true,
@@ -46,11 +45,11 @@ export const getStaticPaths = (async ({ locales }) => {
 }) satisfies GetStaticPaths
 
 export const getStaticProps = (async ({ params, locale }) => {
-  const articlesData = await getArticlesData()
+  const articleData = await getArticleData(params?.slug)
 
   return {
     props: {
-      articleData: articlesData.filter(article => { return article.slug === params?.slug})[0],
+      articleData: articleData ? articleData : null,
       ...(await serverSideTranslations(locale!, [
         'news',
       ])),

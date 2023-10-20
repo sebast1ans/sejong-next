@@ -1,14 +1,24 @@
-import { doc, getDoc } from 'firebase/firestore'
+import { collection, DocumentData, getDocs, query, where } from 'firebase/firestore'
 import { db } from './firebase'
 
-export const getArticleData = async (slug: string) => {
+export const getArticleData = async (slug: string | string [] | undefined) => {
 
   try {
-    const docRef = doc(db, 'news', slug)
-    return await getDoc(docRef)
+    let article!: DocumentData | null
+
+    const newsRef = collection(db, 'news')
+    const q = query(newsRef, where("slug", "==", slug))
+    const querySnapshot = await getDocs(q)
+
+    querySnapshot.forEach(doc => {
+      article = doc ? doc.data() : null
+    })
+
+    return article
 
   } catch (err) {
-    console.error(err)
+    console.log(err)
+    return null
   }
 
 }

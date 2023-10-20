@@ -1,6 +1,10 @@
 import { Heading } from './Heading'
 import { useTranslation } from 'next-i18next'
-import { Place, Schedule, Commute, Subway, DirectionsBus } from '@mui/icons-material'
+import Schedule from "@mui/icons-material/Schedule"
+import Place from "@mui/icons-material/Place"
+import Commute from "@mui/icons-material/Commute"
+import Subway from "@mui/icons-material/Subway"
+import DirectionsBus from "@mui/icons-material/DirectionsBus"
 import { Box, Container, Grid, Typography } from '@mui/material'
 import { GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api'
 import styles from './TrainingSessions.module.scss'

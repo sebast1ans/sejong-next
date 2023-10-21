@@ -6,7 +6,7 @@ import {
 import EditorMenuControls from './EditorMenuControls'
 import { FieldValues, UseFormReturn, useFormContext, Controller } from 'react-hook-form'
 import { ArticleFormInputs } from '../ArticleForm'
-import ClientOnly from '../ClientOnly'
+import ClientOnly from '../../ClientOnly'
 import useExtensions from './useExtensions'
 
 interface ConnectFormProps<TFieldValues extends FieldValues> {

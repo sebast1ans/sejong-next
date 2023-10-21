@@ -19,8 +19,7 @@ function App ({ Component, pageProps }: AppProps) {
 
   useEffect(() => {
     (async () => {
-      const data = await getArticlesData()
-      setArticlesData(data)
+      setArticlesData( await getArticlesData())
     })()
   }, []);
 

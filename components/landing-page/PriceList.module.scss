@@ -11,7 +11,18 @@
 
   table {
     width: auto;
+
+    tbody, th, tr, td {
+      border: none;
+      padding: 0;
+    }
+
+    td {
+      padding-right: 1rem;
+    }
   }
+
+
 
   span {
     font-weight: 600;

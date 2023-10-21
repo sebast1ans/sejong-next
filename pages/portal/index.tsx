@@ -4,7 +4,7 @@ import { Box, Container, Paper, Tab, Tabs } from '@mui/material'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { UserContext } from '../../lib/context'
-import NewsPortalPanel from '../../components/portal/NewsPortalPanel'
+import NewsPanel from '../../components/portal/NewsPanel'
 
 interface TabPanelProps {
   children?: ReactNode
@@ -76,7 +76,7 @@ export default function Portal () {
           </Tabs>
           <Box>
             <TabPanel index={0} value={currentTab}>
-              <NewsPortalPanel />
+              <NewsPanel />
             </TabPanel>
             <TabPanel index={1} value={currentTab}>
               Obsah

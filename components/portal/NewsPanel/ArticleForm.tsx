@@ -1,10 +1,11 @@
 import { addDoc, collection } from '@firebase/firestore'
-import { db } from '../../lib/firebase'
+import { db } from '../../../lib/firebase'
 import { Save, Publish, DeleteOutline } from '@mui/icons-material'
 import { Box, Button, Container, Paper, TextField, Typography } from '@mui/material'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 import TipTapEditor from './TipTapEditor'
 import slugify from 'slugify'
+import { useRouter } from 'next/router'
 
 export type ArticleFormInputs = {
   title: string
@@ -16,6 +17,8 @@ interface Props {
 }
 
 export default function ArticleForm ({ editMode }: Props) {
+  const { push } = useRouter()
+
   const methods = useForm<ArticleFormInputs>({
     defaultValues: {
       title: "",
@@ -32,7 +35,7 @@ export default function ArticleForm ({ editMode }: Props) {
         slug: slugify(data.title),
         timestamp: Date.now()
       })
-      console.log('Published')
+      push('/portal')
     } catch (error) {
       console.log(error)
     }

@@ -44,7 +44,7 @@ export default function PriceList() {
               <tbody>
               <tr>
                 <td><span>{t('children-6-12', { ns: 'common' })}:</span></td>
-                <td>{`${priceInCZK(2000)}/${t('term')}`}</td>
+                <td>{`${priceInCZK(2200)}/${t('term')}`}</td>
               </tr>
               <tr>
                 <td><span>{t('adults-beginners', { ns: 'common' })}:</span></td>

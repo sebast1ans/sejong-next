@@ -1,4 +1,4 @@
-import ArticleForm from '../../../components/portal/ArticleForm'
+import ArticleForm from '../../../components/portal/NewsPanel/ArticleForm'
 
 export default function EditArticle () {
   return (

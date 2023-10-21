@@ -1,5 +1,6 @@
 import { Button, Card, CardActions, CardContent, Typography } from '@mui/material'
 import { DocumentData, doc, deleteDoc } from 'firebase/firestore'
+import { useRouter } from 'next/router'
 import { db } from '../../../lib/firebase'
 import formatDate from '../../../utils/formatDate'
 import htmlStripper from '../../../utils/htmlStripper'
@@ -10,9 +11,11 @@ interface Props {
 }
 
 export default function ArticlePreviewCard ({ article }: Props) {
+  const { reload } = useRouter()
+
   const handleDeleteArticle = async (id: string) => {
     await deleteDoc(doc(db, "news", id))
-    console.log('deleted')
+    reload()
   }
 
   return (

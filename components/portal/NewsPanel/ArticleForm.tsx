@@ -1,4 +1,4 @@
-import { addDoc, collection } from '@firebase/firestore'
+import { addDoc, collection, serverTimestamp } from '@firebase/firestore'
 import { db } from '../../../lib/firebase'
 import { Save, Publish, DeleteOutline } from '@mui/icons-material'
 import { Box, Button, Container, Paper, TextField, Typography } from '@mui/material'
@@ -33,9 +33,9 @@ export default function ArticleForm ({ editMode }: Props) {
       await addDoc(collection(db, 'news'), {
         ...data,
         slug: slugify(data.title),
-        timestamp: Date.now()
+        timestamp: serverTimestamp()
       })
-      push('/portal')
+      await push('/portal')
     } catch (error) {
       console.log(error)
     }

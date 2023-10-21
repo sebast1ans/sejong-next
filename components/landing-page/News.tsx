@@ -109,7 +109,6 @@ const NewsPanel = () => {
               >
                 <Typography
                   sx={{ fontSize: '1.1rem', textWrap: 'balance' }}
-                  // onClick={() => push(`/news/${article.slug}`)}
                 >
                   {textClamper(article.title, 68)}
                 </Typography>

@@ -8,7 +8,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import Head from 'next/head'
 import { Article } from '../../components/news/Article'
 import { getArticlesData } from '../../lib/getArticlesData'
-import { getArticleData } from '../../lib/getArticleData'
+import { getArticleDataWithSlug } from '../../lib/getArticleDataWithSlug'
 
 export default function ArticleView ({ articleData }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
@@ -45,7 +45,7 @@ export const getStaticPaths = (async ({ locales }: GetStaticPathsContext) => {
 }) satisfies GetStaticPaths
 
 export const getStaticProps = (async ({ params, locale }) => {
-  const articleData = await getArticleData(params?.slug)
+  const articleData = await getArticleDataWithSlug(params?.slug)
 
   return {
     props: {

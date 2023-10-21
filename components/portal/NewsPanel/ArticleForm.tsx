@@ -1,4 +1,6 @@
-import { addDoc, collection, serverTimestamp } from '@firebase/firestore'
+import { addDoc, updateDoc, collection, arrayUnion } from '@firebase/firestore'
+import { doc, DocumentData } from 'firebase/firestore'
+import { useEffect } from 'react'
 import { db } from '../../../lib/firebase'
 import { Save, Publish, DeleteOutline } from '@mui/icons-material'
 import { Box, Button, Container, Paper, TextField, Typography } from '@mui/material'
@@ -13,11 +15,12 @@ export type ArticleFormInputs = {
 }
 
 interface Props {
+  articleData?: DocumentData | null
   editMode?: boolean
 }
 
-export default function ArticleForm ({ editMode }: Props) {
-  const { push } = useRouter()
+export default function ArticleForm ({ articleData, editMode }: Props) {
+  const { query, push } = useRouter()
 
   const methods = useForm<ArticleFormInputs>({
     defaultValues: {
@@ -27,15 +30,32 @@ export default function ArticleForm ({ editMode }: Props) {
     mode: 'onBlur'
   })
 
+  useEffect(() => {
+    if (articleData) {
+      methods.setValue('title', articleData.title, {shouldDirty: true})
+      methods.setValue('content', articleData.content, {shouldDirty: true})
+    }
+  }, [articleData, methods]);
+
   const onSubmit: SubmitHandler<ArticleFormInputs>
     = async (data) => {
     try {
-      await addDoc(collection(db, 'news'), {
-        ...data,
-        slug: slugify(data.title),
-        timestamp: serverTimestamp()
-      })
+      if (editMode && articleData) {
+        const docRef = doc(db, "news", query.id as string)
+        await updateDoc(docRef, {
+          ...data,
+          slug: encodeURI(slugify(data.title, {lower: true, strict: true})),
+          updatesTimestamp: arrayUnion(Date.now())
+        })
+      } else {
+        await addDoc(collection(db, 'news'), {
+          ...data,
+          slug: encodeURI(slugify(data.title, {lower: true, strict: true})),
+          timestamp: Date.now()
+        })
+      }
       await push('/portal')
+
     } catch (error) {
       console.log(error)
     }
@@ -71,7 +91,10 @@ export default function ArticleForm ({ editMode }: Props) {
                 startIcon={<DeleteOutline/>}
                 variant='outlined'
                 color='warning'
-                onClick={() => methods.reset()}
+                onClick={() => methods.reset({
+                  title: "",
+                  content: ""
+                })}
               >
                 Zahodit
               </Button>

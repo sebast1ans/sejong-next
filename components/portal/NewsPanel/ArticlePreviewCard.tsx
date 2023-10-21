@@ -11,7 +11,7 @@ interface Props {
 }
 
 export default function ArticlePreviewCard ({ article }: Props) {
-  const { reload } = useRouter()
+  const { pathname, push, reload } = useRouter()
 
   const handleDeleteArticle = async (id: string) => {
     await deleteDoc(doc(db, "news", id))
@@ -50,6 +50,12 @@ export default function ArticlePreviewCard ({ article }: Props) {
           onClick={() => handleDeleteArticle(article.id)}
         >
          Delete
+        </Button>
+        <Button
+          variant='outlined'
+          onClick={() => push(`${pathname}/edit-article/${article.id}`)}
+        >
+          Edit
         </Button>
       </CardActions>
     </Card>

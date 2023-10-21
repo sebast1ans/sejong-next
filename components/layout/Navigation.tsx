@@ -156,7 +156,7 @@ export default function Navigation () {
       setNavigationItems(Object.keys(i18n?.getResourceBundle('cs', 'home-page-navigation')))
     } else if (pathname === '/login') {
       setNavigationItems([])
-    } else if (isOnPortalRoute) {
+    } else if (isOnPortalRoute && user) {
       setNavigationItems(Array(
         <Typography color='white'>{user?.email}</Typography>,
         <SignOutButton/>

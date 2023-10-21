@@ -28,7 +28,7 @@ function App ({ Component, pageProps }: AppProps) {
     <>
       <ThemeProvider theme={theme}>
         <CssBaseline/>
-        <UserContext.Provider value={[...authState]}>
+        <UserContext.Provider value={authState}>
           <Navigation/>
           <div className='site'>
             <NewsContext.Provider value={[...articlesData]}>

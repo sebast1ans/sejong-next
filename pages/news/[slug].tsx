@@ -2,7 +2,7 @@ import { Container, Typography } from '@mui/material'
 import type {
   InferGetStaticPropsType,
   GetStaticProps,
-  GetStaticPaths,
+  GetStaticPaths, GetStaticPathsContext,
 } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import Head from 'next/head'
@@ -26,7 +26,7 @@ export default function ArticleView ({ articleData }: InferGetStaticPropsType<ty
   )
 }
 
-export const getStaticPaths = (async ({ locales }) => {
+export const getStaticPaths = (async ({ locales }: GetStaticPathsContext) => {
   const articles = await getArticlesData()
   const paths =
     locales!.map(locale =>
@@ -34,7 +34,7 @@ export const getStaticPaths = (async ({ locales }) => {
           params: {
             slug: article.slug
           },
-          locale: locale
+          locale
         })
       )).flat()
 
@@ -49,7 +49,7 @@ export const getStaticProps = (async ({ params, locale }) => {
 
   return {
     props: {
-      articleData: articleData ? articleData : null,
+      articleData: articleData || null,
       ...(await serverSideTranslations(locale!, [
         'news',
       ])),

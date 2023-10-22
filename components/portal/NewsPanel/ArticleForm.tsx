@@ -1,7 +1,7 @@
 import { addDoc, updateDoc, collection, arrayUnion } from '@firebase/firestore'
 import { deleteDoc, doc, DocumentData } from 'firebase/firestore'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { db } from '../../../lib/firebase'
 import Replay from '@mui/icons-material/Replay'
 import Save from '@mui/icons-material/Save'
@@ -46,7 +46,7 @@ interface Props {
 }
 
 export default function ArticleForm ({ articleData, editMode }: Props) {
-  const { push } = useRouter()
+  const { push, events  } = useRouter()
   const [open, setOpen] = useState(false)
   const [alertMessage, setAlertMessage] = useState<AlertMessage>({
     type: 'success',
@@ -65,19 +65,32 @@ export default function ArticleForm ({ articleData, editMode }: Props) {
     mode: 'onBlur'
   })
 
+  const handleCancel = useCallback ( () => {
+    if (articleForm.formState.isSubmitted) {
+      return true
+    }
+
+    if (articleForm.formState.isDirty) {
+      if (confirm('Máte neuložené změny, opravdu chcete opustit článek?')) {
+        articleForm.reset()
+        return true
+      }
+      // TODO when using back/forward buttons, the url changes, needs further investigation
+      throw "Abort route change by user's confirmation."
+    }
+    return null
+  }, [articleForm])
+
+  useEffect(() => {
+    events.on('routeChangeStart', handleCancel)
+
+    return () => {
+      events.off('routeChangeStart', handleCancel)
+    }
+  }, [handleCancel, events]);
+
   const handleClose = (_event: React.SyntheticEvent | Event) => {
     setOpen(false);
-  }
-
-  const handleCancel = async () => {
-    if (articleForm.formState.isDirty) {
-      if (confirm('Opravdu chcete opustit článek?')) {
-        articleForm.reset()
-        await push('/portal')
-      }
-    } else {
-      await push('/portal')
-    }
   }
 
   const handleReset = () => {
@@ -105,12 +118,11 @@ export default function ArticleForm ({ articleData, editMode }: Props) {
           timestamp: Date.now(),
         })
       }
-      setAlertMessage({ type: 'success', message: 'Článek byl uložen' })
-      setOpen(true)
-
-      setTimeout(() => {
-        push('/portal')
-      }, 1500)
+        setAlertMessage({ type: 'success', message: 'Článek byl uložen' })
+        setOpen(true)
+        setTimeout(() => {
+          push('/portal')
+        }, 1500)
 
     } catch (error) {
       setAlertMessage({ type: 'error', message: 'Stala se nějaká chyba' })
@@ -121,7 +133,7 @@ export default function ArticleForm ({ articleData, editMode }: Props) {
 
   return (
     <Container sx={{ my: '2rem' }}>
-      <Paper elevation={2}>
+      <Paper elevation={2} sx={{ maxWidth: '50rem' }}>
         <Box
           component='form'
           onSubmit={articleForm.handleSubmit(onSubmit)}
@@ -150,7 +162,7 @@ export default function ArticleForm ({ articleData, editMode }: Props) {
                 startIcon={<Cancel/>}
                 variant='outlined'
                 color='secondary'
-                onClick={handleCancel}
+                onClick={() => void push('/portal')}
               >
                 Storno
               </Button>

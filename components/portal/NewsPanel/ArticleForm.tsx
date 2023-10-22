@@ -39,7 +39,7 @@ export default function ArticleForm ({ articleData, editMode }: Props) {
   const articleForm = useForm<ArticleFormInputs>({
     defaultValues: {
       title: "",
-      content: "",
+      content: "<p></p>",
       isPublished: false
     },
     mode: 'onBlur'
@@ -57,10 +57,16 @@ export default function ArticleForm ({ articleData, editMode }: Props) {
     setOpen(false);
   }
 
-  const handleCancel = () => {
-    if (confirm('Opravdu chcete zrušit celý článek?')) {
+  const handleCancel = async () => {
+    if (articleForm.formState.isDirty) {
+      if (confirm('Opravdu chcete zrušit celý článek?')) {
+        articleForm.reset()
+        await push('/portal')
+        return
+      }
+    } else {
       articleForm.reset()
-      push('/portal')
+      await push('/portal')
     }
   }
 
@@ -140,6 +146,7 @@ export default function ArticleForm ({ articleData, editMode }: Props) {
                 variant='outlined'
                 color='warning'
                 onClick={handleReset}
+                disabled={!articleForm.formState.isDirty}
               >
                 Začít od znova
               </Button>

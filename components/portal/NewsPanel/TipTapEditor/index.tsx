@@ -26,7 +26,7 @@ export default function TipTapEditor ({ isDirty }: { isDirty: boolean }) {
   })
 
   useEffect(() => {
-    if (!isDirty) rteRef.current?.editor?.commands.setContent("")
+    if (!isDirty) rteRef.current?.editor?.commands.setContent("<p></p>")
   }, [isDirty]);
 
   return (

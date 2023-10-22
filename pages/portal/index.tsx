@@ -36,7 +36,7 @@ const a11yProps = (index: number) => {
 
 export default function Portal () {
   const [currentTab, setCurrentTab] = useState(0)
-
+  const tabPanels = [<><NewsPanel/></>, 'Obsah', 'Členové', 'Kalendář', 'Soubory']
   const handleChangeTab = (event: SyntheticEvent, newValue: number) => {
     setCurrentTab(newValue)
   }
@@ -67,21 +67,11 @@ export default function Portal () {
               <Tab icon={<Folder/>} iconPosition='start' label='Soubory' {...a11yProps(4)} />
             </Tabs>
             <Box>
-              <TabPanel index={0} value={currentTab}>
-                <NewsPanel/>
-              </TabPanel>
-              <TabPanel index={1} value={currentTab}>
-                Obsah
-              </TabPanel>
-              <TabPanel index={2} value={currentTab}>
-                Členové
-              </TabPanel>
-              <TabPanel index={3} value={currentTab}>
-                Kalendář
-              </TabPanel>
-              <TabPanel index={4} value={currentTab}>
-                Soubory
-              </TabPanel>
+              {tabPanels.map((tabPanel, index) => (
+                <TabPanel key={index} index={index} value={currentTab}>
+                  {tabPanel}
+                </TabPanel>
+              ))}
             </Box>
           </Paper>
         </Container>

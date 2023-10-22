@@ -5,7 +5,8 @@ import { db } from '../../../lib/firebase'
 import formatDate from '../../../utils/formatDate'
 import htmlStripper from '../../../utils/htmlStripper'
 import textClamper from '../../../utils/textClamper'
-
+import DeleteIcon from '@mui/icons-material/Delete'
+import EditIcon from '@mui/icons-material/Edit'
 interface Props {
   article: DocumentData
 }
@@ -44,16 +45,24 @@ export default function ArticlePreviewCard ({ article }: Props) {
           {textClamper(htmlStripper(article.content), 222)}
         </Typography>
       </CardContent>
-      <CardActions>
+      <CardActions
+        sx={{
+          display: 'flex',
+          justifyContent: 'end'
+        }}
+      >
         <Button
-          variant='outlined'
+          variant='text'
           onClick={() => handleDeleteArticle(article.id)}
+          startIcon={<DeleteIcon/>}
         >
-         Delete
+          Delete
         </Button>
         <Button
-          variant='outlined'
+          variant='text'
+          color='warning'
           onClick={() => push(`${pathname}/edit-article/${article.id}`)}
+          startIcon={<EditIcon/>}
         >
           Edit
         </Button>

@@ -1,3 +1,4 @@
+import { Box } from '@mui/material'
 import { ReactElement, useEffect, useRef } from 'react'
 import {
   RichTextEditor,
@@ -14,11 +15,11 @@ interface ConnectFormProps<TFieldValues extends FieldValues> {
 }
 
 const ConnectForm = <TFieldValues extends FieldValues> ({ children }: ConnectFormProps<TFieldValues>) => {
-    const methods = useFormContext<TFieldValues>()
-    return children({ ...methods })
-  }
+  const methods = useFormContext<TFieldValues>()
+  return children({ ...methods })
+}
 
-export default function TipTapEditor ({isDirty}: {isDirty: boolean}) {
+export default function TipTapEditor ({ isDirty }: { isDirty: boolean }) {
   const rteRef = useRef<RichTextEditorRef | null>(null)
   const extensions = useExtensions({
     placeholder: "Zde napište článek...",
@@ -31,22 +32,24 @@ export default function TipTapEditor ({isDirty}: {isDirty: boolean}) {
   return (
     <ClientOnly>
       <ConnectForm<ArticleFormInputs>>
-        {({ control}) =>
+        {({ control }) =>
           <Controller
             control={control}
             name="content"
             render={({ field: { onChange, onBlur, ref, value } }) =>
-              <RichTextEditor
-                content={value}
-                ref={(e) => {
-                  ref(e)
-                  rteRef.current = e
-                }}
-                onUpdate={() => onChange(rteRef.current?.editor?.getHTML())}
-                onBlur={onBlur}
-                extensions={extensions}
-                renderControls={() => <EditorMenuControls/>}
-              />
+              <Box sx={{ zIndex: '2', '& > div': { backgroundColor: 'white' } }}>
+                <RichTextEditor
+                  content={value}
+                  ref={(e) => {
+                    ref(e)
+                    rteRef.current = e
+                  }}
+                  onUpdate={() => onChange(rteRef.current?.editor?.getHTML())}
+                  onBlur={onBlur}
+                  extensions={extensions}
+                  renderControls={() => <EditorMenuControls/>}
+                />
+              </Box>
             }
           />
         }

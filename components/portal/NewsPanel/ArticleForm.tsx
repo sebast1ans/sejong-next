@@ -31,18 +31,17 @@ export default function ArticleForm ({ articleData, editMode }: Props) {
   })
 
   useEffect(() => {
-    if (articleData) {
+    if (editMode && articleData) {
       methods.setValue('title', articleData.title, {shouldDirty: true})
       methods.setValue('content', articleData.content, {shouldDirty: true})
     }
-  }, [articleData, methods]);
+  }, [editMode, articleData, methods]);
 
   const onSubmit: SubmitHandler<ArticleFormInputs>
     = async (data) => {
     try {
       if (editMode && articleData) {
-        const docRef = doc(db, "news", query.id as string)
-        await updateDoc(docRef, {
+        await updateDoc(doc(db, "news", query.id as string), {
           ...data,
           slug: encodeURI(slugify(data.title, {lower: true, strict: true})),
           updatesTimestamp: arrayUnion(Date.now())

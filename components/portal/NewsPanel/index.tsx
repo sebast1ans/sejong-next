@@ -18,7 +18,16 @@ export default function NewsPanel () {
       >
         Napsat článek
       </Button>
-      <Box sx={{ my: '1rem', display: 'grid', gridTemplate: '1fr / repeat(4, 1fr)', gap: '1rem'}}>
+      <Box sx={{
+        my: '1rem',
+        display: 'grid',
+        gap: '1rem',
+        gridTemplate: {
+          sm: '1fr / repeat(2, 1fr)',
+          md: '1fr / repeat(4, 1fr)'
+        }
+      }}
+      >
         {articles ? articles.map(article => (
           <ArticlePreviewCard key={article.id} article={article}/>
         )) : null}

@@ -3,7 +3,9 @@ import { doc, DocumentData } from 'firebase/firestore'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { db } from '../../../lib/firebase'
-import { Publish, DeleteOutline } from '@mui/icons-material'
+import Replay from '@mui/icons-material/Replay'
+import Save from '@mui/icons-material/Save'
+import Cancel from '@mui/icons-material/Cancel'
 import {
   Alert,
   Box,
@@ -34,7 +36,7 @@ interface Props {
 export default function ArticleForm ({ articleData, editMode }: Props) {
   const { push } = useRouter()
   const [open, setOpen] = useState(false)
-  const methods = useForm<ArticleFormInputs>({
+  const articleForm = useForm<ArticleFormInputs>({
     defaultValues: {
       title: "",
       content: "",
@@ -45,23 +47,26 @@ export default function ArticleForm ({ articleData, editMode }: Props) {
 
   useEffect(() => {
     if (editMode && articleData) {
-      methods.setValue('title', articleData.title, { shouldDirty: true })
-      methods.setValue('content', articleData.content, { shouldDirty: true })
-      methods.setValue('isPublished', articleData.isPublished, { shouldDirty: true })
+      articleForm.setValue('title', articleData.title, { shouldDirty: true })
+      articleForm.setValue('content', articleData.content, { shouldDirty: true })
+      articleForm.setValue('isPublished', articleData.isPublished, { shouldDirty: true })
     }
-  }, [editMode, articleData, methods]);
+  }, [editMode, articleData, articleForm]);
 
   const handleClose = (_event: React.SyntheticEvent | Event) => {
     setOpen(false);
   }
 
+  const handleCancel = () => {
+    if (confirm('Opravdu chcete zrušit celý článek?')) {
+      articleForm.reset()
+      push('/portal')
+    }
+  }
+
   const handleReset = () => {
     if (confirm('Opravdu chcete vymazat celý obsah článku a začít znovu?')) {
-      methods.reset({
-        title: "",
-        content: "",
-        isPublished: false
-      })
+      articleForm.reset()
     }
 
     return
@@ -100,7 +105,7 @@ export default function ArticleForm ({ articleData, editMode }: Props) {
       <Paper elevation={2}>
         <Box
           component='form'
-          onSubmit={methods.handleSubmit(onSubmit)}
+          onSubmit={articleForm.handleSubmit(onSubmit)}
           sx={{
             p: '1rem',
             display: 'flex',
@@ -113,38 +118,48 @@ export default function ArticleForm ({ articleData, editMode }: Props) {
             type='text'
             color='info'
             label='Titulek'
-            {...methods.register('title', {
+            {...articleForm.register('title', {
               required: 'Vyplňte titulek'
             })}
           />
-          <FormProvider {...methods}>
-            <TipTapEditor isDirty={methods.formState.isDirty}/>
+          <FormProvider {...articleForm}>
+            <TipTapEditor isDirty={articleForm.formState.isDirty}/>
           </FormProvider>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap-reverse' }}>
-            <Button
-              startIcon={<DeleteOutline/>}
-              variant='outlined'
-              color='warning'
-              onClick={handleReset}
-            >
-              Zahodit
-            </Button>
+            <Box sx={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+              <Button
+                startIcon={<Cancel/>}
+                variant='outlined'
+                color='secondary'
+                onClick={handleCancel}
+              >
+                Storno
+              </Button>
+              <Button
+                startIcon={<Replay/>}
+                variant='outlined'
+                color='warning'
+                onClick={handleReset}
+              >
+                Začít od znova
+              </Button>
+            </Box>
             <Box sx={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
               <FormControlLabel
                 label='Veřejný'
                 control={
                   <Checkbox
-                    checked={methods.watch('isPublished')}
-                    {...methods.register('isPublished')}
+                    checked={articleForm.watch('isPublished')}
+                    {...articleForm.register('isPublished')}
                   />
                 }
               />
               <Button
-                startIcon={<Publish/>}
+                startIcon={<Save/>}
                 variant='contained'
                 type='submit'
               >
-                Publikovat
+                Uložit
               </Button>
             </Box>
           </Box>

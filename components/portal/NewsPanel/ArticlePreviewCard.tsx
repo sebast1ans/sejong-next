@@ -6,7 +6,7 @@ import formatDate from '../../../utils/formatDate'
 import htmlStripper from '../../../utils/htmlStripper'
 import textClamper from '../../../utils/textClamper'
 import DeleteIcon from '@mui/icons-material/Delete'
-import EditIcon from '@mui/icons-material/Edit'
+import EditNote from '@mui/icons-material/EditNote'
 interface Props {
   article: DocumentData
 }
@@ -66,7 +66,7 @@ export default function ArticlePreviewCard ({ article }: Props) {
           variant='text'
           color='warning'
           onClick={() => push(`${pathname}/edit-article/${article.id}`)}
-          startIcon={<EditIcon/>}
+          startIcon={<EditNote/>}
         >
           Edit
         </Button>

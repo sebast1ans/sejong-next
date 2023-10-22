@@ -1,4 +1,4 @@
-import { Create } from '@mui/icons-material'
+import Create from '@mui/icons-material/Create'
 import { Box, Button } from '@mui/material'
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
@@ -24,7 +24,7 @@ export default function NewsPanel () {
         gap: '1rem',
         gridTemplate: {
           sm: '1fr / repeat(2, 1fr)',
-          md: '1fr / repeat(4, 1fr)'
+          lg: '1fr / repeat(4, 1fr)'
         }
       }}
       >

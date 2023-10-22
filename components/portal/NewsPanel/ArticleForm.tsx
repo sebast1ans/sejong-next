@@ -37,7 +37,11 @@ export default function ArticleForm ({ articleData, editMode }: Props) {
   const { push } = useRouter()
   const [open, setOpen] = useState(false)
   const articleForm = useForm<ArticleFormInputs>({
-    defaultValues: {
+    defaultValues: (editMode && articleData) ? {
+      title: articleData.title,
+      content: articleData.content,
+      isPublished: articleData.isPublished
+    } : {
       title: "",
       content: "<p></p>",
       isPublished: false
@@ -59,21 +63,21 @@ export default function ArticleForm ({ articleData, editMode }: Props) {
 
   const handleCancel = async () => {
     if (articleForm.formState.isDirty) {
-      if (confirm('Opravdu chcete zrušit celý článek?')) {
+      if (confirm('Opravdu chcete opustit článek?')) {
         articleForm.reset()
         await push('/portal')
-        return
       }
     } else {
-      articleForm.reset()
       await push('/portal')
     }
   }
 
   const handleReset = () => {
-    if (confirm('Opravdu chcete vymazat celý obsah článku a začít znovu?')) {
-      articleForm.reset()
-    }
+    if (confirm(
+      editMode
+        ? 'Nyní se článek uvede do původního stavu. Pokračovat?'
+        : 'Opravdu chcete vymazat celý obsah článku a začít znovu?'
+    )) {articleForm.reset()}
 
     return
   }
@@ -129,7 +133,7 @@ export default function ArticleForm ({ articleData, editMode }: Props) {
             })}
           />
           <FormProvider {...articleForm}>
-            <TipTapEditor isDirty={articleForm.formState.isDirty}/>
+            <TipTapEditor/>
           </FormProvider>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap-reverse' }}>
             <Box sx={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>

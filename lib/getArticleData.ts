@@ -6,7 +6,7 @@ export const getArticleData = async (id: string) => {
     const docSnap = await getDoc(doc(db, "news", id));
 
     if (docSnap.exists()) {
-      return docSnap.data()
+      return {id: docSnap.id, ...docSnap.data()}
     } else {
      return null
     }

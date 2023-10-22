@@ -93,7 +93,10 @@ const NewsPanel = () => {
         }}
       >
         <Box className={styles.newsPanel}>
-          {articles ? articles.slice(0, lessThanSm ? 2 : 4).map(article => (
+          {articles ? articles
+              .filter(article => article.isPublished)
+              .slice(0, lessThanSm ? 2 : 4)
+              .map(article => (
             <Card
               elevation={0}
               key={article.id}

@@ -21,31 +21,33 @@ export const ArticlesList = () => {
           <NewspaperOutlined fontSize='large' sx={{ color: 'lightgray' }}/>
         </Typography>
         <Box sx={{ mt: '-2rem' }}>
-          {articles ? articles.map(article => (
-            <Box key={article.id} className={styles.articleCard}>
-              <Box className={styles.date}>
-                <em>{formatDate(article.updatesTimestamp?.slice(-1), locale)}</em>
+          {articles ? articles
+            .filter(article => article.isPublished)
+            .map(article => (
+              <Box key={article.id} className={styles.articleCard}>
+                <Box className={styles.date}>
+                  <em>{formatDate(article.updatesTimestamp?.slice(-1), locale)}</em>
+                </Box>
+                <Box className={styles.article}>
+                  <Typography
+                    variant='h2'
+                    sx={{ fontWeight: '600', mb: '1.2rem', cursor: 'pointer' }}
+                    onClick={() => push(`${pathname}/${article.slug}`)}
+                  >
+                    {article.title}
+                  </Typography>
+                  <Typography variant='body1' sx={{ mb: '1rem' }}>
+                    {textClamper(htmlStripper(article.content), 420)}
+                  </Typography>
+                  <Button
+                    onClick={() => push(`/news/${article.slug}`)}
+                    startIcon={<ArticleOutlined/>}
+                  >
+                    {t('fullArticle')}
+                  </Button>
+                </Box>
               </Box>
-              <Box className={styles.article}>
-                <Typography
-                  variant='h2'
-                  sx={{ fontWeight: '600', mb: '1.2rem', cursor: 'pointer' }}
-                  onClick={() => push(`${pathname}/${article.slug}`)}
-                >
-                  {article.title}
-                </Typography>
-                <Typography variant='body1' sx={{ mb: '1rem' }}>
-                  {textClamper(htmlStripper(article.content), 420)}
-                </Typography>
-                <Button
-                  onClick={() => push(`/news/${article.slug}`)}
-                  startIcon={<ArticleOutlined/>}
-                >
-                  {t('fullArticle')}
-                </Button>
-              </Box>
-            </Box>
-          )) : null}
+            )) : null}
         </Box>
       </CardContent>
     </Card>

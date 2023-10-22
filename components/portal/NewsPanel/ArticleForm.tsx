@@ -1,17 +1,29 @@
 import { addDoc, updateDoc, collection, arrayUnion } from '@firebase/firestore'
 import { doc, DocumentData } from 'firebase/firestore'
-import { useEffect } from 'react'
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 import { db } from '../../../lib/firebase'
-import { Save, Publish, DeleteOutline } from '@mui/icons-material'
-import { Box, Button, Container, Paper, TextField, Typography } from '@mui/material'
+import { Publish, DeleteOutline } from '@mui/icons-material'
+import {
+  Alert,
+  Box,
+  Button,
+  Checkbox,
+  Container,
+  FormControlLabel,
+  Paper,
+  Snackbar,
+  TextField,
+  Typography
+} from '@mui/material'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 import TipTapEditor from './TipTapEditor'
 import slugify from 'slugify'
-import { useRouter } from 'next/router'
 
 export type ArticleFormInputs = {
   title: string
   content: string
+  isPublished: boolean
 }
 
 interface Props {
@@ -20,42 +32,65 @@ interface Props {
 }
 
 export default function ArticleForm ({ articleData, editMode }: Props) {
-  const { query, push } = useRouter()
-
+  const { push } = useRouter()
+  const [open, setOpen] = useState(false)
   const methods = useForm<ArticleFormInputs>({
     defaultValues: {
       title: "",
-      content: ""
+      content: "",
+      isPublished: false
     },
     mode: 'onBlur'
   })
 
   useEffect(() => {
     if (editMode && articleData) {
-      methods.setValue('title', articleData.title, {shouldDirty: true})
-      methods.setValue('content', articleData.content, {shouldDirty: true})
+      methods.setValue('title', articleData.title, { shouldDirty: true })
+      methods.setValue('content', articleData.content, { shouldDirty: true })
+      methods.setValue('isPublished', articleData.isPublished, { shouldDirty: true })
     }
   }, [editMode, articleData, methods]);
 
-  const onSubmit: SubmitHandler<ArticleFormInputs>
-    = async (data) => {
+  const handleClose = (_event: React.SyntheticEvent | Event) => {
+    setOpen(false);
+  }
+
+  const handleReset = () => {
+    if (confirm('Opravdu chcete vymazat celý obsah článku a začít znovu?')) {
+      methods.reset({
+        title: "",
+        content: "",
+        isPublished: false
+      })
+    }
+
+    return
+  }
+
+  const onSubmit: SubmitHandler<ArticleFormInputs> = async (data: ArticleFormInputs) => {
     try {
       if (editMode && articleData) {
-        await updateDoc(doc(db, "news", query.id as string), {
+        await updateDoc(doc(db, "news", articleData.id), {
           ...data,
-          slug: encodeURI(slugify(data.title, {lower: true, strict: true})),
+          slug: encodeURI(slugify(data.title, { lower: true, strict: true })),
           updatesTimestamp: arrayUnion(Date.now())
         })
       } else {
         await addDoc(collection(db, 'news'), {
           ...data,
-          slug: encodeURI(slugify(data.title, {lower: true, strict: true})),
+          slug: encodeURI(slugify(data.title, { lower: true, strict: true })),
           timestamp: Date.now()
         })
       }
-      await push('/portal')
+
+      setOpen(true)
+
+      setTimeout(() => {
+        push('/portal')
+      }, 1500)
 
     } catch (error) {
+      console.log('error')
       console.log(error)
     }
   }
@@ -86,25 +121,24 @@ export default function ArticleForm ({ articleData, editMode }: Props) {
             <TipTapEditor isDirty={methods.formState.isDirty}/>
           </FormProvider>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap-reverse' }}>
-              <Button
-                startIcon={<DeleteOutline/>}
-                variant='outlined'
-                color='warning'
-                onClick={() => methods.reset({
-                  title: "",
-                  content: ""
-                })}
-              >
-                Zahodit
-              </Button>
-            <Box sx={{display: 'flex', gap: '1rem', flexWrap: 'wrap'}}>
-              <Button
-              startIcon={<Save/>}
+            <Button
+              startIcon={<DeleteOutline/>}
               variant='outlined'
-              // onClick={() => push(`${pathname}/create-article`)}
+              color='warning'
+              onClick={handleReset}
             >
-              Uložit
+              Zahodit
             </Button>
+            <Box sx={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+              <FormControlLabel
+                label='Veřejný'
+                control={
+                  <Checkbox
+                    checked={methods.watch('isPublished')}
+                    {...methods.register('isPublished')}
+                  />
+                }
+              />
               <Button
                 startIcon={<Publish/>}
                 variant='contained'
@@ -114,9 +148,15 @@ export default function ArticleForm ({ articleData, editMode }: Props) {
               </Button>
             </Box>
           </Box>
-
         </Box>
       </Paper>
+      <Snackbar
+        open={open}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+        onClose={handleClose}
+      >
+        <Alert severity='success' onClose={handleClose}>Článek je uložen</Alert>
+      </Snackbar>
     </Container>
   )
 }

@@ -15,8 +15,12 @@ export default function ArticlePreviewCard ({ article }: Props) {
   const { pathname, push, reload } = useRouter()
 
   const handleDeleteArticle = async (id: string) => {
-    await deleteDoc(doc(db, "news", id))
-    reload()
+    if (confirm("Opravdu chcete smazat tento článek?")) {
+      await deleteDoc(doc(db, "news", id))
+      reload()
+    }
+
+    return
   }
 
   return (

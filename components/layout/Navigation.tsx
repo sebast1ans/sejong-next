@@ -2,8 +2,8 @@ import { LoadingButton } from '@mui/lab'
 import { MouseEventHandler, ReactNode, useContext, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { Box, Container, FormControl, MenuItem, Select, Typography } from '@mui/material'
-import { FacebookRounded, Instagram, Logout, YouTube } from '@mui/icons-material'
+import { Box, Button, Container, FormControl, MenuItem, Select, Typography } from '@mui/material'
+import { FacebookRounded, Instagram, Logout, OpenInNew, YouTube } from '@mui/icons-material'
 import { i18n, useTranslation } from 'next-i18next'
 import { useSignOut } from 'react-firebase-hooks/auth'
 import { UserContext } from '../../lib/context'
@@ -127,6 +127,17 @@ export const SignOutButton = () => {
   )
 }
 
+const GoToMainSiteButton = () => (
+  <Link href='/' target='_blank'>
+    <Button
+      variant='outlined'
+      startIcon={<OpenInNew/>}
+    >
+      Hlavní&nbsp;stránky
+    </Button>
+  </Link>
+)
+
 export default function Navigation () {
   const navigationRef = useRef(null)
   const { asPath, pathname, push } = useRouter()
@@ -155,10 +166,13 @@ export default function Navigation () {
     if (pathname === '/') {
       setNavigationItems(Object.keys(i18n?.getResourceBundle('cs', 'home-page-navigation')))
     } else if (pathname === '/login') {
-      setNavigationItems([])
+      setNavigationItems(Array(
+          <GoToMainSiteButton />
+          ))
     } else if (isOnPortalRoute && user) {
       setNavigationItems(Array(
         <Typography color='white'>{user?.email}</Typography>,
+        <GoToMainSiteButton />,
         <SignOutButton/>
       ))
     } else {

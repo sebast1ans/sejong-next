@@ -1,11 +1,12 @@
 import { addDoc, updateDoc, collection, arrayUnion } from '@firebase/firestore'
-import { doc, DocumentData } from 'firebase/firestore'
+import { deleteDoc, doc, DocumentData } from 'firebase/firestore'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { db } from '../../../lib/firebase'
 import Replay from '@mui/icons-material/Replay'
 import Save from '@mui/icons-material/Save'
 import Cancel from '@mui/icons-material/Cancel'
+import DeleteOutline from '@mui/icons-material/DeleteOutline'
 import {
   Alert,
   Box,
@@ -22,10 +23,21 @@ import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 import TipTapEditor from './TipTapEditor'
 import slugify from 'slugify'
 
+type AlertMessage = {
+  type: 'success' | 'error'
+  message: string
+}
+
 export type ArticleFormInputs = {
   title: string
   content: string
   isPublished: boolean
+}
+
+export const handleDelete = async (id: string) => {
+  if (confirm("Opravdu chcete smazat tento článek?")) {
+    await deleteDoc(doc(db, "news", id))
+  }
 }
 
 interface Props {
@@ -36,6 +48,10 @@ interface Props {
 export default function ArticleForm ({ articleData, editMode }: Props) {
   const { push } = useRouter()
   const [open, setOpen] = useState(false)
+  const [alertMessage, setAlertMessage] = useState<AlertMessage>({
+    type: 'success',
+    message: ''
+  })
   const articleForm = useForm<ArticleFormInputs>({
     defaultValues: (editMode && articleData) ? {
       title: articleData.title,
@@ -48,14 +64,6 @@ export default function ArticleForm ({ articleData, editMode }: Props) {
     },
     mode: 'onBlur'
   })
-
-  useEffect(() => {
-    if (editMode && articleData) {
-      articleForm.setValue('title', articleData.title, { shouldDirty: true })
-      articleForm.setValue('content', articleData.content, { shouldDirty: true })
-      articleForm.setValue('isPublished', articleData.isPublished, { shouldDirty: true })
-    }
-  }, [editMode, articleData, articleForm]);
 
   const handleClose = (_event: React.SyntheticEvent | Event) => {
     setOpen(false);
@@ -94,10 +102,10 @@ export default function ArticleForm ({ articleData, editMode }: Props) {
         await addDoc(collection(db, 'news'), {
           ...data,
           slug: encodeURI(slugify(data.title, { lower: true, strict: true })),
-          timestamp: Date.now()
+          timestamp: Date.now(),
         })
       }
-
+      setAlertMessage({ type: 'success', message: 'Článek byl uložen' })
       setOpen(true)
 
       setTimeout(() => {
@@ -105,7 +113,8 @@ export default function ArticleForm ({ articleData, editMode }: Props) {
       }, 1500)
 
     } catch (error) {
-      console.log('error')
+      setAlertMessage({ type: 'error', message: 'Stala se nějaká chyba' })
+      setOpen(true)
       console.log(error)
     }
   }
@@ -145,6 +154,18 @@ export default function ArticleForm ({ articleData, editMode }: Props) {
               >
                 Storno
               </Button>
+              {editMode && articleData ?
+                <Button
+                  startIcon={<DeleteOutline/>}
+                  variant='outlined'
+                  color='error'
+                  onClick={() => {
+                    void handleDelete(articleData.id)
+                    void push('/portal')
+                  }}
+                >
+                  Smazat
+                </Button> : null}
               <Button
                 startIcon={<Replay/>}
                 variant='outlined'
@@ -181,7 +202,7 @@ export default function ArticleForm ({ articleData, editMode }: Props) {
         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
         onClose={handleClose}
       >
-        <Alert severity='success' onClose={handleClose}>Článek je uložen</Alert>
+        <Alert severity={alertMessage.type} onClose={handleClose}>{alertMessage.message}</Alert>
       </Snackbar>
     </Container>
   )

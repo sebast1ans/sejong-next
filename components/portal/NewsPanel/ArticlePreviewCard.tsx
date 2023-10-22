@@ -1,27 +1,19 @@
 import { Button, Card, CardActions, CardContent, Typography } from '@mui/material'
-import { DocumentData, doc, deleteDoc } from 'firebase/firestore'
+import { DocumentData } from 'firebase/firestore'
 import { useRouter } from 'next/router'
-import { db } from '../../../lib/firebase'
 import formatDate from '../../../utils/formatDate'
 import htmlStripper from '../../../utils/htmlStripper'
 import textClamper from '../../../utils/textClamper'
 import DeleteIcon from '@mui/icons-material/Delete'
 import EditNote from '@mui/icons-material/EditNote'
+import { handleDelete } from './ArticleForm'
+
 interface Props {
   article: DocumentData
 }
 
 export default function ArticlePreviewCard ({ article }: Props) {
-  const { pathname, push, reload } = useRouter()
-
-  const handleDeleteArticle = async (id: string) => {
-    if (confirm("Opravdu chcete smazat tento článek?")) {
-      await deleteDoc(doc(db, "news", id))
-      reload()
-    }
-
-    return
-  }
+  const { pathname, push } = useRouter()
 
   return (
     <Card
@@ -57,7 +49,7 @@ export default function ArticlePreviewCard ({ article }: Props) {
       >
         <Button
           variant='text'
-          onClick={() => handleDeleteArticle(article.id)}
+          onClick={() => handleDelete(article.id)}
           startIcon={<DeleteIcon/>}
         >
           Delete

@@ -1,7 +1,8 @@
 import { addDoc, updateDoc, collection, arrayUnion } from '@firebase/firestore'
 import { deleteDoc, doc, DocumentData } from 'firebase/firestore'
 import { useRouter } from 'next/router'
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
+import { NewsContext } from '../../../lib/context'
 import { db } from '../../../lib/firebase'
 import Replay from '@mui/icons-material/Replay'
 import Save from '@mui/icons-material/Save'
@@ -47,6 +48,7 @@ interface Props {
 }
 
 export default function ArticleForm ({ articleData, editMode }: Props) {
+  const [articlesSnapshot] = useContext(NewsContext)
   const { push, events } = useRouter()
   const [open, setOpen] = useState(false)
   const lessThanSm = useMediaQuery(theme.breakpoints.down('sm'))
@@ -84,12 +86,20 @@ export default function ArticleForm ({ articleData, editMode }: Props) {
   }, [articleForm])
 
   useEffect(() => {
+    if (articleForm.formState.isSubmitted) {
+      setTimeout(() => {
+        void push('/portal')
+      }, 1000)
+    }
+  }, [articleForm.formState.isSubmitted, push])
+
+  useEffect(() => {
     events.on('routeChangeStart', handleCancel)
 
     return () => {
       events.off('routeChangeStart', handleCancel)
     }
-  }, [handleCancel, events]);
+  }, [handleCancel, events])
 
   const handleClose = (_event: React.SyntheticEvent | Event) => {
     setOpen(false);
@@ -105,6 +115,14 @@ export default function ArticleForm ({ articleData, editMode }: Props) {
     return
   }
 
+  const createUniqueSlug = (newSlug: string, articleSlugs: string[]) => {
+    return (function createSlug (temporarySlug: string, increment: number): string {
+      return articleSlugs.includes(temporarySlug)
+        ? createSlug(`${newSlug}-${increment}`, increment + 1)
+        : temporarySlug
+    })(newSlug, 0)
+  }
+
   const onSubmit: SubmitHandler<ArticleFormInputs> = async (data: ArticleFormInputs) => {
     try {
       if (editMode && articleData) {
@@ -116,15 +134,15 @@ export default function ArticleForm ({ articleData, editMode }: Props) {
       } else {
         await addDoc(collection(db, 'news'), {
           ...data,
-          slug: encodeURI(slugify(data.title, { lower: true, strict: true })),
+          slug: createUniqueSlug(
+            encodeURI(slugify(data.title, { lower: true, strict: true })),
+            articlesSnapshot!.docs.map(doc => doc.data().slug),
+          ),
           timestamp: Date.now(),
         })
       }
       setAlertMessage({ type: 'success', message: 'Článek byl uložen' })
       setOpen(true)
-      setTimeout(() => {
-        push('/portal')
-      }, 1500)
 
     } catch (error) {
       setAlertMessage({ type: 'error', message: 'Stala se nějaká chyba' })
@@ -148,7 +166,7 @@ export default function ArticleForm ({ articleData, editMode }: Props) {
         >
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
             <Typography variant='h2' fontWeight='bold'>{editMode ? 'Upravit článek' : 'Nový článek'}</Typography>
-            <Box sx={{ display: 'flex', gap: '.5rem'}}>
+            <Box sx={{ display: 'flex', gap: '.5rem' }}>
               {lessThanSm ? (
                 <IconButton color='secondary' aria-label='Storno'>
                   <Cancel/>

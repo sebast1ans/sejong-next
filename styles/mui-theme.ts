@@ -1,4 +1,4 @@
-import { createTheme } from '@mui/material/styles'
+import { createTheme, responsiveFontSizes } from '@mui/material/styles'
 import { Saira_Semi_Condensed } from "next/font/google"
 import variables from './variables.module.scss'
 
@@ -9,7 +9,7 @@ const encodeSans = Saira_Semi_Condensed({
 })
 
 
-export const theme = createTheme({
+export let theme = createTheme({
   typography: {
     fontFamily: [
       encodeSans.style.fontFamily,
@@ -46,3 +46,5 @@ export const theme = createTheme({
     }
   }
 })
+
+theme = responsiveFontSizes(theme)

@@ -6,6 +6,7 @@ import htmlStripper from '../../../utils/htmlStripper'
 import textClamper from '../../../utils/textClamper'
 import DeleteIcon from '@mui/icons-material/Delete'
 import EditNote from '@mui/icons-material/EditNote'
+import Circle from '@mui/icons-material/Circle'
 import { handleDelete } from './ArticleForm'
 
 interface Props {
@@ -29,6 +30,7 @@ export default function ArticlePreviewCard ({ article }: Props) {
         <Typography
           sx={{ fontSize: '1.1rem', textWrap: 'balance' }}
         >
+          <Circle color={article.isPublished ? 'success' : 'warning'} sx={{ fontSize: '.5rem', mr: '4px', mb: '4px'}}/>
           {textClamper(article.title, 68)}
         </Typography>
         <Typography variant={'body2'} sx={{ color: 'dimgray', mb: '1rem' }}>
@@ -52,7 +54,7 @@ export default function ArticlePreviewCard ({ article }: Props) {
           onClick={() => handleDelete(article.id)}
           startIcon={<DeleteIcon/>}
         >
-          Delete
+          Smazat
         </Button>
         <Button
           variant='text'
@@ -60,7 +62,7 @@ export default function ArticlePreviewCard ({ article }: Props) {
           onClick={() => push(`${pathname}/edit-article/${article.id}`)}
           startIcon={<EditNote/>}
         >
-          Edit
+          Upravit
         </Button>
       </CardActions>
     </Card>

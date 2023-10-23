@@ -31,7 +31,7 @@ export default function NewsPanel () {
         {!loading ?
           articlesSnapshot?.docs
             ? articlesSnapshot.docs.map(article =>
-              <ArticlePreviewCard key={article.id} article={article.data()}/>
+              <ArticlePreviewCard key={article.id} article={{ ...article.data(), id: article.id }}/>
             )
             : <p>Žádné články neexistují</p>
           : <p>Načítání...</p>

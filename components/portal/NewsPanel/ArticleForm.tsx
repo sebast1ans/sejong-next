@@ -13,12 +13,13 @@ import {
   Button,
   Checkbox,
   Container,
-  FormControlLabel,
+  FormControlLabel, IconButton,
   Paper,
   Snackbar,
   TextField,
-  Typography
+  Typography, useMediaQuery
 } from '@mui/material'
+import { theme } from '../../../styles/mui-theme'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 import TipTapEditor from './TipTapEditor'
 import slugify from 'slugify'
@@ -46,8 +47,9 @@ interface Props {
 }
 
 export default function ArticleForm ({ articleData, editMode }: Props) {
-  const { push, events  } = useRouter()
+  const { push, events } = useRouter()
   const [open, setOpen] = useState(false)
+  const lessThanSm = useMediaQuery(theme.breakpoints.down('sm'))
   const [alertMessage, setAlertMessage] = useState<AlertMessage>({
     type: 'success',
     message: ''
@@ -65,7 +67,7 @@ export default function ArticleForm ({ articleData, editMode }: Props) {
     mode: 'onBlur'
   })
 
-  const handleCancel = useCallback ( () => {
+  const handleCancel = useCallback(() => {
     if (articleForm.formState.isSubmitted) {
       return true
     }
@@ -118,11 +120,11 @@ export default function ArticleForm ({ articleData, editMode }: Props) {
           timestamp: Date.now(),
         })
       }
-        setAlertMessage({ type: 'success', message: 'Článek byl uložen' })
-        setOpen(true)
-        setTimeout(() => {
-          push('/portal')
-        }, 1500)
+      setAlertMessage({ type: 'success', message: 'Článek byl uložen' })
+      setOpen(true)
+      setTimeout(() => {
+        push('/portal')
+      }, 1500)
 
     } catch (error) {
       setAlertMessage({ type: 'error', message: 'Stala se nějaká chyba' })
@@ -144,7 +146,45 @@ export default function ArticleForm ({ articleData, editMode }: Props) {
             gap: '1rem'
           }}
         >
-          <Typography variant='h2' fontWeight='bold'>{editMode ? 'Upravit článek' : 'Nový článek'}</Typography>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
+            <Typography variant='h2' fontWeight='bold'>{editMode ? 'Upravit článek' : 'Nový článek'}</Typography>
+            <Box sx={{ display: 'flex', gap: '.5rem'}}>
+              {lessThanSm ? (
+                <IconButton color='secondary' aria-label='Storno'>
+                  <Cancel/>
+                </IconButton>
+              ) : (
+                <Button
+                  startIcon={<Cancel/>}
+                  variant='outlined'
+                  color='secondary'
+                  size='small'
+                  onClick={() => void push('/portal')}
+                >
+                  Storno
+                </Button>
+              )}
+              {editMode && articleData ?
+                lessThanSm ? (
+                  <IconButton color='error' aria-label='Smazat'>
+                    <DeleteOutline/>
+                  </IconButton>
+                ) : (
+                  <Button
+                    startIcon={<DeleteOutline/>}
+                    variant='outlined'
+                    color='error'
+                    size='small'
+                    onClick={() => {
+                      void handleDelete(articleData.id)
+                      void push('/portal')
+                    }}
+                  >
+                    Smazat
+                  </Button>
+                ) : null}
+            </Box>
+          </Box>
           <TextField
             type='text'
             color='info'
@@ -156,39 +196,25 @@ export default function ArticleForm ({ articleData, editMode }: Props) {
           <FormProvider {...articleForm}>
             <TipTapEditor/>
           </FormProvider>
-          <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap-reverse' }}>
-            <Box sx={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-              <Button
-                startIcon={<Cancel/>}
-                variant='outlined'
-                color='secondary'
-                onClick={() => void push('/portal')}
-              >
-                Storno
-              </Button>
-              {editMode && articleData ?
+          <Box sx={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'space-between' }}>
+            <Box>
+              {lessThanSm ? (
+                <IconButton color='warning' aria-label='Reset'>
+                  <Replay/>
+                </IconButton>
+              ) : (
                 <Button
-                  startIcon={<DeleteOutline/>}
+                  startIcon={<Replay/>}
                   variant='outlined'
-                  color='error'
-                  onClick={() => {
-                    void handleDelete(articleData.id)
-                    void push('/portal')
-                  }}
+                  color='warning'
+                  onClick={handleReset}
+                  disabled={!articleForm.formState.isDirty}
                 >
-                  Smazat
-                </Button> : null}
-              <Button
-                startIcon={<Replay/>}
-                variant='outlined'
-                color='warning'
-                onClick={handleReset}
-                disabled={!articleForm.formState.isDirty}
-              >
-                Začít od znova
-              </Button>
+                  Začít od znova
+                </Button>
+              )}
             </Box>
-            <Box sx={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+            <Box>
               <FormControlLabel
                 label='Veřejný'
                 control={

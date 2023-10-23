@@ -62,9 +62,9 @@ export default function ArticleForm ({ articleData, editMode }: Props) {
       content: articleData.content,
       isPublished: articleData.isPublished
     } : {
-      title: "",
-      content: "<p></p>",
-      isPublished: false
+      title: '',
+      content: '<p></p>',
+      isPublished: false,
     },
     mode: 'onBlur'
   })
@@ -115,12 +115,12 @@ export default function ArticleForm ({ articleData, editMode }: Props) {
     return
   }
 
-  const createUniqueSlug = (newSlug: string, articleSlugs: string[]) => {
+  const createUniqueSlug = (title: string) => {
     return (function createSlug (temporarySlug: string, increment: number): string {
-      return articleSlugs.includes(temporarySlug)
-        ? createSlug(`${newSlug}-${increment}`, increment + 1)
-        : temporarySlug
-    })(newSlug, 0)
+      return articlesSnapshot!.docs.map(doc => doc.data().slug).includes(temporarySlug)
+        ? createSlug(`${title}-${increment}`, increment + 1)
+        : encodeURI(slugify(temporarySlug, { lower: true, strict: true }))
+    })(title, 0)
   }
 
   const onSubmit: SubmitHandler<ArticleFormInputs> = async (data: ArticleFormInputs) => {
@@ -128,16 +128,13 @@ export default function ArticleForm ({ articleData, editMode }: Props) {
       if (editMode && articleData) {
         await updateDoc(doc(db, "news", articleData.id), {
           ...data,
-          slug: encodeURI(slugify(data.title, { lower: true, strict: true })),
+          slug: createUniqueSlug(data.title),
           updatesTimestamp: arrayUnion(Date.now())
         })
       } else {
         await addDoc(collection(db, 'news'), {
           ...data,
-          slug: createUniqueSlug(
-            encodeURI(slugify(data.title, { lower: true, strict: true })),
-            articlesSnapshot!.docs.map(doc => doc.data().slug),
-          ),
+          slug: createUniqueSlug(data.title),
           timestamp: Date.now(),
         })
       }
@@ -214,6 +211,7 @@ export default function ArticleForm ({ articleData, editMode }: Props) {
           <FormProvider {...articleForm}>
             <TipTapEditor/>
           </FormProvider>
+           {/*TODO possibility to edit slug manually*/}
           <Box sx={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'space-between' }}>
             <Box>
               {lessThanSm ? (

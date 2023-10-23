@@ -1,11 +1,10 @@
-import { DocumentData } from 'firebase/firestore'
+import { collection, orderBy, query } from 'firebase/firestore'
 import type { AppProps } from 'next/app'
 import { ThemeProvider } from '@mui/material/styles'
-import { useEffect, useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
+import { useCollection } from 'react-firebase-hooks/firestore'
 import { NewsContext, UserContext } from '../lib/context'
-import { auth } from '../lib/firebase'
-import { getArticlesData } from '../lib/getArticlesData'
+import { auth, db } from '../lib/firebase'
 import { theme } from '../styles/mui-theme'
 import { appWithTranslation } from 'next-i18next'
 import Navigation from '../components/layout/Navigation'
@@ -15,13 +14,11 @@ import '../styles/globals.scss'
 
 function App ({ Component, pageProps }: AppProps) {
   const authState = useAuthState(auth)
-  const [articlesData, setArticlesData] = useState<DocumentData[]>([])
 
-  useEffect(() => {
-    (async () => {
-      setArticlesData( await getArticlesData())
-    })()
-  }, []);
+  const articlesCollection = useCollection(query(
+    collection(db, 'news' ),
+    orderBy('timestamp', 'desc')
+  ))
 
   return (
     <>
@@ -30,7 +27,7 @@ function App ({ Component, pageProps }: AppProps) {
         <UserContext.Provider value={authState}>
           <Navigation/>
           <div className='site'>
-            <NewsContext.Provider value={[...articlesData]}>
+            <NewsContext.Provider value={articlesCollection}>
               <Component {...pageProps} />
             </NewsContext.Provider>
           </div>

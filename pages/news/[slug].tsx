@@ -7,8 +7,8 @@ import type {
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import Head from 'next/head'
 import { Article } from '../../components/news/Article'
-import { getArticlesData } from '../../lib/getArticlesData'
 import { getArticleDataWithSlug } from '../../lib/getArticleDataWithSlug'
+import { getArticlesData } from '../../lib/getArticlesData'
 
 export default function ArticleView ({ articleData }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (

@@ -10,7 +10,7 @@ import textClamper from '../../utils/textClamper'
 import styles from './ArticlesList.module.scss'
 
 export const ArticlesList = () => {
-  const articles = useContext(NewsContext)
+  const [articlesSnapshot] = useContext(NewsContext)
   const { locale, pathname, push } = useRouter()
   const { t } = useTranslation('news')
 
@@ -21,26 +21,26 @@ export const ArticlesList = () => {
           <NewspaperOutlined fontSize='large' sx={{ color: 'lightgray' }}/>
         </Typography>
         <Box sx={{ mt: '-2rem' }}>
-          {articles ? articles
-            .filter(article => article.isPublished)
+          {articlesSnapshot?.docs ? articlesSnapshot.docs
+            .filter(article => article.data().isPublished)
             .map(article => (
               <Box key={article.id} className={styles.articleCard}>
                 <Box className={styles.date}>
-                  <em>{formatDate(article.updatesTimestamp?.slice(-1), locale)}</em>
+                  <em>{formatDate(article.data().updatesTimestamp?.slice(-1), locale)}</em>
                 </Box>
                 <Box className={styles.article}>
                   <Typography
                     variant='h2'
                     sx={{ fontWeight: '600', mb: '1.2rem', cursor: 'pointer' }}
-                    onClick={() => push(`${pathname}/${article.slug}`)}
+                    onClick={() => push(`${pathname}/${article.data().slug}`)}
                   >
-                    {article.title}
+                    {article.data().title}
                   </Typography>
                   <Typography variant='body1' sx={{ mb: '1rem' }}>
-                    {textClamper(htmlStripper(article.content), 420)}
+                    {textClamper(htmlStripper(article.data().content), 420)}
                   </Typography>
                   <Button
-                    onClick={() => push(`/news/${article.slug}`)}
+                    onClick={() => push(`/news/${article.data().slug}`)}
                     startIcon={<ArticleOutlined/>}
                   >
                     {t('fullArticle')}

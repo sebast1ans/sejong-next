@@ -68,7 +68,7 @@ const ArticleDialog = ({ open, onClose, article }: ArticleDialogProps) => {
 const NewsPanel = () => {
   const { t } = useTranslation('news')
   const { locale, push } = useRouter()
-  const articles = useContext(NewsContext)
+  const [articlesSnapshot] = useContext(NewsContext)
   const [dialogOpen, setDialogOpen] = useState(false)
   const [articleDialogData, setArticleDialogData] = useState<DocumentData | null>(null)
   const lessThanSm = useMediaQuery(theme.breakpoints.down('sm'))
@@ -93,8 +93,8 @@ const NewsPanel = () => {
         }}
       >
         <Box className={styles.newsPanel}>
-          {articles ? articles
-              .filter(article => article.isPublished)
+          {articlesSnapshot?.docs ? articlesSnapshot.docs
+              .filter(article => article.data().isPublished)
               .slice(0, lessThanSm ? 2 : 4)
               .map(article => (
             <Card
@@ -107,28 +107,28 @@ const NewsPanel = () => {
               }}
             >
               <CardContent
-                onClick={() => handleClickOpen(article)}
+                onClick={() => handleClickOpen(article.data())}
                 sx={{ cursor: 'pointer' }}
               >
                 <Typography
                   sx={{ fontSize: '1.1rem', textWrap: 'balance' }}
                 >
-                  {textClamper(article.title, 68)}
+                  {textClamper(article.data().title, 68)}
                 </Typography>
                 <Typography variant={'body2'} sx={{ color: 'dimgray', mb: '1rem' }}>
-                  <em>{formatDate(article.updatesTimestamp?.slice(-1), locale)}</em>
+                  <em>{formatDate(article.data().updatesTimestamp?.slice(-1), locale)}</em>
                 </Typography>
                 <Typography
                   variant={'body2'}
                   sx={{ color: 'dimgray', }}
                 >
-                  {textClamper(htmlStripper(article.content), 222)}
+                  {textClamper(htmlStripper(article.data().content), 222)}
                 </Typography>
               </CardContent>
               <CardActions>
                 <Button
                   size='small'
-                  onClick={() => push(`/news/${article.slug}`)}
+                  onClick={() => push(`/news/${article.data().slug}`)}
                   startIcon={<ArticleOutlined/>}
                 >
                   {t('fullArticle')}

@@ -7,7 +7,7 @@ import ArticlePreviewCard from './ArticlePreviewCard'
 
 export default function NewsPanel () {
   const { push, pathname } = useRouter()
-  const articles = useContext(NewsContext)
+  const [articlesSnapshot, loading] = useContext(NewsContext)
 
   return (
     <>
@@ -28,9 +28,14 @@ export default function NewsPanel () {
         }
       }}
       >
-        {articles ? articles.map(article => (
-          <ArticlePreviewCard key={article.id} article={article}/>
-        )) : null}
+        {!loading ?
+          articlesSnapshot?.docs
+            ? articlesSnapshot.docs.map(article =>
+              <ArticlePreviewCard key={article.id} article={article.data()}/>
+            )
+            : <p>Žádné články neexistují</p>
+          : <p>Načítání...</p>
+        }
       </Box>
     </>
   )

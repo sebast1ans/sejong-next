@@ -92,7 +92,7 @@ export const LoginWindow = () => {
       />
       <LoadingButton
         type='submit'
-        variant='outlined'
+        variant='text'
         color={user ? 'success' : undefined}
         loading={loading}
         loadingPosition="start"
@@ -132,7 +132,7 @@ export default function LoginPage () {
       </Head>
       <Container>
         <Box sx={{ display: 'grid', placeItems: 'center' }}>
-          <h1>Vítejte na portálu Sejong Dojang</h1>
+          <h1>Vítejte na portálu Sejong Taekwondo!</h1>
           <LoginWindow/>
         </Box>
       </Container>

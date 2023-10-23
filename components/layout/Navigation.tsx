@@ -105,10 +105,12 @@ const LanguageSelector = ({ isLangSelectOpen }: LanguageSelectorProps) => {
 
 export const SignOutButton = () => {
   const [signOut, loading] = useSignOut(auth)
+  const { push } = useRouter()
 
   const handleSignOut = async () => {
     try {
       await signOut()
+      push('/login')
     } catch (error) {
       console.log(error)
     }

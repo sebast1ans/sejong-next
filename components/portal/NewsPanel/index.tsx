@@ -14,7 +14,7 @@ export default function NewsPanel () {
 
     for (let i = 0; i < 4; i++) {
       skeletons.push(
-        <Card>
+        <Card key={i}>
           <CardContent>
             <Typography variant='h3' mb='1rem'>
               <Skeleton/>

@@ -9,7 +9,7 @@ const tabs: { label: string, icon: ReactElement, component: ReactNode }[] = [
   {
     label: 'Aktuality',
     icon: <Newspaper/>,
-    component: <><NewsPanel/></>
+    component: <NewsPanel/>
   },
   {
     label: 'Obsah',

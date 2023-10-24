@@ -1,9 +1,37 @@
 import { CalendarMonth, Folder, Groups2, Newspaper, Web } from '@mui/icons-material'
-import { ReactNode, SyntheticEvent, useState } from 'react'
+import { ReactElement, ReactNode, SyntheticEvent, useState } from 'react'
 import { Box, Container, Paper, Tab, Tabs } from '@mui/material'
 import Head from 'next/head'
 import NewsPanel from '../../components/portal/NewsPanel'
 import AuthCheck from '../../components/portal/AuthCheck'
+
+const tabs: { label: string, icon: ReactElement, component: ReactNode }[] = [
+  {
+    label: 'Aktuality',
+    icon: <Newspaper/>,
+    component: <><NewsPanel/></>
+  },
+  {
+    label: 'Obsah',
+    icon: <Web/>,
+    component: 'Obsah'
+  },
+  {
+    label: 'Členové',
+    icon: <Groups2/>,
+    component: 'Členové'
+  },
+  {
+    label: 'Kalendář',
+    icon: <CalendarMonth/>,
+    component: 'Kalendář'
+  },
+  {
+    label: 'Soubory',
+    icon: <Folder/>,
+    component: 'Soubory'
+  }
+]
 
 interface TabPanelProps {
   children?: ReactNode
@@ -27,6 +55,7 @@ const TabPanel = ({ children, value, index, ...rest }: TabPanelProps) => (
   </div>
 )
 
+
 const a11yProps = (index: number) => {
   return {
     id: `tab-${index}`,
@@ -36,7 +65,7 @@ const a11yProps = (index: number) => {
 
 export default function Portal () {
   const [currentTab, setCurrentTab] = useState(0)
-  const tabPanels = [<><NewsPanel/></>, 'Obsah', 'Členové', 'Kalendář', 'Soubory']
+
   const handleChangeTab = (event: SyntheticEvent, newValue: number) => {
     setCurrentTab(newValue)
   }
@@ -60,16 +89,14 @@ export default function Portal () {
               allowScrollButtonsMobile
               aria-label='tabs'
             >
-              <Tab icon={<Newspaper/>} iconPosition='start' label='Aktuality' {...a11yProps(0)} />
-              <Tab icon={<Web/>} iconPosition='start' label='Obsah' {...a11yProps(1)} />
-              <Tab icon={<Groups2/>} iconPosition='start' label='Členové' {...a11yProps(2)} />
-              <Tab icon={<CalendarMonth/>} iconPosition='start' label='Kalendář' {...a11yProps(3)} />
-              <Tab icon={<Folder/>} iconPosition='start' label='Soubory' {...a11yProps(4)} />
+              {tabs.map((tab, index) => (
+                <Tab key={index} icon={tab.icon} iconPosition='start' label={tab.label} {...a11yProps(index)} />
+              ))}
             </Tabs>
             <Box>
-              {tabPanels.map((tabPanel, index) => (
+              {tabs.map((tab, index) => (
                 <TabPanel key={index} index={index} value={currentTab}>
-                  {tabPanel}
+                  {tab.component}
                 </TabPanel>
               ))}
             </Box>

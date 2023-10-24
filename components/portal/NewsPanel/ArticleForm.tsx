@@ -203,7 +203,11 @@ export default function ArticleForm ({ articleData, editMode }: Props) {
           <TextField
             type='text'
             color='info'
-            label='Titulek'
+            error={!!articleForm.formState.errors?.title}
+            label={articleForm.formState.errors?.title
+              ? articleForm.formState.errors?.title?.message
+              : 'Titulek'
+            }
             {...articleForm.register('title', {
               required: 'Vyplňte titulek'
             })}
@@ -211,7 +215,7 @@ export default function ArticleForm ({ articleData, editMode }: Props) {
           <FormProvider {...articleForm}>
             <TipTapEditor/>
           </FormProvider>
-           {/*TODO possibility to edit slug manually*/}
+          {/*TODO possibility to edit slug manually*/}
           <Box sx={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'space-between' }}>
             <Box>
               {lessThanSm ? (

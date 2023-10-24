@@ -9,9 +9,8 @@ export default function EditArticle ({ articleData }: InferGetStaticPropsType<ty
   )
 }
 
-export const getServerSideProps = (async ({ params }) => {
+export const getServerSideProps = (async ({ params}) => {
   const articleData = await getArticleData(params!.id as string)
-
   return {
     props: {
       articleData: articleData || null,

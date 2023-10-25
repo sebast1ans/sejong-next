@@ -33,7 +33,8 @@ export default function TipTapEditor () {
         control={control}
         name="content"
         render={({ field: { onChange, onBlur, ref, value } }) =>
-          <Box sx={{ zIndex: '2', '& > div': { backgroundColor: 'white' } }}>
+          <Box sx={{ zIndex: '2', '& > div': { backgroundColor: 'white', }}}>
+            {/*TODO change focus color*/}
             <RichTextEditor
               content={value}
               ref={(e) => {

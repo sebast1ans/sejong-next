@@ -80,19 +80,21 @@ export default function Portal () {
       </Head>
       <AuthCheck>
         <Container sx={{ my: '2rem' }}>
-          <Paper elevation={2}>
-            <Tabs
-              value={currentTab}
-              onChange={handleChangeTab}
-              variant='scrollable'
-              scrollButtons='auto'
-              allowScrollButtonsMobile
-              aria-label='tabs'
-            >
-              {tabs.map((tab, index) => (
-                <Tab key={index} icon={tab.icon} iconPosition='start' label={tab.label} {...a11yProps(index)} />
-              ))}
-            </Tabs>
+          <Paper variant='outlined' elevation={0}>
+            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+              <Tabs
+                value={currentTab}
+                onChange={handleChangeTab}
+                variant='scrollable'
+                scrollButtons='auto'
+                allowScrollButtonsMobile
+                aria-label='tabs'
+              >
+                {tabs.map((tab, index) => (
+                  <Tab key={index} icon={tab.icon} iconPosition='start' label={tab.label} {...a11yProps(index)} />
+                ))}
+              </Tabs>
+            </Box>
             <Box>
               {tabs.map((tab, index) => (
                 <TabPanel key={index} index={index} value={currentTab}>

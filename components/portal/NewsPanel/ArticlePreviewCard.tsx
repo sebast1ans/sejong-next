@@ -18,7 +18,8 @@ export default function ArticlePreviewCard ({ article }: Props) {
 
   return (
     <Card
-      elevation={2}
+      elevation={0}
+      variant='outlined'
       key={article.id}
       sx={{
         display: 'flex',

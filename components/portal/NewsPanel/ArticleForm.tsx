@@ -150,7 +150,7 @@ export default function ArticleForm ({ articleData, editMode }: Props) {
 
   return (
     <Container sx={{ my: '2rem' }}>
-      <Paper elevation={2} sx={{ maxWidth: '50rem' }}>
+      <Paper elevation={0} variant='outlined' sx={{ maxWidth: '50rem' }}>
         <Box
           component='form'
           onSubmit={articleForm.handleSubmit(onSubmit)}

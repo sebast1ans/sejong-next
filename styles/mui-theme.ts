@@ -44,6 +44,13 @@ export let theme = createTheme({
     primary: {
       main: variables.sejongRed,
     }
+  },
+  components: {
+    MuiButton: {
+      defaultProps: {
+        disableElevation: true
+      }
+    }
   }
 })
 

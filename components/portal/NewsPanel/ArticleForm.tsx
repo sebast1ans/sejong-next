@@ -165,7 +165,11 @@ export default function ArticleForm ({ articleData, editMode }: Props) {
             <Typography variant='h2' fontWeight='bold'>{editMode ? 'Upravit článek' : 'Nový článek'}</Typography>
             <Box sx={{ display: 'flex', gap: '.5rem' }}>
               {lessThanSm ? (
-                <IconButton color='secondary' aria-label='Storno'>
+                <IconButton
+                  color='secondary'
+                  aria-label='Storno'
+                  onClick={() => void push('/portal')}
+                >
                   <Cancel/>
                 </IconButton>
               ) : (
@@ -181,7 +185,14 @@ export default function ArticleForm ({ articleData, editMode }: Props) {
               )}
               {editMode && articleData ?
                 lessThanSm ? (
-                  <IconButton color='error' aria-label='Smazat'>
+                  <IconButton
+                    color='error'
+                    aria-label='Smazat'
+                    onClick={() => {
+                      void handleDelete(articleData.id)
+                      void push('/portal')
+                    }}
+                  >
                     <DeleteOutline/>
                   </IconButton>
                 ) : (
@@ -219,7 +230,12 @@ export default function ArticleForm ({ articleData, editMode }: Props) {
           <Box sx={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'space-between' }}>
             <Box>
               {lessThanSm ? (
-                <IconButton color='warning' aria-label='Reset'>
+                <IconButton
+                  color='warning'
+                  aria-label='Reset'
+                  onClick={handleReset}
+                  disabled={!articleForm.formState.isDirty}
+                >
                   <Replay/>
                 </IconButton>
               ) : (

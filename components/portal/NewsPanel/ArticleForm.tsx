@@ -1,7 +1,7 @@
 import { addDoc, updateDoc, collection, arrayUnion } from '@firebase/firestore'
 import { deleteDoc, doc, DocumentData } from 'firebase/firestore'
 import { useRouter } from 'next/router'
-import React, { useCallback, useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { NewsContext } from '../../../lib/context'
 import { db } from '../../../lib/firebase'
 import Replay from '@mui/icons-material/Replay'
@@ -69,22 +69,6 @@ export default function ArticleForm ({ articleData, editMode }: Props) {
     mode: 'onBlur'
   })
 
-  const handleCancel = useCallback(() => {
-    if (articleForm.formState.isSubmitted) {
-      return true
-    }
-
-    if (articleForm.formState.isDirty) {
-      if (confirm('Máte neuložené změny, opravdu chcete opustit článek?')) {
-        articleForm.reset()
-        return true
-      }
-      // TODO when using back/forward buttons, the url changes, needs further investigation
-      throw "Abort route change by user's confirmation."
-    }
-    return null
-  }, [articleForm])
-
   useEffect(() => {
     if (articleForm.formState.isSubmitted) {
       setTimeout(() => {
@@ -94,12 +78,28 @@ export default function ArticleForm ({ articleData, editMode }: Props) {
   }, [articleForm.formState.isSubmitted, push])
 
   useEffect(() => {
+    const handleCancel = () => {
+      if (articleForm.formState.isSubmitted) {
+        return true
+      }
+
+      if (articleForm.formState.isDirty) {
+        if (confirm('Máte neuložené změny, opravdu chcete opustit článek?')) {
+          articleForm.reset()
+          return true
+        }
+        // TODO when using back/forward buttons, the url changes, needs further investigation
+        throw "Abort route change by user's confirmation."
+      }
+      return null
+    }
+
     events.on('routeChangeStart', handleCancel)
 
     return () => {
       events.off('routeChangeStart', handleCancel)
     }
-  }, [handleCancel, events])
+  }, [articleForm, articleForm.formState.isSubmitted, articleForm.formState.isDirty, events])
 
   const handleClose = (_event: React.SyntheticEvent | Event) => {
     setOpen(false);

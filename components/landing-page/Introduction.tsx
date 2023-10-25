@@ -1,6 +1,7 @@
 import { Container, Typography } from '@mui/material'
 import { DocumentData } from 'firebase/firestore'
 import { useTranslation } from 'next-i18next'
+import { useRouter } from 'next/router'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay, Pagination } from 'swiper/modules'
 import 'swiper/css'
@@ -8,12 +9,14 @@ import 'swiper/css/pagination'
 import convertHtmlToReact from '@hedgedoc/html-to-react'
 import { Heading } from './Heading'
 import styles from './Introduction.module.scss'
+import { getPropertyWithSuffix } from '../../lib/getPropertyWithSuffix'
 
 interface Props {
   slidesData: DocumentData[]
 }
 
 export default function Introduction ({ slidesData }: Props) {
+  const { locale } = useRouter()
   const { t } = useTranslation('introduction')
 
   return (
@@ -34,8 +37,12 @@ export default function Introduction ({ slidesData }: Props) {
           >
             <div className={styles.backdropFilter}>
               <Container className={styles.slideTextContainer}>
-                <Typography variant={'h2'}>{convertHtmlToReact(slideData.title)}</Typography>
-                <Typography variant={'body1'}>{convertHtmlToReact(slideData.text)}</Typography>
+                <Typography variant={'h2'}>
+                  {convertHtmlToReact(slideData[getPropertyWithSuffix('title', locale)])}
+                </Typography>
+                <Typography variant={'body1'}>
+                  {convertHtmlToReact(slideData[getPropertyWithSuffix('text', locale)])}
+                </Typography>
               </Container>
             </div>
           </SwiperSlide>

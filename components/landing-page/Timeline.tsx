@@ -1,10 +1,55 @@
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
+import IconButton from '@mui/material/IconButton'
 import { Heading } from './Heading'
 import { useTranslation } from 'next-i18next'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import { Navigation } from 'swiper/modules'
 import 'swiper/css'
+import 'swiper/css/navigation'
 import styles from './Timeline.module.scss'
 import { theme } from '../../styles/mui-theme'
-import { Typography } from '@mui/material'
+import { Typography, useMediaQuery } from '@mui/material'
+
+const SwiperNavigationButtons = () => {
+  const lessThanMd = useMediaQuery(theme.breakpoints.down('md'))
+  const buttonsPosition = {
+    top: `${lessThanMd ? '14.6rem' : '16.2rem'}`,
+    margin: '.5rem',
+    zIndex: 2
+  }
+
+  return (
+    <>
+      <IconButton
+        className='swiper-nav-prev'
+        size='large'
+        color='primary'
+        sx={{
+          position: 'absolute',
+          top: buttonsPosition.top,
+          left: buttonsPosition.margin,
+          zIndex: buttonsPosition.zIndex,
+        }}
+      >
+        <ArrowBackIosNewIcon/>
+      </IconButton>
+      <IconButton
+        className='swiper-nav-next'
+        size='large'
+        color='primary'
+        sx={{
+          position: 'absolute',
+          top: buttonsPosition.top,
+          right: buttonsPosition.margin,
+          zIndex: buttonsPosition.zIndex
+        }}
+      >
+        <ArrowForwardIosIcon/>
+      </IconButton>
+    </>
+  )
+}
 
 export default function Timeline() {
   const {t} = useTranslation('timeline')
@@ -30,12 +75,17 @@ export default function Timeline() {
       <Heading text={t('our-story')}/>
       <Swiper
         className={styles.timeline}
+        navigation={{
+          prevEl: '.swiper-nav-prev',
+          nextEl: '.swiper-nav-next'
+        }}
         slidesPerView={2}
         centeredSlides={true}
         freeMode={true}
         initialSlide={0}
         grabCursor={true}
         breakpoints={carouselBreakpoints}
+        modules={[Navigation]}
       >
         {years.map(year => (
           <SwiperSlide className={styles.event} key={year}>
@@ -49,6 +99,7 @@ export default function Timeline() {
           </SwiperSlide>
         ))}
       </Swiper>
+      <SwiperNavigationButtons/>
     </section>
   )
 }

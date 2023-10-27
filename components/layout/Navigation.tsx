@@ -83,11 +83,13 @@ const LanguageSelector = ({ isLangSelectOpen }: LanguageSelectorProps) => {
   }
 
   return (
-    <FormControl size={'small'}>
+    <FormControl size='small'>
       <Select
         id='languageSelector'
-        className={styles.select}
         value={activeLocale}
+        autoWidth
+        sx={{ '.MuiOutlinedInput-notchedOutline': { borderStyle: 'none' }, '& .MuiSvgIcon-root': { color: 'white' }}}
+        renderValue={(value) => <span className={`fi fi-${alpha2Code[value as keyof typeof alpha2Code]}`}></span>}
         onOpen={() => isLangSelectOpen(true)}
         onClose={() => isLangSelectOpen(false)}
         onChange={e => {handleLanguageChange(e.target.value as string)}}
@@ -110,7 +112,7 @@ export const SignOutButton = () => {
   const handleSignOut = async () => {
     try {
       await signOut()
-      push('/login')
+      await push('/login')
     } catch (error) {
       console.log(error)
     }
@@ -169,12 +171,12 @@ export default function Navigation () {
       setNavigationItems(Object.keys(i18n?.getResourceBundle('cs', 'home-page-navigation')))
     } else if (pathname === '/login') {
       setNavigationItems(Array(
-          <GoToMainSiteButton />
-          ))
+        <GoToMainSiteButton/>
+      ))
     } else if (isOnPortalRoute && user) {
       setNavigationItems(Array(
         <Typography color='white'>{user?.email}</Typography>,
-        <GoToMainSiteButton />,
+        <GoToMainSiteButton/>,
         <SignOutButton/>
       ))
     } else {
@@ -223,7 +225,7 @@ export default function Navigation () {
                 isNavigationMenuHidden={isNavigationMenuHidden}
                 setIsNavigationMenuHidden={() => setIsNavigationMenuHidden(current => !current)}
               />
-            ) : null }
+            ) : null}
           </div>
           <div className={`${styles.navigationItems} ${isNavigationMenuHidden && styles.inactive}`}>
             <ul className={styles.anchors}>

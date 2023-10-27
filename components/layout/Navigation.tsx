@@ -83,12 +83,15 @@ const LanguageSelector = ({ isLangSelectOpen }: LanguageSelectorProps) => {
   }
 
   return (
-    <FormControl size='small'>
+    <FormControl size='small' sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'end',}}>
       <Select
         id='languageSelector'
         value={activeLocale}
         autoWidth
-        sx={{ '.MuiOutlinedInput-notchedOutline': { borderStyle: 'none' }, '& .MuiSvgIcon-root': { color: 'white' }}}
+        sx={{
+          '.MuiOutlinedInput-notchedOutline': { borderStyle: 'none' },
+          '& .MuiSvgIcon-root': { color: 'white' }
+        }}
         renderValue={(value) => <span className={`fi fi-${alpha2Code[value as keyof typeof alpha2Code]}`}></span>}
         onOpen={() => isLangSelectOpen(true)}
         onClose={() => isLangSelectOpen(false)}

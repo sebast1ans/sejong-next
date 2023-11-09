@@ -57,7 +57,7 @@ $pillSize: 2rem;
   top: 0;
   width: 100%;
   border-radius: 0 0 4px 4px;
-  z-index: 2;
+  z-index: 3;
 
   @include background;
 
@@ -164,10 +164,6 @@ $pillSize: 2rem;
 
       .anchors {
         flex-direction: column;
-      }
-
-      .select {
-        color: white;
       }
     }
   }

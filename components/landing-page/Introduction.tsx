@@ -38,10 +38,16 @@ export default function Introduction ({ slidesData }: Props) {
             <div className={styles.backdropFilter}>
               <Container className={styles.slideTextContainer}>
                 <Typography variant={'h2'}>
-                  {convertHtmlToReact(slideData[getPropertyWithSuffix('title', locale)])}
+                  {convertHtmlToReact(
+                    slideData[getPropertyWithSuffix('title', locale)]
+                    ?? slideData[getPropertyWithSuffix('title', 'cs')]
+                  )}
                 </Typography>
                 <Typography variant={'body1'}>
-                  {convertHtmlToReact(slideData[getPropertyWithSuffix('text', locale)])}
+                  {convertHtmlToReact(
+                    slideData[getPropertyWithSuffix('text', locale)]
+                    ?? slideData[getPropertyWithSuffix('text', 'cs')]
+                  )}
                 </Typography>
               </Container>
             </div>

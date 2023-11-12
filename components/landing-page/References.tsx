@@ -1,5 +1,6 @@
 import { Card, CardContent, Paper, Typography } from '@mui/material'
 import { Grade } from '@mui/icons-material'
+import { useTranslation } from 'next-i18next'
 import Image from 'next/image'
 import { times } from 'lodash'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -49,6 +50,7 @@ interface Props {
 }
 
 export default function References({data}: Props) {
+  const { t } = useTranslation('common')
   const muiBreakpoints = theme.breakpoints.values
   const carouselBreakpoints = {
     [muiBreakpoints.md]: {
@@ -64,7 +66,7 @@ export default function References({data}: Props) {
 
   return (
     <section id={'references'} className={styles.references}>
-      <Typography variant={'h2'} className={styles.smallHeading}>Reference</Typography>
+      <Typography variant={'h2'} className={styles.smallHeading}>{t('references')}</Typography>
       <Swiper
         modules={[Autoplay]}
         autoplay={{

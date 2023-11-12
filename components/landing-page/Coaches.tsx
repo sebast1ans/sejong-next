@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router'
+import { getPropertyWithSuffix } from '../../lib/getPropertyWithSuffix'
 import styles from './Coaches.module.scss'
 import { DocumentData } from 'firebase/firestore'
 import { Heading } from './Heading'
@@ -18,7 +20,7 @@ import convertHtmlToReact from '@hedgedoc/html-to-react'
 import Image from 'next/image'
 import { useState } from 'react'
 
-interface CoachDialogData  {
+interface CoachDialogData {
   name: string
   subtitle: string
   image: string
@@ -31,7 +33,7 @@ interface CoachDetailsDialogProps {
   coachData: CoachDialogData | null
 }
 
-const CoachDetailsDialog = ({open, onClose, coachData}: CoachDetailsDialogProps) => {
+const CoachDetailsDialog = ({ open, onClose, coachData }: CoachDetailsDialogProps) => {
 
   return (
     <Dialog open={open} onClose={onClose}>
@@ -54,7 +56,7 @@ const CoachDetailsDialog = ({open, onClose, coachData}: CoachDetailsDialogProps)
             <IconButton
               aria-label="close"
               onClick={onClose}
-              sx={{marginLeft: 'auto'}}
+              sx={{ marginLeft: 'auto' }}
             >
               <CloseIcon/>
             </IconButton>
@@ -72,14 +74,15 @@ interface Props {
   data: DocumentData[]
 }
 
-export default function Coaches({data}: Props) {
-  const {t} = useTranslation('coaches')
+export default function Coaches ({ data }: Props) {
+  const { t } = useTranslation('coaches')
+  const { locale } = useRouter()
   const [dialogOpen, setDialogOpen] = useState(false)
   const mainCoaches = data.filter(coach => coach.role === 'main').reverse()
   const [coachDialogData, setCoachDialogData] = useState<CoachDialogData | null>(null)
 
-  const handleClickOpen = ({name, subtitle, image, details}: CoachDialogData) => {
-    setCoachDialogData({name, subtitle, image, details})
+  const handleClickOpen = ({ name, subtitle, image, details }: CoachDialogData) => {
+    setCoachDialogData({ name, subtitle, image, details })
     setDialogOpen(true)
   }
 
@@ -95,13 +98,13 @@ export default function Coaches({data}: Props) {
         <div className={styles.coaches}>
           {mainCoaches.map(coach => (
             <Card className={styles.coach} key={coach.id}>
-              <CardContent sx={{width: '100%'}}>
+              <CardContent sx={{ width: '100%' }}>
                 <Paper className={styles.avatar} elevation={6}>
                   <Image src={coach.imageURL} alt={coach.name} fill sizes={'16rem'}/>
                 </Paper>
-                <Typography variant={'h2'} className={styles.name}>{coach.name}</Typography>
-                <Typography variant={'body1'} className={styles.subtitle}><em>{coach.subtitle}</em></Typography>
-                <div>{convertHtmlToReact(coach.cardText)}</div>
+                <Typography variant={'h2'} className={styles.name}>{coach[getPropertyWithSuffix('name', locale)]}</Typography>
+                <Typography variant={'body1'} className={styles.subtitle}><em>{coach[getPropertyWithSuffix('subtitle', locale)]}</em></Typography>
+                <div>{convertHtmlToReact(coach[getPropertyWithSuffix('cardText', locale)])}</div>
               </CardContent>
               <Button
                 className={styles.button}

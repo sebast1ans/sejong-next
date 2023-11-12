@@ -2,25 +2,28 @@
   "what-is-taekwondo": "What is Taekwondo",
   "taekwondo-content": {
     "p1": "Taekwondo is a <strong>martial art</strong> independently developed in <strong>Korea</strong> for over two millennia and has become a <strong>modern international sport</strong>. In short, Taekwondo can be characterized as a martial art, which utilizes arms, legs, and other parts of the body to deflect opponent's attack",
-    "p2": "Jelikož Taekwondo se již od počátku vyvíjelo jako sebeobranný systém, tak i veškeré aktivity v Taekwondo se zakládají v duchu sebeobrany. V dávných dobách lidé žily jednoduchý život s nedostatkem fyzického zatížení a ve stáří se jejich těla hrbila. Taekwondo také napomáhá upevnit zdraví, fyzickou i psychickou sílu a celkovou rovnováhu lidského těla.",
-    "p3": " Člověk, který se věnuje Taekwondo se musí naučit potlačit vlastní ego, ovládat své nitro a být uctivý k druhým, čili dospět k harmonii duchovna a fyzické síly, protože se učí technikám pro vlastní obranu s použitím celého těla. Pro člověka, který se učí technikám Taekwondo, je jeho celé tělo zbraní, kterou lze lehce zneškodnit protivníkův útok za pomoci vlastních nohou, rukou, pěstí, loktů, kolen, hlavy, či jiné části svého těla.",
-    "p4": "Taekwondista se nejdříve musí naučit ovládat sám sebe a vždy se musí zastat slabšího. Může se sice rovně postavit každému nepříteli, ale kodex zakazuje nepoctivý útok a použití nepřiměřené síly. Cvičení Taekwondo učí jednotlivce duševní skromnosti.",
-    "p5": "<strong>5 zásad taekwondo</strong>",
-    "p6": "Taekwondo je bojové umění, které vyžaduje i přísnou disciplínu. Proto by jeho pět zásad (taekwondo jeongsin) měl každý, kdo se věnuje taekwondo, nejenom znát, ale měl by i chápat jejich skutečný význam. Každý cvičenec taekwondo by se měl zásadami taekwondo řídit nejenom v tělocvične, ale i v běžném životě.",
-    "p7": "<strong>Zdvořilost</strong> 예의 [ye-hwi]<br/><strong>Čestnost</strong> 염치 [yeom-chi]<br/><strong>Vytrvalost</strong> 인내 [in-nae]<br/><strong>Sebeovládání</strong> 극기 [geuk-gi]<br/><strong>Nezlomný duch</strong> 백절불굴 [baekjeol-bulgul]"
+    "p2": "Since it's beginnings, Taekwondo has been developed as a defensive martial art system, therefore it's every activty is based on the spirit of self-defense. Long in the past, people used to live very simply with lack of diverse physical movement, which caused them to slouch. Taekwondo aids to strengthen health, physical and mental strength and overall balance of the body.",
+    "p3": "A person who practices Taekwondo should learn how to supress their ego, control their mind and be courteous to others. In other words, to reach the harmony of the mind and the body, because they learn techniques for their own defence using their whole body. For a taekwondo practicioner, his body becomes his weapon and can easily revert enemy's attacks using their own legs, arms, fists, elbos, knees, head or other parts of the body.",
+    "p4": "A Taekwondo practicioner should, in the first place, learn how to control themselves and always has to defend weaker ones. They can fairly face an enemy, however, the codex forbids unfair attacks and abuse of power. By practicing Taekwondo, one learns humility.",
+    "p5": "<strong>5 tenets of Taekwondo</strong>",
+    "p6": "Taekwondo is a martial art which requires a strict discipline. Anyone who practices Taekwondo should not only remember, but also understand the true meaning of the 5 tenets. Every practicioner ought to abide by them in the dojo and in the outside as well.",
+    "p7": "<strong>Courtesy</strong> 예의 [ye-hwi]<br/><strong>Integrity</strong> 염치 [yeom-chi]<br/><strong>Perserverance</strong> 인내 [in-nae]<br/><strong>Self-control</strong> 극기 [geuk-gi]<br/><strong>Indominable Spirit</strong> 백절불굴 [baekjeol-bulgul]"
   },
   "poomsae-content": {
-    "p1": "Poomsae (souborná cvičení) jsou závazná cvičení, vypracovaná mistry Taekwondo, za účelem předávání vědy o umění boje a vlastních interpretacích tohoto umění.",
-    "p2": "Poomsae se dělí na <strong>základní</strong> a <strong>mistrovské</strong>.",
-    "p3": "V poomsae vystupují harmonicky spjaté všechny techniky obrany a útoku se vzrůstajícím stupněm obtížnosti, které napomáhají k procvičení umění boje s jedním nebo více protivníky. Takto se můžou cvičit různé útočné a obrané techniky bez skutečného protivníka a bez nebezpečí zranění.",
-    "p4": "Posloupnost pohybů je přesně vymezena a probíhá podle stanoveného diagramu kroku. Pohyby musí být silné koncentrované, přesné a rytmické při zachování stabilní polohy těla.",
-    "p5": "Poomsae stanoví základní prvek zkoušky pro další stupeň školení nebo mistrovství.",
-    "p6": "Poomsae se dělí na <strong>8 základních</strong> (Taegeuk 1 – 8 Jang) a <strong>9 mistrovských</strong> (Yudanja Poomsae), které jsou pojmenovány podle posvátných míst v Koreji nebo názvy, které se vztahují ke <strong>korejským dějinám</strong> (Koryo, Keumgang, Taebaek, Pyongwon, Sipjin, Jitae, Cheonkwon, Hansoo a Ilyeo)."
+    "p1": "Poomsae (a systematic sequence of moves) are exercise drills developed by Taekwondo masters for the purpose of passing on the knowledge of martial arts and their own interpretation of it.",
+    "p2": "Poomsae is divided into basic and black belt levels.",
+    "p3": "In poomsae, both offensive and defensive moves are harmoniously combined together with increasing levels of difficulty, which aids to master the art of combat between multiple opponents. This way, one is able to learn various techniques without real opponents and danger of injuries.",
+    "p4": "The flow of movements is strictly defined and proceeds according to given forms. The movements should be powerful, focused, precise and evenly paced with keeping a stable body stance.",
+    "p5": "Skills in Poomsae determines the next level of training or mastery.",
+    "p6": "Poomsae is categorised into <strong>8 basic</strong> (Taegeuk 1 – 8 Jang) forms, and <strong>9 black belt</strong> (Yudanja Poomsae) patterns, which are named after sacred places in Korea or reffers to <strong>Korean history</strong> (Koryo, Keumgang, Taebaek, Pyongwon, Sipjin, Jitae, Cheonkwon, Hansoo & Ilyeo)."
   },
   "kyorugi-content": {
-    "p1": "Kyorugi (zápas) se dělí na zápas <strong>řízený</strong> a <strong>volný</strong>.",
-    "p2": " Řízený boj probíhá podle předem stanoveného schématu. Je to soubor konkrétních útoků a přesně vymezených technik obrany po provedení <strong>tří kroků (sambon kyorugi)</strong>, <strong>dvou kroků (dubon kyorugi)</strong>, či <strong>jednoho kroku (hanbon kyorugi)</strong>.",
-    "p3": " Ve <strong>cvičném volném boji (chayu kyorugi)</strong> se cvičenec musí rozhodovat rychle a samostatně, a musí svá rozhodnutí přizpůsobit aktuální situaci. Musí se vyhnout jakékoli jednostrannosti ve stylu boje a vyčerpat veškeré kombinace a uskutečňovat protiútoky.",
-    "p4": " Boj sledovaný rozhodčím podléhá naopak přísným sportovním pravidlům.<strong>Sportovní zápas</strong> se uskutečňuje v plném kontaktu a trvá <strong>3 kola po 3 minutách</strong>, což vyžaduje pro sportovce velké technické umění, pevnou fyzickou kondici, psychickou rovnováhu, bleskové reakce a ohromné důvěry ve vlastní schopnosti. Při volném zápase se cvičenec vybaven chrániči hrudi, hlavy, holení, předloktí a suspensorem."
+    "p1": "Kyorugi (combat) is divided into <strong>moderated</strong> and <strong>freestyle</strong>.",
+    "p2": "Moderated combat is run by a given schema. A schema describes specific movements of offence and defence in <strong>three steps</strong> (Sambon Kyorugi), <strong>two steps</strong> (Dubon Kyorugi) or <strong>one step</strong> (Hanbon Kyorugi).",
+    "p3": "In <strong>sparring freestyle combat</strong> (Chayu Kyorugi), the combatant must decide quickly and independently and must adapt to current conditions. They also must avoid repetitivness in their combat style, utilise all their skills and perform couterattacks.",
+    "p4": "A fight supervised by a referee is moderated under strict sport rules. The fight is full-contact and has <strong>3 rounds</strong>, each for <strong>3 minutes</strong>. It requires extensive technical skill, great physical condition, mental stability, lightning-fast reactions and firm self-confidence in one's own abilities. A fighter is equiped with a chest protector, a helmet, pads protecting elbows, arms, knees and shins, and a jockstrap."
+  },
+  "kyokpa-content": {
+    "p1": "Kyokpa (breaking techniques) is divided into <strong>breaking using strength</strong>, where the primary focus is on the strength of the technique; and <strong>special breaking</strong>, where the most important element is the complexity of the technique. Kyokpa is a part of Taekwondo practice and there are competitions in this discipline as well. A practicioner challenges themselves in their strength, deft, precision, dexterity and ability to focus."
   }
 }

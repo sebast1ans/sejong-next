@@ -38,7 +38,7 @@ export default function TrainingSessions ({ gMapsApiKey }: Props) {
           time: `${t('tuesday-and-thursday', { ns: 'common' })} 18:00 – 19:30`,
         }
       ],
-      metro: [`C – Pankrác (5 min ${t('by-foot')})`],
+      metro: [`C – Pankrác (5 ${t('minutes')} ${t('by-foot')})`],
       bus: ['Krčský hřbitov (193, 148)'],
       lat: 50.0461,
       lng: 14.4365

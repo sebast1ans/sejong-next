@@ -103,7 +103,10 @@ export default function References({data}: Props) {
         spaceBetween={10}
         initialSlide={0}
         centeredSlides={true}
-        freeMode={true}
+        freeMode={{
+          enabled: true,
+          sticky: true
+        }}
         breakpoints={carouselBreakpoints}
       >
         {data && data.map(reference => (

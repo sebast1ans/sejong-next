@@ -4,7 +4,7 @@ import IconButton from '@mui/material/IconButton'
 import { Heading } from './Heading'
 import { useTranslation } from 'next-i18next'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation } from 'swiper/modules'
+import { FreeMode, Navigation } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import styles from './Timeline.module.scss'
@@ -75,17 +75,20 @@ export default function Timeline() {
       <Heading text={t('our-story')}/>
       <Swiper
         className={styles.timeline}
+        modules={[Navigation, FreeMode]}
         navigation={{
           prevEl: '.timeline-nav-prev',
           nextEl: '.timeline-nav-next'
         }}
         slidesPerView={2}
         centeredSlides={true}
-        freeMode={true}
+        freeMode={{
+          enabled: true,
+          sticky: true
+        }}
         initialSlide={0}
         grabCursor={true}
         breakpoints={carouselBreakpoints}
-        modules={[Navigation]}
       >
         {years.map(year => (
           <SwiperSlide className={styles.event} key={year}>

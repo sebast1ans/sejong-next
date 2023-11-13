@@ -22,7 +22,7 @@ const SwiperNavigationButtons = () => {
   return (
     <>
       <IconButton
-        className='swiper-nav-prev'
+        className='timeline-nav-prev'
         size='large'
         color='primary'
         sx={{
@@ -35,7 +35,7 @@ const SwiperNavigationButtons = () => {
         <ArrowBackIosNewIcon/>
       </IconButton>
       <IconButton
-        className='swiper-nav-next'
+        className='timeline-nav-next'
         size='large'
         color='primary'
         sx={{
@@ -76,8 +76,8 @@ export default function Timeline() {
       <Swiper
         className={styles.timeline}
         navigation={{
-          prevEl: '.swiper-nav-prev',
-          nextEl: '.swiper-nav-next'
+          prevEl: '.timeline-nav-prev',
+          nextEl: '.timeline-nav-next'
         }}
         slidesPerView={2}
         centeredSlides={true}

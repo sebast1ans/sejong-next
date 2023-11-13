@@ -9,25 +9,21 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import styles from './Timeline.module.scss'
 import { theme } from '../../styles/mui-theme'
-import { Typography, useMediaQuery } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 
 const SwiperNavigationButtons = () => {
-  const lessThanMd = useMediaQuery(theme.breakpoints.down('md'))
   const buttonsPosition = {
-    top: `${lessThanMd ? '14.6rem' : '16.2rem'}`,
     margin: '.5rem',
     zIndex: 2
   }
 
   return (
-    <>
+    <Box display='flex' justifyContent='space-between'>
       <IconButton
         className='swiper-nav-prev'
         size='large'
         color='primary'
         sx={{
-          position: 'absolute',
-          top: buttonsPosition.top,
           left: buttonsPosition.margin,
           zIndex: buttonsPosition.zIndex,
         }}
@@ -39,15 +35,13 @@ const SwiperNavigationButtons = () => {
         size='large'
         color='primary'
         sx={{
-          position: 'absolute',
-          top: buttonsPosition.top,
           right: buttonsPosition.margin,
           zIndex: buttonsPosition.zIndex
         }}
       >
         <ArrowForwardIosIcon/>
       </IconButton>
-    </>
+    </Box>
   )
 }
 
@@ -73,6 +67,7 @@ export default function Timeline() {
   return (
     <section id={'history'} className={styles.history}>
       <Heading text={t('our-story')}/>
+      <SwiperNavigationButtons/>
       <Swiper
         className={styles.timeline}
         navigation={{
@@ -99,7 +94,6 @@ export default function Timeline() {
           </SwiperSlide>
         ))}
       </Swiper>
-      <SwiperNavigationButtons/>
     </section>
   )
 }

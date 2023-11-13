@@ -1,6 +1,15 @@
+import { PaletteColorOptions } from '@mui/material'
 import { createTheme, responsiveFontSizes } from '@mui/material/styles'
 import { Saira_Semi_Condensed } from "next/font/google"
 import variables from './variables.module.scss'
+
+declare module '@mui/material/styles' {
+  interface CustomPalette {
+   white: PaletteColorOptions;
+  }
+  interface Palette extends CustomPalette {}
+  interface PaletteOptions extends CustomPalette {}
+}
 
 const encodeSans = Saira_Semi_Condensed({
   weight: ['400', '500', '600', '700', '800'],
@@ -8,6 +17,9 @@ const encodeSans = Saira_Semi_Condensed({
   display: 'swap',
 })
 
+const { palette } = createTheme()
+const { augmentColor } = palette
+const createColor = (mainColor: string) => augmentColor({ color: { main: mainColor } })
 
 export let theme = createTheme({
   typography: {
@@ -43,7 +55,8 @@ export let theme = createTheme({
   palette: {
     primary: {
       main: variables.sejongRed,
-    }
+    },
+    white: createColor('#fff')
   },
   components: {
     MuiButton: {

@@ -18,7 +18,7 @@ const SwiperNavigationButtons = () => {
   }
 
   return (
-    <Box display='flex' justifyContent='space-between'>
+    <Box display='flex' justifyContent='space-between' mb='1'>
       <IconButton
         className='timeline-nav-prev'
         size='large'

@@ -1,14 +1,36 @@
-import { Card, CardContent, Paper, Typography } from '@mui/material'
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
+import { Box, Card, CardContent, Paper, Typography } from '@mui/material'
 import { Grade } from '@mui/icons-material'
+import IconButton from '@mui/material/IconButton'
 import { useTranslation } from 'next-i18next'
 import Image from 'next/image'
 import { times } from 'lodash'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Autoplay } from 'swiper/modules'
+import { Autoplay, Navigation, FreeMode } from 'swiper/modules'
 import { DocumentData } from 'firebase/firestore'
 import styles from './References.module.scss'
 import { theme } from '../../styles/mui-theme'
 
+const SwiperNavigationButtons = () => {
+
+  return (
+    <Box display='flex' justifyContent='center' gap='2rem'>
+      <IconButton
+        className='references-nav-prev'
+        size='large'
+      >
+        <ArrowBackIosNewIcon/>
+      </IconButton>
+      <IconButton
+        className='references-nav-next'
+        size='large'
+      >
+        <ArrowForwardIosIcon/>
+      </IconButton>
+    </Box>
+  )
+}
 
 interface ReferenceCardProps {
   text: string,
@@ -53,7 +75,7 @@ export default function References({data}: Props) {
   const { t } = useTranslation('common')
   const muiBreakpoints = theme.breakpoints.values
   const carouselBreakpoints = {
-    [muiBreakpoints.md]: {
+    [muiBreakpoints.sm]: {
       slidesPerView: 2,
       spaceBetween: 20
     },
@@ -68,10 +90,14 @@ export default function References({data}: Props) {
     <section id={'references'} className={styles.references}>
       <Typography variant={'h2'} className={styles.smallHeading}>{t('references')}</Typography>
       <Swiper
-        modules={[Autoplay]}
+        modules={[Autoplay, FreeMode, Navigation]}
         autoplay={{
           delay: 4000,
           disableOnInteraction: false
+        }}
+        navigation={{
+          prevEl: '.references-nav-prev',
+          nextEl: '.references-nav-next'
         }}
         slidesPerView={1}
         spaceBetween={10}
@@ -90,6 +116,7 @@ export default function References({data}: Props) {
           </SwiperSlide>
         ))}
       </Swiper>
+      <SwiperNavigationButtons/>
     </section>
   )
 }

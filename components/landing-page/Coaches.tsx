@@ -102,16 +102,26 @@ export default function Coaches ({ data }: Props) {
                 <Paper className={styles.avatar} elevation={6}>
                   <Image src={coach.imageURL} alt={coach.name} fill sizes={'16rem'}/>
                 </Paper>
-                <Typography variant={'h2'} className={styles.name}>{coach[getPropertyWithSuffix('name', locale)]}</Typography>
-                <Typography variant={'body1'} className={styles.subtitle}><em>{coach[getPropertyWithSuffix('subtitle', locale)]}</em></Typography>
+                <Typography
+                  variant={'h2'}
+                  className={styles.name}
+                >
+                  {coach[getPropertyWithSuffix('name', locale)]}
+                </Typography>
+                <Typography
+                  variant={'body1'}
+                  className={styles.subtitle}
+                >
+                  <em>{coach[getPropertyWithSuffix('subtitle', locale)]}</em>
+                </Typography>
                 <div>{convertHtmlToReact(coach[getPropertyWithSuffix('cardText', locale)])}</div>
               </CardContent>
               <Button
                 className={styles.button}
                 variant={'text'}
                 onClick={() => handleClickOpen({
-                  name: coach.name,
-                  subtitle: coach.subtitle,
+                  name: coach[getPropertyWithSuffix('name', locale)],
+                  subtitle: coach[getPropertyWithSuffix('subtitle', locale)],
                   image: coach.imageURL,
                   details: coach.dialogText
                 })}

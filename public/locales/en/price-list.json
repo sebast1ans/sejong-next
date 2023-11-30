@@ -5,5 +5,6 @@
   "message-to-recipient": "Message to recipient",
   "name-and-surname-of-exerciser": "name and surname of an exerciser",
   "variable-symbol": "Variable symbol (variabilní symbol)",
-  "ni-number": "national insurance number (rodné číslo) without the slash"
+  "ni-number": "national insurance number (rodné číslo) without the slash",
+  "insurance-note": "It is possible to apply for a benefit from selected health insurance companies for individual preventive programmes (contribution for regular physical and sports activities). The club will issue a receipt of payment, which you will present to the insurance company. For specific information on the conditions, please contact your health insurance company."
 }

@@ -18,6 +18,11 @@ import sejongSeal from '../../public/logos/sejongSeal.svg'
 import 'flag-icons/css/flag-icons.min.css'
 import styles from './Navigation.module.scss'
 
+declare module '@mui/material/Button' {
+  interface ButtonPropsColorOverrides {
+    white: true
+  }
+}
 
 interface HamburgerMenuProps {
   isNavigationMenuHidden: boolean
@@ -138,6 +143,7 @@ const GoToMainSiteButton = () => (
   <Link href='/' target='_blank'>
     <Button
       variant='outlined'
+      color='white'
       startIcon={<OpenInNew/>}
     >
       Hlavní&nbsp;stránky
@@ -178,7 +184,7 @@ export default function Navigation () {
       ))
     } else if (isOnPortalRoute && user) {
       setNavigationItems(Array(
-        <Typography color='white'>{user?.email}</Typography>,
+        <Typography color='#fff'>{user?.email}</Typography>,
         <GoToMainSiteButton/>,
         <SignOutButton/>
       ))
@@ -213,7 +219,7 @@ export default function Navigation () {
                 }}
                 >
                   <Image src={sejongSeal} className={styles.logo} alt='Navigation logo'/>
-                  <Typography sx={{ color: 'white', fontSize: '1.2rem' }}>
+                  <Typography sx={{ color: '#fff', fontSize: '1.2rem' }}>
                     {`${'Portal'.toUpperCase()}`}
                   </Typography>
                 </Box>

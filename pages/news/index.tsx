@@ -14,6 +14,12 @@ export default function News () {
         <title>{`${t('news')} | Sejong Taekwondo`}</title>
         <meta name="description" content="Sejong Taekwondo – sportovní klub Taekwondo WT v Praze"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta property="og:title" content={` ${t('news')} | Sejong Taekwondo`}/>
+        <meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/sejong-web.appspot.com/o/images%2FogImg.png?alt=media&token=d38e0436-e425-4218-8223-e157ba171bdd"/>
+        <meta name="og:image:alt" content="Sejong Taekwondo"/>
+        <meta property="og:url" content="http://www.sejong.cz"/>
+        <meta property="og:description" content="Sejong Taekwondo – sportovní klub Taekwondo WT v Praze"/>
+        <meta property="og:site_name" content="Sejong Taekwondo"/>
         <link rel="icon" href="/favicon.png"/>
       </Head>
       <Heading text={t('news')}/>

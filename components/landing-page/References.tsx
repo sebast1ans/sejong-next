@@ -51,7 +51,7 @@ const ReferenceCard = ({text, avatarImage, name}: ReferenceCardProps) => (
             src={avatarImage}
             fill
             sizes={'100px'}
-            alt={'world taekwondo'}
+            alt={name}
           />
         }
       </Paper>

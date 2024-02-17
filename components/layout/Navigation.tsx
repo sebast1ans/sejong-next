@@ -226,7 +226,7 @@ export default function Navigation () {
               </Link>
             ) : (
               <Link href='/' onDoubleClick={() => void push('/login')}>
-                <Image src={logo} className={styles.logo} alt='Navigation logo'/>
+                <Image priority src={logo} className={styles.logo} alt='Navigation logo'/>
               </Link>
             )}
             {(navigationItems.length > 0 || isOnNewsRoute) ? (

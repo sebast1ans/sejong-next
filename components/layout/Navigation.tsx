@@ -95,7 +95,7 @@ const LanguageSelector = ({ isLangSelectOpen }: LanguageSelectorProps) => {
         autoWidth
         sx={{
           '.MuiOutlinedInput-notchedOutline': { borderStyle: 'none' },
-          '& .MuiSvgIcon-root': { color: 'white' }
+          '& .MuiSelect-icon': { color: 'white!important' },
         }}
         renderValue={(value) => <span className={`fi fi-${alpha2Code[value as keyof typeof alpha2Code]}`}></span>}
         onOpen={() => isLangSelectOpen(true)}

@@ -47,23 +47,23 @@ export default function Contact () {
         </Typography>
         <Typography variant={'body1'}>
           <span>{t('telephone')}: </span>
-          {czPhonePrefix} 604 541 100
+          {czPhonePrefix} 604 541 100 (WhatsApp)
         </Typography>
         <Typography variant={'body1'}>
           <span>{t('email')}: </span>
           <Link href={'mailto:ondra@sejong.cz'} target={'_top'}>ondra@sejong.cz</Link></Typography>
-        <br/>
-        <Typography variant={'body1'}>
-          <PermContactCalendarIcon/>
-          <span>Bc. Phuong Nhung Havlíčková</span>
-        </Typography>
-        <Typography variant={'body1'}>
-          <span>{t('telephone')} (Tiếng Việt): </span>
-          {czPhonePrefix} 774 545 777 </Typography>
-        <Typography variant={'body1'}>
-          <span>{t('email')}: </span>
-          <a href={'mailto:hoang.pnhung@gmail.com'} target={'_top'}>hoang.pnhung@gmail.com</a>
-        </Typography>
+        {/*<br/>*/}
+        {/*<Typography variant={'body1'}>*/}
+        {/*  <PermContactCalendarIcon/>*/}
+        {/*  <span>Bc. Phuong Nhung Havlíčková</span>*/}
+        {/*</Typography>*/}
+        {/*<Typography variant={'body1'}>*/}
+        {/*  <span>{t('telephone')} (Tiếng Việt): </span>*/}
+        {/*  {czPhonePrefix} 774 545 777 </Typography>*/}
+        {/*<Typography variant={'body1'}>*/}
+        {/*  <span>{t('email')}: </span>*/}
+        {/*  <a href={'mailto:hoang.pnhung@gmail.com'} target={'_top'}>hoang.pnhung@gmail.com</a>*/}
+        {/*</Typography>*/}
       </div>
     </section>
   )

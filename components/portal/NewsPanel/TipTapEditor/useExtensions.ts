@@ -10,7 +10,7 @@ import { Placeholder } from '@tiptap/extension-placeholder'
 import { TableCell } from '@tiptap/extension-table-cell'
 import { TableHeader } from '@tiptap/extension-table-header'
 import { TableRow } from '@tiptap/extension-table-row'
-import { LinkBubbleMenuHandler, TableImproved } from 'mui-tiptap'
+import { LinkBubbleMenuHandler, ResizableImage, TableImproved } from 'mui-tiptap'
 
 import { useMemo } from 'react'
 
@@ -49,6 +49,7 @@ export default function useExtensions({placeholder}: UseExtensionsOptions = {}):
      Placeholder.configure({
        placeholder,
      }),
+     ResizableImage
    ]
  }, [CustomLinkExtension, placeholder])
 }

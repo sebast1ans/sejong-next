@@ -6,7 +6,7 @@ import {
   MenuButtonUndo, MenuControlsContainer,
   MenuDivider,
   MenuSelectHeading, MenuSelectTextAlign, TableBubbleMenu,
-  isTouchDevice, MenuButtonIndent, MenuButtonUnindent,
+  isTouchDevice, MenuButtonIndent, MenuButtonUnindent, MenuButtonImageUpload,
 } from 'mui-tiptap'
 
 export default function EditorMenuControls () {
@@ -55,14 +55,21 @@ export default function EditorMenuControls () {
       <MenuButtonBulletedList/>
       {isTouchDevice() && (
         <>
-          <MenuButtonIndent />
-          <MenuButtonUnindent />
+          <MenuButtonIndent/>
+          <MenuButtonUnindent/>
         </>
       )}
       <MenuDivider/>
-      <MenuButtonAddTable />
-      <TableBubbleMenu />
+      <MenuButtonAddTable/>
+      <TableBubbleMenu/>
       <MenuButtonHorizontalRule/>
+      <MenuButtonImageUpload onUploadFiles={files =>
+        files.map(file => ({
+          src: URL.createObjectURL(file),
+          alt: file.name,
+        }))
+      }
+      />
     </MenuControlsContainer>
   )
 }

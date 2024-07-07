@@ -77,7 +77,6 @@ export default function EditorMenuControls ({ setImages }: { setImages: Dispatch
             alt: 'image',
             title: image.id
           }))
-
         }}
       />
     </MenuControlsContainer>

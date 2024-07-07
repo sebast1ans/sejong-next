@@ -4,7 +4,7 @@ import { Box, Card, CardContent, Typography } from '@mui/material'
 import { DocumentData } from 'firebase/firestore'
 import { useRouter } from 'next/router'
 import formatDate from '../../utils/formatDate'
-import styles from './Article.module.scss'
+import styles from './ArticleCard.module.scss'
 
 
 interface Props {
@@ -39,7 +39,7 @@ export const ArticleCard = ({ article, inDialog }: Props) => {
         <Box className={styles.date}>
           <em>{formatDate(article?.updatesTimestamp?.slice(-1), locale)}</em>
         </Box>
-        <Box sx={{ mb: '1rem' }}>
+        <Box className={styles.content}>
           {convertHtmlToReact(article?.content)}
         </Box>
       </CardContent>

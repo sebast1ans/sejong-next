@@ -17,6 +17,14 @@
     width: fit-content;
     color: dimgray;
   }
+
+  .content {
+    margin-bottom: 1rem;
+
+    img {
+      max-width: 100%;
+    }
+  }
 }
 
 @media (width >= map-get(variables.$breakpoints, 'sm')) {

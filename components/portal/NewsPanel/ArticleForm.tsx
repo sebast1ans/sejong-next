@@ -1,5 +1,5 @@
-import { addDoc, updateDoc, collection, arrayUnion } from '@firebase/firestore'
-import { deleteDoc, doc, DocumentData } from 'firebase/firestore'
+import { doc, addDoc, updateDoc, deleteDoc, DocumentData, collection, arrayUnion } from '@firebase/firestore'
+import { getDownloadURL } from 'firebase/storage'
 import { useRouter } from 'next/router'
 import React, { useContext, useEffect, useState } from 'react'
 import { NewsContext } from '../../../lib/context'
@@ -20,6 +20,7 @@ import {
   TextField,
   Typography, useMediaQuery
 } from '@mui/material'
+import { uploadImages } from '../../../lib/uploadImages'
 import { theme } from '../../../styles/mui-theme'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 import TipTapEditor from './TipTapEditor'
@@ -28,6 +29,11 @@ import slugify from 'slugify'
 type AlertMessage = {
   type: 'success' | 'error'
   message: string
+}
+
+export interface ImageWithId {
+  id: string,
+  file: File
 }
 
 export type ArticleFormInputs = {
@@ -52,10 +58,12 @@ export default function ArticleForm ({ articleData, editMode }: Props) {
   const { push, events } = useRouter()
   const [open, setOpen] = useState(false)
   const lessThanSm = useMediaQuery(theme.breakpoints.down('sm'))
+  const [images, setImages] = useState<ImageWithId[]>([])
   const [alertMessage, setAlertMessage] = useState<AlertMessage>({
     type: 'success',
     message: ''
   })
+
   const articleForm = useForm<ArticleFormInputs>({
     defaultValues: (editMode && articleData) ? {
       title: articleData.title,
@@ -67,6 +75,26 @@ export default function ArticleForm ({ articleData, editMode }: Props) {
       isPublished: false,
     },
     mode: 'onBlur'
+  })
+
+  articleForm.watch(({ content }) => {
+    if (!content) return
+    let imageIds: string[] = []
+
+    const contentAsHtml = new DOMParser().parseFromString(content, 'text/html')
+    const images = contentAsHtml.querySelectorAll('img')
+
+    if (images.length > 0) {
+      images.forEach(image => {
+        const imageId = image.getAttribute('title')
+
+        if (imageId) {
+          imageIds.push(imageId)
+        }
+      })
+    }
+
+    setImages(previous => previous.filter(image => imageIds.includes(image.id)))
   })
 
   useEffect(() => {
@@ -124,17 +152,34 @@ export default function ArticleForm ({ articleData, editMode }: Props) {
   }
 
   const onSubmit: SubmitHandler<ArticleFormInputs> = async (data: ArticleFormInputs) => {
+    const slug = createUniqueSlug(data.title)
+
+    const contentAsHtml = new DOMParser().parseFromString(data.content, 'text/html')
+
+    for (const image of images) {
+      const snapshot = await uploadImages(image.file, slug)
+      const imageElement = contentAsHtml.querySelector(`img[title="${image.id}"]`)
+
+      if (imageElement) {
+        const src = await getDownloadURL(snapshot.ref)
+        imageElement.setAttribute('src',  src)
+      }
+    }
+
+    data.content = contentAsHtml.body.innerHTML
+
     try {
       if (editMode && articleData) {
+
         await updateDoc(doc(db, "news", articleData.id), {
           ...data,
-          slug: createUniqueSlug(data.title),
+          slug,
           updatesTimestamp: arrayUnion(Date.now())
         })
       } else {
         await addDoc(collection(db, 'news'), {
           ...data,
-          slug: createUniqueSlug(data.title),
+          slug,
           timestamp: Date.now(),
         })
       }
@@ -224,7 +269,7 @@ export default function ArticleForm ({ articleData, editMode }: Props) {
             })}
           />
           <FormProvider {...articleForm}>
-            <TipTapEditor/>
+            <TipTapEditor setImages={setImages}/>
           </FormProvider>
           {/*TODO possibility to edit slug manually*/}
           <Box sx={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'space-between' }}>

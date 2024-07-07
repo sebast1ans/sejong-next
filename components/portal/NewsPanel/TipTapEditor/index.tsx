@@ -1,16 +1,17 @@
 import { Box } from '@mui/material'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, Dispatch, SetStateAction } from 'react'
 import {
   RichTextEditor,
   type RichTextEditorRef
 } from 'mui-tiptap'
+import { ImageWithId } from '../ArticleForm'
 import EditorMenuControls from './EditorMenuControls'
 import { useFormContext, Controller } from 'react-hook-form'
 import ClientOnly from '../../ClientOnly'
 import useExtensions from './useExtensions'
 
 
-export default function TipTapEditor () {
+export default function TipTapEditor ({ setImages }: { setImages: Dispatch<SetStateAction<ImageWithId[]>> }) {
   const {
     control,
     formState,
@@ -44,7 +45,7 @@ export default function TipTapEditor () {
               onUpdate={() => onChange(rteRef.current?.editor?.getHTML())}
               onBlur={onBlur}
               extensions={extensions}
-              renderControls={() => <EditorMenuControls/>}
+              renderControls={() => <EditorMenuControls setImages={setImages}/>}
             />
           </Box>
         }

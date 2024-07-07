@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from 'react'
 import {
   LinkBubbleMenu, MenuButtonAddTable,
   MenuButtonBold, MenuButtonBulletedList, MenuButtonEditLink, MenuButtonHighlightColor, MenuButtonHorizontalRule,
@@ -8,8 +9,10 @@ import {
   MenuSelectHeading, MenuSelectTextAlign, TableBubbleMenu,
   isTouchDevice, MenuButtonIndent, MenuButtonUnindent, MenuButtonImageUpload,
 } from 'mui-tiptap'
+import { v4 as uuid } from 'uuid'
+import { ImageWithId } from '../ArticleForm'
 
-export default function EditorMenuControls () {
+export default function EditorMenuControls ({ setImages }: { setImages: Dispatch<SetStateAction<ImageWithId[]>> }) {
   return (
     <MenuControlsContainer>
       <MenuButtonUndo/>
@@ -63,12 +66,19 @@ export default function EditorMenuControls () {
       <MenuButtonAddTable/>
       <TableBubbleMenu/>
       <MenuButtonHorizontalRule/>
-      <MenuButtonImageUpload onUploadFiles={files =>
-        files.map(file => ({
-          src: URL.createObjectURL(file),
-          alt: file.name,
-        }))
-      }
+      <MenuButtonImageUpload
+        onUploadFiles={(files) => {
+          const currentImages: ImageWithId[] = files.map(file => ({id: uuid(), file}))
+
+          setImages(previous => [...previous, ...currentImages])
+
+          return currentImages.map(image => ({
+            src: URL.createObjectURL(image.file),
+            alt: 'image',
+            title: image.id
+          }))
+
+        }}
       />
     </MenuControlsContainer>
   )

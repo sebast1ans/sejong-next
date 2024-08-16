@@ -23,7 +23,6 @@ export default function useExtensions({placeholder}: UseExtensionsOptions = {}):
     inclusive: false,
   })
 
-//TODO Add support for images
  return useMemo(() => {
    return [
      TableImproved.configure({

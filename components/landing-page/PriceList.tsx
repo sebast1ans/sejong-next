@@ -7,6 +7,7 @@ import styles from './PriceList.module.scss'
 export default function PriceList() {
   const {t} = useTranslation(['price-list', 'common'])
   const { locale } = useRouter()
+
   const priceInCZK = (price: number) =>
     Intl.NumberFormat(locale, {
       style: 'currency',
@@ -24,16 +25,28 @@ export default function PriceList() {
             <table>
               <tbody>
               <tr>
-                <td><span>{t('children-6-9', { ns: 'common' })}:</span></td>
-                <td>{`${priceInCZK(1800)}/${t('term')}`}</td>
+                <td>
+                  <span>
+                  {`${t('children-6-9', { ns: 'common' })} (${t('wednesday', { ns: 'common'})} 16:30)`}:
+                  </span>
+                </td>
+                <td>{`${priceInCZK(2000)}/${t('term')}`}</td>
               </tr>
               <tr>
-                <td><span>{t('children-10-15', { ns: 'common' })}:</span></td>
-                <td>{`${priceInCZK(2300)}/${t('term')}`}</td>
+                <td>
+                  <span>
+                    {`${t('children-10-15', { ns: 'common' })} (${t('tuesday-and-thursday', { ns: 'common'})} 16:30)`}:
+                  </span>
+                </td>
+                <td>{`${priceInCZK(2500)}/${t('term')}`}</td>
               </tr>
               <tr>
-                <td><span>{t('juniors-and-adults', { ns: 'common' })}:</span></td>
-                <td>{`${priceInCZK(2800)}/${t('term')}`}</td>
+                <td>
+                  <span>
+                    {`${t('juniors-and-adults', { ns: 'common' })} (${t('tuesday-and-thursday', { ns: 'common'})} 18:30)`}:
+                  </span>
+                </td>
+                <td>{`${priceInCZK(3000)}/${t('term')}`}</td>
               </tr>
               </tbody>
             </table>
@@ -43,12 +56,20 @@ export default function PriceList() {
             <table>
               <tbody>
               <tr>
-                <td><span>{t('children-6-12', { ns: 'common' })}:</span></td>
-                <td>{`${priceInCZK(2200)}/${t('term')}`}</td>
+                <td>
+                  <span>
+                    {`${t('children-6-12', { ns: 'common' })} (${t('friday', { ns: 'common'})} 15:00)`}:
+                  </span>
+                </td>
+                <td>{`${priceInCZK(2400)}/${t('term')}`}</td>
               </tr>
               <tr>
-                <td><span>{t('adults-beginners', { ns: 'common' })}:</span></td>
-                <td>{`${priceInCZK(2200)}/${t('term')}`}</td>
+                <td>
+                  <span>
+                    {`${t('adults-beginners', { ns: 'common' })} (${t('wednesday', { ns: 'common'})} 18:30)`}:
+                  </span>
+                </td>
+                <td>{`${priceInCZK(2400)}/${t('term')}`}</td>
               </tr>
               </tbody>
             </table>

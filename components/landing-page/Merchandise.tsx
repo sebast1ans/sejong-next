@@ -2,13 +2,8 @@ import { Box, Container, Typography } from '@mui/material'
 import { useTranslation } from 'next-i18next'
 import Image from 'next/image'
 import { Heading } from './Heading'
+import { Item } from '@/types/Item'
 import style from './Merchandise.module.scss'
-
-interface Item {
-  name: string
-  image: string
-  price: number
-}
 
 interface ItemProps {
   item: Item

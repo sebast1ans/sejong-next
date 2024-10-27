@@ -24,6 +24,15 @@
     img {
       max-width: 100%;
     }
+
+    table {
+      border-collapse: collapse;
+    }
+
+    tbody, td, th {
+      border: 1px solid darkgray;
+      padding: 0 .2rem;
+    }
   }
 }
 

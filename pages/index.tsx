@@ -3,6 +3,7 @@ import { InferGetStaticPropsType } from 'next'
 import Head from 'next/head'
 import { DocumentData } from 'firebase/firestore'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { Merchandise } from '../components/landing-page/Merchandise'
 import News from '../components/landing-page/News'
 import { getIntroductionData } from '../lib/getIntroductionData'
 import { getReferencesData } from '../lib/getReferencesData'
@@ -49,6 +50,7 @@ export default function Home ({
       <AboutTaekwondo/>
       <TrainingSessions gMapsApiKey={gMapsApiKey!}/>
       <PriceList/>
+      <Merchandise/>
       <Contact/>
     </>
   )
@@ -77,6 +79,7 @@ export async function getStaticProps (context: { locale: string }) {
         'about-taekwondo',
         'training-sessions',
         'price-list',
+        'merchandise',
         'contact'
       ])),
       gMapsApiKey: process.env.GMAPS_API_KEY

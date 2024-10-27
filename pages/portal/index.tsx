@@ -1,7 +1,8 @@
-import { CalendarMonth, Folder, Groups2, Newspaper, Web } from '@mui/icons-material'
+import { CalendarMonth, Folder, Groups2, Newspaper, Storefront, Web} from '@mui/icons-material'
 import { ReactElement, ReactNode, SyntheticEvent, useState } from 'react'
 import { Box, Container, Paper, Tab, Tabs } from '@mui/material'
 import Head from 'next/head'
+import { Merchandise } from '../../components/portal/Merchandise'
 import NewsPanel from '../../components/portal/NewsPanel'
 import AuthCheck from '../../components/portal/AuthCheck'
 
@@ -12,25 +13,30 @@ const tabs: { label: string, icon: ReactElement, component: ReactNode }[] = [
     component: <NewsPanel/>
   },
   {
-    label: 'Obsah',
-    icon: <Web/>,
-    component: 'Obsah'
-  },
-  {
-    label: 'Členové',
-    icon: <Groups2/>,
-    component: 'Členové'
-  },
-  {
-    label: 'Kalendář',
-    icon: <CalendarMonth/>,
-    component: 'Kalendář'
-  },
-  {
-    label: 'Soubory',
-    icon: <Folder/>,
-    component: 'Soubory'
+    label: 'Merch',
+    icon: <Storefront/>,
+    component: <Merchandise/>
   }
+  // {
+  //   label: 'Obsah',
+  //   icon: <Web/>,
+  //   component: 'Obsah'
+  // },
+  // {
+  //   label: 'Členové',
+  //   icon: <Groups2/>,
+  //   component: 'Členové'
+  // },
+  // {
+  //   label: 'Kalendář',
+  //   icon: <CalendarMonth/>,
+  //   component: 'Kalendář'
+  // },
+  // {
+  //   label: 'Soubory',
+  //   icon: <Folder/>,
+  //   component: 'Soubory'
+  // }
 ]
 
 interface TabPanelProps {
